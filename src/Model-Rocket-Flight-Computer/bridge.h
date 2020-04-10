@@ -1,10 +1,10 @@
 #include<Arduino.h>
 #include<EEPROM.h>
 #include"sensors.h"
-#include"IMU.cpp"
+#include"IMU.h"
 #include"limCalcs.h"
-#include"ControlSystems.cpp"
-#include"command.cpp"
+#include"ControlSystems.h"
+#include"command.h"
 #include"Path.h"
 #include"FileSys.h"
 #include"ExCommunication - Transmit.cpp"

@@ -1,8 +1,6 @@
-#include<stdint.h>
-#include<stddef.h>
-class Tools {
- 	public:
- 		 uint16_t HCF(uint32_t x,uint32_t y) {
+#include"ControlSystems.h"
+
+ 		 uint16_t Tools::HCF(uint32_t x,uint32_t y) {
 			//Function to compute the Highest Common Factor between two numbers
 			uint16_t HCF;
  			for (size_t i = 1; i <= x && i <= y; i++){
@@ -13,7 +11,7 @@ class Tools {
  			return HCF;
 		}
 
-		uint8_t greater(uint32_t x,uint32_t y) {
+		uint8_t Tools::greater(uint32_t x,uint32_t y) {
 			//Function to compare two uint32_tegers and determine which is greater
  			uint32_t greater = x;
  			if(y > x) {
@@ -22,7 +20,7 @@ class Tools {
  			return greater;	
 		}
 
- 		uint8_t length(uint8_t arr[]) {
+ 		uint8_t Tools::length(uint8_t arr[]) {
 			//Function to find length of an array
 			uint8_t count;
  			for(size_t i = 0; i < arr[i];i++){
@@ -32,15 +30,8 @@ class Tools {
  			return count;	
 		}			
 		
- };	
- 
- class Control : public Tools {
- 	private:
- 		uint8_t inputL1;
- 		uint8_t inputL2;
- 	public:
 	 	/*-------------------------EXPERIMENTAL PROCESS-------------------------*/
- 		uint8_t *Equation_of_Line(uint32_t ROT,uint32_t MOV) {
+ 		uint8_t *Control::Equation_of_Line(uint32_t ROT,uint32_t MOV) {
  			//Finding equation of line (y = mx + c)
  			//Finding M (y = (M)x + c)
  			uint8_t pouint32_tx1,pouint32_tx2,pouint32_ty1,pouint32_ty2; // Temporary bug - Initial x pouint32_ts are not always (0,0) uint32_troduce array element to store last vector position to use for initial x pouint32_ts
@@ -77,7 +68,7 @@ class Tools {
  			
  			return vals;
  		}
- 		void ExpVectorM(uint8_t ROT,uint8_t MOV) {
+ 		void Control::ExpVectorM(uint8_t ROT,uint8_t MOV) {
  			uint8_t Mval1,Cval;
  			uint8_t xvalue,yvalue;
  			//values[0] = M values[1] = c
@@ -105,7 +96,7 @@ class Tools {
  		}
 		 /*---------------------------------------------------------------------*/
 		 
-		 uint8_t *thrustVector(uint8_t M_1,uint8_t M_2){
+		 uint8_t *Control::thrustVector(uint8_t M_1,uint8_t M_2){
 			//M_1 and M_2 values will be in the range of 0 - 90
 			//but servo moves from 0 - 180 so numbers will have to 
 			//be scaled 
@@ -124,5 +115,4 @@ class Tools {
 			return servoLoc;
 		 }			
  	
- };	
  

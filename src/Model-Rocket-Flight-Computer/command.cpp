@@ -1,11 +1,7 @@
-#include<stdint.h>
-#include<stddef.h>
-#define NULL 0
+#include"command.h"
 
-class Command_Word_Break {
-    private:
     //Finds the length of a string
-    uint8_t string_len(char x[64]){
+    uint8_t Command_Word_Break::string_len(char x[64]){
         uint8_t count;
         for(size_t i = 0; i < x[i];i++){
             x[i];
@@ -13,13 +9,13 @@ class Command_Word_Break {
         }
         return count;
     }
-    char ERROR(uint8_t type){
+    char Command_Word_Break::ERROR(uint8_t type){
         //char error[] = "Error";
        // Serial.pruint32_tln(error + type);
     }
-    public:
+    
     //Verify that string is apart of availabe commands
-    char verify(char x[]){
+    char Command_Word_Break::verify(char x[]){
         //char ERROR[] = "error";
         char availableC[128] = "Fatslu"; // Characters at index 0 and 2 of root command strings
         uint8_t itr;
@@ -40,7 +36,7 @@ class Command_Word_Break {
         }
     }
     //Parse string command
-    uint8_t parse_comm(char stringV[]){
+    uint8_t Command_Word_Break::parse_comm(char stringV[]){
         //char ERROR[] = "error";
         uint8_t count,count2 = 0;
         char subroot[32];
@@ -70,19 +66,13 @@ class Command_Word_Break {
     }
 }   
     //Analyzes subroot to corresponding function
-    char subrootAnalyzer(char y[]){
+    char Command_Word_Break::subrootAnalyzer(char y[]){
         
     
 
-
-
     }
-};
-
-class SYS_FUNCTIONS {
     //Flight Data Functions
-    public:
-        double *COMPILED_FLIGHT_DATA(){
+        double *SYS_FUNCTIONS::COMPILED_FLIGHT_DATA(){
             //Display Altitude
             //IDisplay(xF_Altitude);
             //Display Coordinates
@@ -90,13 +80,13 @@ class SYS_FUNCTIONS {
                 //IDisplay(xF_FCoordinates[i]);
             }
         }
-        double GET_LATITUDE(double *xF_FCoordinates){
+        double SYS_FUNCTIONS::GET_LATITUDE(double *xF_FCoordinates){
             return xF_FCoordinates[0];
         }
-         double GET_LONGITUDE(double *xF_FCoordinates){
+        double SYS_FUNCTIONS::GET_LONGITUDE(double *xF_FCoordinates){
             return xF_FCoordinates[1];
         }
-        uint8_t ADD_COORDINATES(double x,double y,double *xF_FCoordinates){
+        uint8_t SYS_FUNCTIONS::ADD_COORDINATES(double x,double y,double *xF_FCoordinates){
             //xF_FCoordinates[2]
             for(size_t i = 0; i < 2;i++){
                 if(xF_FCoordinates[i] != NULL){
@@ -107,7 +97,7 @@ class SYS_FUNCTIONS {
             xF_FCoordinates[1] = y;
             return 1;
         }
-        uint8_t ADD_ALTITUDE(double newAlt,double *xF_altitude){
+        uint8_t SYS_FUNCTIONS::ADD_ALTITUDE(double newAlt,double *xF_altitude){
             //xF_altitude
             double *nAlt = &newAlt;
             if(xF_altitude > 0){
@@ -117,7 +107,7 @@ class SYS_FUNCTIONS {
             }
             return 1;
         }
-        void CLEAR_F_DATA(double *xF_FCoordinates,double *xF_altitude){
+        void SYS_FUNCTIONS::CLEAR_F_DATA(double *xF_FCoordinates,double *xF_altitude){
             //Clear Flight Data sets all data values to NULL
             //Altitude
             //xF_Altitude = NULL;
@@ -127,15 +117,13 @@ class SYS_FUNCTIONS {
             }
         }
     //Testing Functions
-        uint8_t TEST_SYS(){
+        uint8_t SYS_FUNCTIONS::TEST_SYS(){
             
         }
 
-
     //Launch Functions
-        uint8_t LAUNCH_DATA(){
+        uint8_t SYS_FUNCTIONS::LAUNCH_DATA(){
 
         }    
 
 
-};
