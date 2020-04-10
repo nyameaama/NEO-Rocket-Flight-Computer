@@ -1,0 +1,126 @@
+Pressure:
+-Adafruit_BMP085
+
+Distance:
+-Ultrasonic Sensor
+
+Inertial Measurement:
+-MPU6050 IMU 
+
+Airspeed:
+Arduino Pitot Tube
+-MPXV7002DP
+
+Program Structure (Dependencies)
+
+bridge.h 
+    |
+IMU.cpp
+    |
+ControlSystems.cpp
+    |
+Sensors.cpp
+    |
+Path.cpp
+    |
+Data.cpp
+    |
+limCalcs.cpp
+    |
+main.cpp
+
+-----------------Project Outline---------------------
+
+Class :
+
+Control {
+    ThrustVector(MOTOR_READING1, MOTOR_READING2)  {
+        Parameters include: Axis values.
+    }
+
+}
+
+Data {
+    EEPROM_READ_WRITE(READ/WRITE,VALUE,SPECIFIC ADDRESS){
+        Parameters include: READ/WRITE 
+                            VALUE
+                            SPECIFIC ADDRESS
+    }
+
+    EEPROM_MANAGEMENT(){
+        Parameters include: None
+    }
+
+    Flight_Data_Save(){
+        Parameters include: None
+    }
+
+}
+
+Gyro {
+    AccGyroVals(SENSOR_TYPE_NO){
+        Parameter inlcude: SENSOR_TYPE_NO (Roll = 1, Pitch = 2, Yaw = 3)
+    }
+
+}
+
+RPY_CHECK {
+    roll_range(){
+        Parameters include: None
+    }
+
+    pitch_range(){
+        Parameters inlcude: None
+    }
+
+    yaw_range(){
+        Parameters include: None
+    }
+
+}
+
+VectorCompute {
+    translate_to_servo(){
+        Parameters include: None
+    }
+
+}
+
+PathControl {
+    translate(){
+        Parameters include: None 
+    }
+
+    adjustHeading(PITCH,YAW){
+        Parameters include: PITCH
+                            YAW
+    }
+
+}
+
+PathCompute {
+     distance_lat_long(LAT, LONG){
+         Parameters include: LAT
+                             LONG
+     }
+
+}
+
+Sensors {
+    ultrasonic_sensor_B() {
+        Parameters include: None
+    }
+
+    altimeter() {
+        Parameters include: None
+    }
+
+    AirspeedVal(){
+        Parameters inlcude: None
+    }
+
+    GPS_LOC(CO-ORDINATES){
+        Parameters include: PREFERRED CO-ORDINATES
+    }
+
+}

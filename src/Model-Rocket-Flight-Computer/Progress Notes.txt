@@ -1,0 +1,29 @@
+Sensors —> Guidance System —> Control System
+
+*New*
+-Interface AirSpeed Sensor *
+-Add support for GPS Module *
+-Add PathFind {} class with path functions
+-Add support for control fins to control vehicle roll
+-Add support for ultrasonic close surface detection *
+-Add support for logging of Flight Data *
+-Add support for flight data/details parsing for flight (Comm system) *
+-Add support for launch sequence (Launch Timer)*
+-Add test program to test all systems
+-Research System Multithreading / Arduino Protothreading
+-Write Project Documentation
+-Add support to detect launch *
+-Add external File SD support *
+-Add support for communication *
+
+*Fix*
+-Rework IMU (Gyro and Accelerometer) *
+-Finish Thrust Vectoring support *
+-Rework Altimeter function *
+-Finish axis stabilization functions (limCalcs) *
+-Finish velocity control 
+-Revisit MPXV7002DP - Airspeed 
+
+https://www.google.com/url?sa=i&url=https%3A%2F%2Fjourneynorth.org%2Ftm%2FLongitudeIntro.html&psig=AOvVaw0R7wwkcXBeSL2yacowkVXi&ust=1580319143554000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOifneDppucCFQAAAAAdAAAAABAJ
+
+BUILD AUTOCAD MODEL
