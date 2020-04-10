@@ -7,7 +7,7 @@ PlatformIO IDE system with integration into VSCode.
 
 Features:
 
-Support for vertical landing 
-Thrust Vectoring Control Support
-Active Flight Data Logging
+Support for vertical landing, 
+Thrust Vectoring Control Support,
+Active Flight Data Logging,
 GPS based navigation
