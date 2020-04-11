@@ -1,14 +1,14 @@
 #include<Arduino.h>
 #include<EEPROM.h>
-#include"sensors.h"
-#include"IMU.h"
-#include"limCalcs.h"
-#include"ControlSystems.h"
-#include"command.h"
-#include"Path.h"
-#include"FileSys.h"
-#include"ExCommunication - Transmit.cpp"
-#include"EEPROMStorage.h"
+#include"Sensors/sensors.h"
+#include"Inertial Measurement/IMU.h"
+#include"Flight Control/limCalcs.h"
+#include"Flight Control/ControlSystems.h"
+#include"Serial Comm/command.h"
+#include"Navigation/Path.h"
+#include"Data Logging/FileSys.h"
+#include"RF Comm/ExCommunication - Transmit.cpp"
+#include"Data Logging/EEPROMStorage.h"
 #include<Thread.h>
 #include<ThreadController.h>
 #include<Servo.h>
