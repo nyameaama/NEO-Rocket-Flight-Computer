@@ -12,17 +12,6 @@
 //uint32_t numPouint32_ts,path_anchor_index;
 //double currentHeading[2] = {AccGyroVals(2),AccGyroVals(3)};// <— Pitch = [0] Yaw = [1]
 
-class PathControl {
-	private:
-		//Accepts directional values to translate to t-vector range
-		//y =    0 = pitch     1 = yaw
-		double translate(double x,double y);
-
-        public:
-		//Accepts new pitch and yaw heading values and vectors appropriately
-		double *adjustHeading(double pitch,double yaw,double current_pitch,double current_yaw);
-};       
-
 class PathCompute {
 	private:
         //This functions finds the next divisible number
@@ -82,17 +71,12 @@ class PathCompute {
         //Function to Generate Altitude path
 		double *generate_alt(double current_alt,double high);
 
-        //Path Controller Function for altitude control
-		double alt_PathController(double cLoc,uint8_t haslaunched);
-
         //Helper function for LatLongDist()
 		double LatLongDist_helper(double current_lat,double current_long, double latlong,double distance);
 
         //Functions to generate heading path pouint32_ts for launch stage,transfer stage and landing stage
 		//Function writes path pouint32_ts to a two dimensional array and is coverted to return a one dimensional array
 		double *generate_path_points(double current_lat,double current_long,double final_lat,double final_long);
-
-        double *pathController(double latC,double longC,double alt,double *xF_pathData[64][2]);
 
         
 };    
