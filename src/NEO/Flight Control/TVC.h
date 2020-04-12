@@ -26,4 +26,3 @@ class Control : public Tools {
         uint8_t *thrustVector(uint8_t M_1,uint8_t M_2);
 
 };        
-

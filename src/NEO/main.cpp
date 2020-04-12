@@ -42,6 +42,9 @@ uint8_t AcurrentIndex;
 double flightDistance;
 double *xF_apPoints;
 
+//Sensors
+uint8_t UltrasonicSensor1[3] = {};
+
 //FileSys
 uint8_t FileBridge();
 
@@ -196,7 +199,6 @@ void SDisplay(char x){
 void IDisplay(uint8_t x){
    Serial.println(x);
 }
-
 char *prompt(){
     char comm_byte;
     char comm_str[32];
@@ -223,8 +225,6 @@ char *prompt(){
   }                   
     return comm_str;
 }
-
-
 uint8_t fData(){
     Data inf;
     Sensors sen;

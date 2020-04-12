@@ -6,12 +6,11 @@
 
 class Sensors {
     private:
-	    const uint8_t trigPin = UNDEFINED;
-	    const uint8_t echoPin = UNDEFINED;
 	    const uint8_t airspeedPin = UNDEFINED;
+
     public:
-        //Functions returns distance from nearest object from ultrasonic sensor
-	    uint32_t ultrasonic_sensor_B();
+          //Functions returns distance from nearest object from ultrasonic sensor
+	    uint32_t ultrasonic_sensor_calib(uint8_t trigPin, uint8_t echoPin);    
 
         //Function retrns altitude in meters
 	    uint32_t altimeter();

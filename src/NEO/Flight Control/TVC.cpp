@@ -1,4 +1,4 @@
-#include "ControlSystems.h"
+#include "TVC.h"
 
 uint16_t Tools::HCF(uint32_t x, uint32_t y){
 	//Function to compute the Highest Common Factor between two numbers
@@ -116,3 +116,4 @@ uint8_t *Control::thrustVector(uint8_t M_1, uint8_t M_2){
 	//Multithread servo move process
 	return servoLoc;
 }
+

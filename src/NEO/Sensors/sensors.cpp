@@ -1,6 +1,6 @@
 #include "sensors.h"
 
-uint32_t Sensors::ultrasonic_sensor_B(){
+uint32_t Sensors::ultrasonic_sensor_calib(uint8_t trigPin, uint8_t echoPin){
 	long duration, microseconds_to_cm;
 	pinMode(trigPin, OUTPUT);
 	digitalWrite(trigPin, LOW);
