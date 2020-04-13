@@ -48,7 +48,9 @@ uint8_t Data::EEPROM_MANAGEMENT(uint32_t eepromCycle){
     return percent_health;
 }
 
-void Data::Flight_Data_Save(uint16_t alt_address, uint16_t vel_address, uint16_t pitch_address, uint16_t yaw_address, uint16_t altimeter, uint8_t Airspeed, uint8_t pitch, uint8_t yaw, uint16_t eepromCycle, uint16_t addr){
+void Data::Flight_Data_Save(uint16_t alt_address, uint16_t vel_address, uint16_t pitch_address, uint16_t yaw_address,
+                             uint16_t altimeter, uint8_t Airspeed, uint8_t pitch, uint8_t yaw, uint16_t eepromCycle, 
+                             uint16_t addr){
     //Data during flight | 100 - 900 Byte address
     //Sensors alt,airSp;
     //Gyro pitch,yaw;
