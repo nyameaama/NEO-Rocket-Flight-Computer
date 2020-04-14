@@ -1,6 +1,6 @@
 #include<Arduino.h>
 #include<Servo.h>
-#include"sensors.h"
+#include"../sensors.h"
 #include<stdint.h>
 #include<stddef.h>
 
