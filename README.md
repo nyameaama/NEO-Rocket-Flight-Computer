@@ -13,4 +13,4 @@ Features:
 
 Support for vertical landing,
 Active Flight Data Logging,
-GPS based navigation
+GPS based navigation.
