@@ -1,6 +1,6 @@
 # NEO-Hover Flight Computer
 
-Description:
+#### Description:
 
 NEO-Rocket Flight Computer is an experimentally based ATmega2560 microcontroller based model rocket.
 
