@@ -8,7 +8,7 @@ The aim for this project is to create a a fully independent flight system fitted
 deviation monitoring and control, data logging,and vertical takeoff and landing support.This program is developed in conjunction with the
 PlatformIO IDE system with integration into VSCode. The project is wriiten in C++.
 
-Features:
+#### Features:
 
 * Support for vertical landing,
 * Active Flight Data Logging,
