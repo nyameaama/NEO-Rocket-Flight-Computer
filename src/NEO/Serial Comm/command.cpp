@@ -69,6 +69,35 @@ uint8_t Command_Word_Break::parse_comm(char stringV[]){
 //Analyzes subroot to corresponding function
 char Command_Word_Break::subrootAnalyzer(char y[]){
 }
+
+void Command_Word_Break::SDisplay(char x){
+    Serial.println(x);
+}
+//Display Integers
+void Command_Word_Break::IDisplay(uint8_t x){
+   Serial.println(x);
+}
+char *Command_Word_Break::prompt(){
+    char comm_byte;
+    char comm_str[32];
+     //Call prompt
+  //Read characters from Serial Monitor
+  uint8_t comm_index;
+  while(comm_byte != '\n'){
+    if (Serial.available() > 0) {  
+        comm_byte = Serial.read();// get the character
+    }
+    if (comm_byte != '\n') {
+      // a character of the string was received
+      comm_str[comm_index] = comm_byte;
+      comm_index++;
+    }
+    else{
+      
+    }
+  }                   
+    return comm_str;
+}
 //Flight Data Functions
 double *SYS_FUNCTIONS::COMPILED_FLIGHT_DATA(){
     //Display Altitude

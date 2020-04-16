@@ -1,12 +1,23 @@
 #include<stdint.h>
 #include<stddef.h>
+#include<Arduino.h>
 #define NULL 0
+#define LAUNCHCONFIRM 1
 
 class Command_Word_Break {
+    private:
+        char comm_byte;
+        char comm_str[32];
+        
+
     private:
         uint8_t string_len(char x[64]);
 
         char ERROR(uint8_t type);
+        
+        void SDisplay(char x);
+
+        void IDisplay(uint8_t x);
 
     public:
         char verify(char x[]);
@@ -15,6 +26,7 @@ class Command_Word_Break {
 
         char subrootAnalyzer(char y[]);
 
+        char *prompt();
 };
 
 class SYS_FUNCTIONS {

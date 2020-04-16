@@ -43,7 +43,35 @@ double RPY_CHECK::yaw_range(double yaw_val, uint8_t standardYawVal){
 	return readError;
 }
 
-//Function to correct rocket axis from variances in flight direction
+double *RPY_CHECK::timeElapsed(){
+    Sensors sp;
+    double time[3];
+    double readings[2];
+	double startTime,endTime,elapsed;
+	startTime = micros();
+	for(size_t i = 0; i < 2;i++){
+		readings[i] = sp.AirspeedVal();
+	}
+    time[0] = readings[0];
+    time[1] = readings[1];
+	endTime = micros();
+	elapsed = (endTime - startTime);
+    time[2] = elapsed;
+    return time;
+}
+
+double *RPY_CHECK::velChange(){
+    double ret[2];
+    double *vel = timeElapsed();
+    double vel_change,acc_change;
+    vel_change = vel[1] - vel[0];
+    ret[0] = vel_change;
+	acc_change = vel_change / vel[2];
+    vel[1] = acc_change;
+    return ret;
+}
+
+//Function to correct craft axis from variances in flight direction
 int *VectorCompute::translate_to_servo(double yawR, double pitchR){
 	//Translate gyro range to support servo range
 	int ranges[2];
@@ -77,7 +105,7 @@ int *VectorCompute::translate_to_servo(double yawR, double pitchR){
 
 //---------EXPERIMENTAL-------------//
 
-//Creates altimeter and ultrasonic sensor readings relationship and determines if rocket is in safe alt range after
+//Creates altimeter and ultrasonic sensor readings relationship and determines if craft is in safe alt range after
 //launch or during landing
 uint8_t AreaAnalysis::closeSurfaceDetection(double senRead, double altRead){
 	//Sensors closeSurface,altS;
@@ -89,7 +117,7 @@ uint8_t AreaAnalysis::closeSurfaceDetection(double senRead, double altRead){
 	//Check if readings between altimeter and ultrasonic are similar by a difference of 2cm
 	if (scaledUread != altRead && (altRead - negExRangeVal) < extended_range || (altRead + posExRangeVal) > extended_range){
 		//if they are similar reading is verified
-		//So we check to see if rocket is close to surface
+		//So we check to see if craft is close to surface
 		if (altRead > (terrain_level)){
 		}
 	}

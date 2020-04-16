@@ -1,64 +1,5 @@
 #include "PathCompute.h"
 
-//This functions finds the next divisible number
-uint16_t PathCompute::divisibleBY(uint32_t x){
-	uint8_t flag = 0;
-	uint16_t ar[10] = {1, 2, 3, 4, 5, 6, 7, 8, 9, 10};
-	for (size_t i : ar){
-		if (x % ar[i] == 0){
-			flag = i;
-		}
-	}
-	return ar[flag];
-}
-//This function converts decimal degrees to radians
-double PathCompute::deg2rad(double deg){
-	return (deg * pi / 180);
-}
-//This function converts radians to decimal degrees
-double PathCompute::rad2deg(double rad){
-	return (rad * 180 / pi);
-}
-//Calculates cosine rule
-double PathCompute::cosine_rule(double lengthA, double lengthB, double lengthC){
-	double val;
-	val = pow(lengthB, 2) + pow(lengthC, 2);
-	val = val - pow(lengthA, 2);
-	val = val / (2 * lengthB * lengthC);
-	val = acos(val) * 180.0 / pi;
-	return val;
-}
-double PathCompute::ang_to_PitchYaw(){
-}
-//1D array Length Function
-uint8_t PathCompute::ODlength(double arr[]){
-	uint8_t count;
-	for (size_t i = 0; i < arr[i]; i++){
-		arr[i];
-		count++;
-	}
-	return count;
-}
-//2D array Length Function
-uint32_t PathCompute::TDlength(double arr[][2]){
-	//String str = String(arr);
-}
-//Convert 2D array to 1D array
-double *PathCompute::arrayConversion2D_1D(double array[][2]){
-	uint16_t n = 64;
-	double a[n][n], b[n * n];
-	uint16_t *c = (uint16_t *)malloc(n * n);
-	uint16_t i, j, k = 0, l = 0;
-	for (i = 0; i < n; i++){
-		for (j = 0; j < n; j++){
-			b[k] = a[i][j];
-			k++;
-		}
-	}
-	free(c);
-	return b;
-}
-
 //Convert 1D array to 2D array
 double *PathCompute::arrayConversion1D_2D(double array[64]){
 	double temp2[64][64];
@@ -76,9 +17,9 @@ double PathCompute::distance_lat_long(double current_lat, double current_long, d
 	}
 	else{
 		theta = current_long - final_long;
-		dist = sin(deg2rad(current_lat)) * sin(deg2rad(final_lat)) + cos(deg2rad(current_lat)) * cos(deg2rad(final_lat)) * cos(deg2rad(theta));
+		dist = sin(funcs.deg2rad(current_lat)) * sin(funcs.deg2rad(final_lat)) + cos(funcs.deg2rad(current_lat)) * cos(funcs.deg2rad(final_lat)) * cos(funcs.deg2rad(theta));
 		dist = acos(dist);
-		dist = rad2deg(dist);
+		dist = funcs.rad2deg(dist);
 		dist = dist * 60 * 1.1515;
 		dist = dist * 1.609344;
 		return (dist);
@@ -123,7 +64,7 @@ uint8_t PathCompute::HeadingclosestPoint(double FLat, double FLong, double array
 	//Check every distance for pouint32_ts in array and compare to determine smallest
 	double smallest_dist = 0;
 	uint8_t index, i = HcurrentIndex;
-	for (size_t i; i < TDlength(array); i++){
+	for (size_t i; i < funcs.TDlength(array); i++){
 		if (distance_lat_long(FLat, FLong, array[i][0], array[i][1]) < smallest_dist){
 			smallest_dist = distance_lat_long(FLat, FLong, array[i][0], array[i][1]);
 			index = i;
@@ -137,7 +78,7 @@ double PathCompute::AltitudeclosestPoint(double current_alt, double array[64], u
 	//Check every distance for pouint32_ts in array and compare to determine smallest
 	double smallest_dist = array[0];
 	uint8_t index = AcurrentIndex;
-	for (size_t i; i < ODlength(array); i++){
+	for (size_t i; i < funcs.ODlength(array); i++){
 		if (array[i] < 0){
 			if (-(array[i] - current_alt) < smallest_dist){
 				smallest_dist = (array[i] - current_alt);
@@ -183,7 +124,7 @@ double *PathCompute::generate_alt(double current_alt, double high){
 	double *tempPath = (double *)malloc(64);
 	uint8_t tempDiff = high - current_alt;
 	if (tempDiff % 2 != 0){
-		for (size_t j = current_alt; j < high; j += divisibleBY(tempDiff)){
+		for (size_t j = current_alt; j < high; j += funcs.divisibleBY(tempDiff)){
 			tempPath[point_count] = j;
 		}
 	}
@@ -223,6 +164,11 @@ double *PathCompute::generate_path_points(double current_lat, double current_lon
 		lat_increment = tempPoints[i][0];
 		long_increment = tempPoints[i][1];
 	}
-	double *conv = arrayConversion2D_1D(tempPoints);
+	double *conv = funcs.arrayConversion2D_1D(tempPoints);
 	return conv;
+}
+double **PathCompute::generate_path_points_helper(double array[]){
+	double **ret;
+	//ret =  funcs.arrayConversion1D_2D(array);
+
 }
