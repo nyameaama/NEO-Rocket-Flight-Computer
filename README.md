@@ -12,6 +12,6 @@ Features:
 
 * Support for vertical landing,
 * Active Flight Data Logging,
-* Project is written in C++GPS based navigation.
+* GPS based navigation.
 
 
