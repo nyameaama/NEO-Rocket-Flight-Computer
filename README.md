@@ -1,4 +1,4 @@
-# NEO-Hover Flight Computer
+# NEO-Rocket Flight Computer
 
 #### Description:
 
