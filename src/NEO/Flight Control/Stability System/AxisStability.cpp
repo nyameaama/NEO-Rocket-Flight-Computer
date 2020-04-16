@@ -1,4 +1,4 @@
-#include "limCalcs.h"
+#include "AxisStability.h"
 
 //Functions to check if roll, pitch and yaw readings are in acceptable range
 //Based on flight path, correct calibrated angle will change according to state in path so the standard (roll/pith/yaw) values
