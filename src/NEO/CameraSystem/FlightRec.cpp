@@ -1,5 +1,5 @@
 #include"FlightRec.h"
 
-byte camCapture(){
-    
+byte FlightRec::camCapture(){
+
 }
