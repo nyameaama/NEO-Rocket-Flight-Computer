@@ -17,6 +17,8 @@ FileSystem::FileSystem()
     PrIDS[7] = "7GN31Q0";
     PrIDS[8] = "ACTIVITY_LOG";
     PrIDS[9] = "SYS347P";
+    PrIDS[10] = "ERROR_LOG";
+    PrIDS[11] = "SYS412Y";
 }
 
 String *PrIDS = (String *)malloc(16);
@@ -295,3 +297,15 @@ uint8_t FileSystem::YAW_RECORD(double yaw){
         return 0;
     }
 }
+
+ uint8_t FileSystem::FOREIGN_LOG(String PID,uint8_t x){
+     //Make request to file handler
+    if (fileHandler(PID) == 1){
+        String strVal = toString(x);
+        LogRateManagement(strVal, PID);
+        return 1;
+    }
+    else{
+        return 0;
+    }
+ }

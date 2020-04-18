@@ -16,6 +16,9 @@
 //double currentHeading[2] = {AccGyroVals(2),AccGyroVals(3)};// <— Pitch = [0] Yaw = [1]
 
 class PathCompute {
+    private:
+        double kp,ki,kd;
+	    double error_previous = 0,error_integral = 0;
 	private:
         double ang_to_PitchYaw();
 
@@ -44,7 +47,9 @@ class PathCompute {
 
         //Function to determine the rotation of both the first servo and second servo for thrust vectoring
 		//to adjust the course so that the rocket heads towards the straight line and follow that straight line.
-        double *Proportional_integral_derivative(double deviation);
+        double Proportional_integral_derivative(double deviation);
+
+        double setWeightingConstants();
 
         //Function to compute deviation angle 
 		double deviationAngle(double latStartingpouint32_t,double longStartingpouint32_t,double latEndpouint32_t,double longEndpouint32_t);

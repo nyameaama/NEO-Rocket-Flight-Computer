@@ -9,10 +9,6 @@ uint8_t Command_Word_Break::string_len(char x[64]){
     }
     return count;
 }
-char Command_Word_Break::ERROR(uint8_t type){
-    //char error[] = "Error";
-    // Serial.pruint32_tln(error + type);
-}
 
 //Verify that string is apart of availabe commands
 char Command_Word_Break::verify(char x[]){
@@ -30,7 +26,8 @@ char Command_Word_Break::verify(char x[]){
         }
     }
     if (itr < 2){
-        return ERROR(404);
+        ErrorDump fr;
+        return fr.ERROR_DUMP("404");
     }
     else{
         return 1;

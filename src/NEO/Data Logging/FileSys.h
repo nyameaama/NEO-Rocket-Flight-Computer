@@ -61,6 +61,7 @@ class FileSystem{
 
         uint8_t YAW_RECORD(double yaw);
 
+        uint8_t FOREIGN_LOG(String PID,uint8_t x);
 
 
 };    

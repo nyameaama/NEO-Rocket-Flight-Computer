@@ -1,6 +1,7 @@
 #include<stdint.h>
 #include<stddef.h>
 #include<Arduino.h>
+#include"../utility/ErrorDump.h"
 #define NULL 0
 #define LAUNCHCONFIRM 1
 
@@ -13,7 +14,7 @@ class Command_Word_Break {
     private:
         uint8_t string_len(char x[64]);
 
-        char ERROR(uint8_t type);
+        //char ERROR(uint8_t type);
         
         void SDisplay(char x);
 
