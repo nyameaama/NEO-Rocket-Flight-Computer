@@ -14,6 +14,10 @@ PlatformIO IDE system with integration into VSCode.
 * Active Flight Data Logging,
 * GPS based navigation.
 
+# Contribution
+
+You can clone this repository at https://github.com/nyameaama/NEO-Rocket-Flight-Computer. 
+
 # Documentation
 
 The flight code for the project is written in C++. 
