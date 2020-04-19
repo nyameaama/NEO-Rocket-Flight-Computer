@@ -95,10 +95,9 @@ double PathCompute::AltitudeclosestPoint(double current_alt, double array[64], u
 	AcurrentIndex = index;
 	return index;
 }
-double PathCompute::Proportional_integral_derivative(double rocketPos){
+double PathCompute::Proportional_integral_derivative(double rocketPos,double setpoint){
 	//function to determine the rotation of both the first servo and second servo for thrust vectoring
 	//to adjust the course so that the rocket heads towards the straight line and follow that straight line.
-	double setpoint; //TEMPORARY
 	uint8_t dt;
 	double error,processVar;
 	double derivative,proportional,integral;
