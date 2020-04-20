@@ -13,3 +13,22 @@
 #include"Flight Control/ThrustRegulation/PropThrustControl.h"
 #include<Servo.h>
 #include<stdlib.h>
+
+
+  
+    //Object for sensors class
+    Sensors tel;
+    //Object for Gyro class
+    Gyro stat;
+    //Object for RPY_CHECK class
+    RPY_CHECK obj3;
+    //Object for AreaAnalysis class
+    AreaAnalysis lD;
+    //Object for PathCompute class
+    PathCompute pInit;
+    FileSystem sav;
+    Command_Word_Break string;
+    SYS_FUNCTIONS sys;
+    VectorCompute change;
+    Control thrust;
+    Data inf;

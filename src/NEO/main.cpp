@@ -1,4 +1,4 @@
-#include"bridge.h"
+#include"main_bridge.h"
 
 //limCalcs
 String launch_time;
@@ -29,53 +29,36 @@ uint8_t FileBridge();
 
 void setup(){
     Serial.begin(9600);
-    Command_Word_Break string;
-    SYS_FUNCTIONS sys;
     char *function = string.prompt();
-    char *temp = string.prompt();
+    char *stat = string.prompt();
     string.parse_comm(function);
     Serial.print("SETUP COMPLETE?");
-    if(temp == "N"){
+    if(stat == "N"){
         setup();
-    }else if(temp == "Y"){
+    }else if(stat == "Y"){
         Serial.println("FLIGHT STATS");
     }
     //Set Path
-    Sensors tel;
-    PathCompute hp;
-    Utility funcs;
     //uint32_t length;
     double FINAL_LAT = sys.GET_LATITUDE(xF_FCoordinates);
     double FINAL_LONG = sys.GET_LONGITUDE(xF_FCoordinates);
-    double *hpPoints = hp.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    hp.generate_path_points_helper(hpPoints);
+    double *pInitPoints = pInit.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
+    pInit.generate_path_points_helper(pInitPoints);
    // double *Fdata = sys.COMPILED_FLIGHT_DATA();
-    flightDistance = hp.distance_lat_long(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    xF_apPoints = hp.generate_alt(tel.altimeter(),hp.peak_altitude(flightDistance));
+    flightDistance = pInit.distance_lat_long(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
+    xF_apPoints = pInit.generate_alt(tel.altimeter(),pInit.peak_altitude(flightDistance));
     //SET LAUNCH
     sys.TEST_SYS();
-    //1 sec wait before launch
+    //30 sec wait before launch
     delay(30000);
 
 }
 
 void loop(){
-    //Objects
- //Object for sensors class
-    Sensors obj;
-    //Object for Gyro class
-    Gyro obj2;
-    //Object for RPY_CHECK class
-    RPY_CHECK obj3;
-    //Object for AreaAnalysis class
-    AreaAnalysis lD;
-    //Object for PathCompute class
-    PathCompute pInit;
-    FileSystem sav;
     //Launch Detect
     double *elaps = obj3.timeElapsed();
     double *ret = obj3.velChange();
-    if(lD.launch_detect(obj.altimeter(),elaps[2],ret[0],ret[1]) != 1){
+    if(lD.launch_detect(tel.altimeter(),elaps[2],ret[0],ret[1]) != 1){
         //Pre - Launch
     }else{
         //Define Launch Time
@@ -86,7 +69,6 @@ void loop(){
         uint8_t mov1,mov2,mov3;
         double standardPitchval = 87;   
         double standardYawval = 0; 
-        Gyro stat;
         if(obj3.pitch_range(stat.AccGyroVals(2),standardPitchval) != 0){
             axisCorrect(mov1,mov2);
         }else if(obj3.yaw_range(stat.AccGyroVals(3),standardYawval) != 0){
@@ -99,50 +81,41 @@ void loop(){
 }
 //Control Systems
 void axisCorrect(uint8_t mov1,uint8_t mov2){
-    VectorCompute change;
     int *translate = change.translate_to_servo(mov1,mov2);
     //Gimbal will thrust opposite to the axis misdirection, correcting orientation and direction
 	//By using the negative axis - servo translated value, gimbal can thrust opposite to direction of movement
 	//Vector
-	Control thrust;
     uint8_t *servoPos = thrust.thrustVector(-(translate[1]),-(translate[0]));
     thrust.multithreadServo(servoPos[0],servoPos[1]);
 }
 
 uint8_t fData(){
-    Data inf;
-    Sensors sen;
-    Gyro temp;
-    inf.Flight_Data_Save(alt_address,vel_address,pitch_address,yaw_address,sen.altimeter(),sen.AirspeedVal(),temp.AccGyroVals(2),temp.AccGyroVals(3),eepromCycle,addr);
+    inf.Flight_Data_Save(alt_address,vel_address,pitch_address,yaw_address,tel.altimeter(),tel.AirspeedVal(),stat.AccGyroVals(2),stat.AccGyroVals(3),eepromCycle,addr);
     return 1;
 }
 
 uint8_t FileBridge(){
-    FileSystem rec;
-    Sensors sen;
-    Gyro temp;
     //Send data to file    
-    rec.VELOCITY_RECORD(sen.AirspeedVal());
-    rec.ALTITUDE_RECORD(sen.altimeter());
-    rec.PITCH_RECORD(temp.AccGyroVals(2));
-    rec.YAW_RECORD(temp.AccGyroVals(3));
+    sav.VELOCITY_RECORD(tel.AirspeedVal());
+    sav.ALTITUDE_RECORD(tel.altimeter());
+    sav.PITCH_RECORD(stat.AccGyroVals(2));
+    sav.YAW_RECORD(stat.AccGyroVals(3));
     //transmit data through RF
-    //Send Flight Data
+    //teld Flight Data
     FileSystem data;
-    char* VdataSend = "VELdata";
-    char* AdataSend = "ALTdata";
-    char* PdataSend = "PITCHdata";
-    char* YdataSend = "YAWdata";
-    /*String data[4][4] = {{"VELdata",String(sen.AirspeedVal())},
-                         {"ALTdata",String(sen.altimeter())},
-                         {"PITCHdata",String(temp.AccGyroVals(2))},
-                         {"YAWdata",String(temp.AccGyroVals(3))}};*/
+    char* Vdatateld = "VELdata";
+    char* Adatateld = "ALTdata";
+    char* Pdatateld = "PITCHdata";
+    char* Ydatateld = "YAWdata";
+    /*String data[4][4] = {{"VELdata",String(tel.AirspeedVal())},
+                         {"ALTdata",String(tel.altimeter())},
+                         {"PITCHdata",String(stat.AccGyroVals(2))},
+                         {"YAWdata",String(stat.AccGyroVals(3))}};*/
     //ExCommunication comm;
-    //comm.transmit(VdataSend);
+    //comm.transmit(Vdatateld);
 }
 
 //Path
 void adjustHeadingHelper(double orientVals[2]){
-    Control system;
-    system.thrustVector(orientVals[0],orientVals[1]);
+    thrust.thrustVector(orientVals[0],orientVals[1]);
 }

@@ -25,6 +25,14 @@ double PathCompute::distance_lat_long(double current_lat, double current_long, d
 		return (dist);
 	}
 }
+
+double PathCompute::computeBearing(double current_lat,double current_long,double final_lat,double final_long){
+	double temp1,temp2,bearing;
+	temp1 = sin(final_long - current_long) * cos(final_lat);
+	temp2 = cos(current_lat) * sin(final_lat) -  sin(current_lat) * cos(final_lat) * cos(final_long - current_long);
+	 bearing = atan2(temp2, funcs.rad2deg(temp1));
+	 return bearing;
+}
 //Compiled distance is the distance from a pouint32_t to another pouint32_t including altitude as well as GPS-coord for a distance estimate
 double PathCompute::compiled_distance(double current_lat, double current_long, double current_alt, double final_lat, double final_long, double final_alt){
 	//Pythagoras theorem is used to find compiled distance

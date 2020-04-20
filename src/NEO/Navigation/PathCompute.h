@@ -31,6 +31,8 @@ class PathCompute {
         //Distance between two pairs of coordinates. Returns Kilometers
 		double distance_lat_long(double current_lat,double current_long,double final_lat,double final_long);
 
+        double computeBearing(double current_lat,double current_long,double final_lat,double final_long);
+
         //Compiled distance is the distance from a pouint32_t to another pouint32_t including altitude as well as GPS-coord for a distance estimate
 		double compiled_distance(double current_lat,double current_long,double current_alt,double final_lat,double final_long,double final_alt);
 
