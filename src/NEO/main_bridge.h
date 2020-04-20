@@ -26,9 +26,15 @@
     AreaAnalysis lD;
     //Object for PathCompute class
     PathCompute pInit;
+    //Object for FileSystem class
     FileSystem sav;
+    //Object for Command_Word_Break class
     Command_Word_Break string;
+    //Object for SYS_FUNCTIONS class
     SYS_FUNCTIONS sys;
+    //Object for VectorCompute class
     VectorCompute change;
+    //Object for Control class
     Control thrust;
+    //Object for Data class
     Data inf;

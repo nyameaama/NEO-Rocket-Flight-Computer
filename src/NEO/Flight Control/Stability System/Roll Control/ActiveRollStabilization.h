@@ -9,6 +9,7 @@
 #define POS_THRESHOLD 179
 
 #define SPIN_STATE false
+#define pi 3.14159265358979
 
 //If rocket is spinning counter the direction of movement.
 
@@ -29,6 +30,10 @@ class RollStability {
 
         //Function to calculate counter movement for servo motors
         uint8_t computeCounterRoll(uint8_t x);
+
+        double getRollSpeed();
+
+        double getRotationPM();
 
     public:
         //Driver function which takes current roll values
