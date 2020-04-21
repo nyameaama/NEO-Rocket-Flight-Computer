@@ -1,5 +1,7 @@
 #include<Servo.h>
 #include"../../../Inertial Measurement/IMU.h"
+#include<Thread.h>
+#include<ThreadController.h>
 
 #define MOTOR_PIN_1 0
 #define MOTOR_PIN_2 0
@@ -19,6 +21,7 @@ class RollStability {
         boolean POS_ROLL_AXIS = true;
         String SPIN_DIRECTION= "clockwise";
         uint8_t arSize = 1;
+        double RPM_HIGH;
         double *RPM_COMP = (double*)malloc(arSize);
     private:
         //Function to compile two roll values
@@ -41,6 +44,9 @@ class RollStability {
 
         //Function to get Rotations per minute
         double getRotationPM();
+
+        //Function to move fins accordingly
+        void finMovement(double x);
 
     public:
         //Driver function which takes current roll values

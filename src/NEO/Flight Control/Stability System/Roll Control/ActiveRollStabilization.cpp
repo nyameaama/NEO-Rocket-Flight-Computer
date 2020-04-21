@@ -68,13 +68,12 @@ double RollStability::getRotationPM(){
 }
 
 uint8_t RollStability::computeCounterRoll(uint8_t RPM){
-   /* double minRPM,minServoMovement;
-    double maxRPM;
+    double HR = updateHighestRPM();
+    double servoThresh = 180;
     double temp1, temp2;
-	temp1 = maxRPM * minServoMovement;
-	temp2 = temp1 / minRPM;
-	return temp2;*/
-    
+    temp1 = RPM_HIGH / servoThresh;
+    temp2 = RPM / temp1;
+    return temp2;
 }
 
 double RollStability::updateHighestRPM(){ //<--Find more efficient implementation
@@ -87,9 +86,14 @@ double RollStability::updateHighestRPM(){ //<--Find more efficient implementatio
             highest = RPM_COMP[i];
         }
     }
+    RPM_HIGH = highest;
     realloc(RPM_COMP,arSize + 1);
     arSize++;
     return;
+}
+
+void RollStability::finMovement(double x){
+    
 }
 
  uint8_t RollStability::rollStabilize(uint8_t roll){
@@ -99,6 +103,10 @@ double RollStability::updateHighestRPM(){ //<--Find more efficient implementatio
         R_axis = 1;  //If pos set to pos  
     }
     determineRollDirection();
+    double current_RPM = getRotationPM();
+    double counterMov = computeCounterRoll(current_RPM);
+    finMovement(counterMov);
+
 
 
  }
