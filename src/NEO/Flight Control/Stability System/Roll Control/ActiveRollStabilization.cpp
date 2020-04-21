@@ -67,8 +67,29 @@ double RollStability::getRotationPM(){
     return RPM;
 }
 
-uint8_t RollStability::computeCounterRoll(uint8_t x){
+uint8_t RollStability::computeCounterRoll(uint8_t RPM){
+   /* double minRPM,minServoMovement;
+    double maxRPM;
+    double temp1, temp2;
+	temp1 = maxRPM * minServoMovement;
+	temp2 = temp1 / minRPM;
+	return temp2;*/
     
+}
+
+double RollStability::updateHighestRPM(){ //<--Find more efficient implementation
+    double RPM = getRotationPM();
+    double highest = RPM_COMP[0];    
+    //Add newRPM to array
+    RPM_COMP[arSize - 1] = RPM;
+    for(size_t i = 0; i < arSize;i++){
+        if(RPM_COMP[i] > highest){
+            highest = RPM_COMP[i];
+        }
+    }
+    realloc(RPM_COMP,arSize + 1);
+    arSize++;
+    return;
 }
 
  uint8_t RollStability::rollStabilize(uint8_t roll){

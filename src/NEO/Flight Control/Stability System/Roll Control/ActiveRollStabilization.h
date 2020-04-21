@@ -18,6 +18,8 @@ class RollStability {
         Servo s1,s2,s3;
         boolean POS_ROLL_AXIS = true;
         String SPIN_DIRECTION= "clockwise";
+        uint8_t arSize = 1;
+        double *RPM_COMP = (double*)malloc(arSize);
     private:
         //Function to compile two roll values
         double *compileValues(uint8_t count);
@@ -29,10 +31,15 @@ class RollStability {
         String determineRollDirection();
 
         //Function to calculate counter movement for servo motors
-        uint8_t computeCounterRoll(uint8_t x);
+        uint8_t computeCounterRoll(uint8_t RPM);
 
+        //Function to update Highest RPM
+        double updateHighestRPM();
+
+        //Function to get vehicle roll speed
         double getRollSpeed();
 
+        //Function to get Rotations per minute
         double getRotationPM();
 
     public:
