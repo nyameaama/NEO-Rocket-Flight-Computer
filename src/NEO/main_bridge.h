@@ -15,7 +15,6 @@
 #include<stdlib.h>
 
 
-  
     //Object for sensors class
     Sensors tel;
     //Object for Gyro class

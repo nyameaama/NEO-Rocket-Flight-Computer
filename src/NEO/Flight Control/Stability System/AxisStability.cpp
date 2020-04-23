@@ -155,3 +155,4 @@ uint8_t AreaAnalysis::launch_detect(uint32_t current_altitude, double elapsed, d
 	}
 	return 0;
 }
+

@@ -46,4 +46,4 @@ class AreaAnalysis {
 		uint8_t launch_detect(uint32_t current_altitude,double elapsed,double vel_change,double acc_change);
 
         
-};        
+};      

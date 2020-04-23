@@ -76,7 +76,7 @@ uint8_t RollStability::computeCounterRoll(uint8_t RPM){
     return temp2;
 }
 
-double RollStability::updateHighestRPM(){ //<--Find more efficient implementation
+double RollStability::updateHighestRPM(){ //<-- Use more efficient implementation
     double RPM = getRotationPM();
     double highest = RPM_COMP[0];    
     //Add newRPM to array
@@ -93,7 +93,7 @@ double RollStability::updateHighestRPM(){ //<--Find more efficient implementatio
 }
 
 void RollStability::finMovement(double x){
-    
+
 }
 
  uint8_t RollStability::rollStabilize(uint8_t roll){
@@ -106,7 +106,5 @@ void RollStability::finMovement(double x){
     double current_RPM = getRotationPM();
     double counterMov = computeCounterRoll(current_RPM);
     finMovement(counterMov);
-
-
 
  }
