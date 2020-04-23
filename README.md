@@ -16,7 +16,7 @@ PlatformIO IDE system with integration into VSCode.
 
 # Contribution
 
-You can clone this repository at https://github.com/nyameaama/NEO-Rocket-Flight-Computer. 
+You can fork this reposirtory to introduce new features, changes or bug fixes and create a pull request to merge with master. This repository can be cloned at https://github.com/nyameaama/NEO-Rocket-Flight-Computer. 
 
 # Documentation
 
