@@ -1,5 +1,6 @@
 #include<Servo.h>
 #include"../../../Inertial Measurement/IMU.h"
+#include"../../../Data Logging/FileSys.h"
 #include<Thread.h>
 #include<ThreadController.h>
 
@@ -23,6 +24,8 @@ class RollStability {
         uint8_t arSize = 1;
         double RPM_HIGH;
         double *RPM_COMP = (double*)malloc(arSize);
+        String PID;
+        uint8_t CURRENT_SERVO_POSITION;
     private:
         //Function to compile two roll values
         double *compileValues(uint8_t count);
@@ -49,6 +52,12 @@ class RollStability {
         void finMovement(double x);
 
     public:
+        //Constructor
+        RollStability();
+
+        //Destructor
+        ~RollStability();
+
         //Driver function which takes current roll values
        uint8_t rollStabilize(uint8_t roll); 
 

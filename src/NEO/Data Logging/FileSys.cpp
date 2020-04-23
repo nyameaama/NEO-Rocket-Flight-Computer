@@ -21,15 +21,6 @@ FileSystem::FileSystem()
     PrIDS[11] = "SYS412Y";
 }
 
-String *PrIDS = (String *)malloc(16);
-uint8_t PIN_OUTPUT;
-uint32_t remainingCapacity;
-uint8_t DataLogRate;
-uint16_t Activity;
-File DataFILE;
-SdFile root;
-//Constructor
-
 //Function compares two strings
 boolean FileSystem::compare(String x, String y){
     if (x != y)
@@ -308,4 +299,8 @@ uint8_t FileSystem::YAW_RECORD(double yaw){
     else{
         return 0;
     }
+ }
+
+ String FOREIGN_READ(String PID,String searchParam){
+
  }

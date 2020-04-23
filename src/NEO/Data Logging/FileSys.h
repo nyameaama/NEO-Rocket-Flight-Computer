@@ -63,5 +63,7 @@ class FileSystem{
 
         uint8_t FOREIGN_LOG(String PID,uint8_t x);
 
+        String FOREIGN_READ(String PID,String searchParam);
+
 
 };    

@@ -1,5 +1,19 @@
 #include"ActiveRollStabilization.h"
 
+RollStability::RollStability(){
+    s1.attach(MOTOR_PIN_1);
+    s2.attach(MOTOR_PIN_2);
+    s3.attach(MOTOR_PIN_3);
+    String search;
+    FileSystem get;
+    CURRENT_SERVO_POSITION = get.FOREIGN_READ(PID,search).toInt();
+}
+
+RollStability::~RollStability(){
+      FileSystem get;
+      get.FOREIGN_LOG(PID,CURRENT_SERVO_POSITION);
+}
+
 String RollStability::determineRollDirection(){
     //Roll direction can be calculated by using two roll values to
     // 
@@ -93,7 +107,24 @@ double RollStability::updateHighestRPM(){ //<-- Use more efficient implementatio
 }
 
 void RollStability::finMovement(double x){
-
+    uint8_t DELAY_TIME;
+    uint8_t count = CURRENT_SERVO_POSITION;
+    uint8_t increment;
+    if(count < x){
+       increment = 1;
+    }else if(count > x){
+       increment = -1;
+    }
+    while(count != x){ 
+       s1.write(count);
+       delay(DELAY_TIME);
+       s2.write(count);
+       delay(DELAY_TIME);
+       s3.write(count);
+       delay(DELAY_TIME);
+       count += increment;
+    }
+   
 }
 
  uint8_t RollStability::rollStabilize(uint8_t roll){
