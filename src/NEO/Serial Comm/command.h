@@ -1,3 +1,5 @@
+#ifndef Command
+#define Command
 #include<stdint.h>
 #include<stddef.h>
 #include<Arduino.h>
@@ -50,4 +52,5 @@ class SYS_FUNCTIONS {
 
         //Launch Functions
         uint8_t LAUNCH_DATA();
-};        
+};
+#endif        

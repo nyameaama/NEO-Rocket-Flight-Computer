@@ -1,3 +1,5 @@
+#ifndef Utility_F
+#define Utility_F
 #include<stddef.h>
 #include<stdint.h>
 #include"math.h"
@@ -34,3 +36,4 @@ class Utility {
         double *arrayConversion2D_1D(double array[][2]);
 
 };
+#endif

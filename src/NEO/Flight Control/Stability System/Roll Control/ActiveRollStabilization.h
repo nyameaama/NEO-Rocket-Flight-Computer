@@ -1,3 +1,6 @@
+#ifndef ActiveRollStabilization
+#define ActiveRollStabilization
+
 #include<Servo.h>
 #include"../../../Inertial Measurement/IMU.h"
 #include"../../../Data Logging/FileSys.h"
@@ -63,3 +66,5 @@ class RollStability {
 
 
 };
+
+#endif

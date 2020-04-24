@@ -124,7 +124,6 @@ void RollStability::finMovement(double x){
        delay(DELAY_TIME);
        count += increment;
     }
-   
 }
 
  uint8_t RollStability::rollStabilize(uint8_t roll){

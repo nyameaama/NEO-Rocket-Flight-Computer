@@ -1,3 +1,5 @@
+#ifndef PathCompute_F
+#define PathCompute_F
 #include<math.h>
 #include<stdlib.h>
 #include<stdint.h>
@@ -71,3 +73,4 @@ class PathCompute {
 
         double **generate_path_points_helper(double array[]);
 };    
+#endif

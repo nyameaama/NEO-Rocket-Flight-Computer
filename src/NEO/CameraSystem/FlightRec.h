@@ -1,3 +1,5 @@
+#ifndef FlightRecording
+#define FlightRecording
 #include <Wire.h>
 #include <ArduCAM.h>
 #include <SPI.h>
@@ -23,3 +25,4 @@ class FlightRec {
 
 
 };
+#endif

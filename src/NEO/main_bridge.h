@@ -1,8 +1,8 @@
 #include<Arduino.h>
 #include<EEPROM.h>
-//#include"Sensors/sensors.h"
+#include"Sensors/sensors.h"
 #include"Inertial Measurement/IMU.h"
-#include"Flight Control/Stability System/AxisStability.h"  //<-- Sensors.h 
+#include"Flight Control/Stability System/AxisStability.h" 
 #include"Flight Control/TVC.h"
 #include"Serial Comm/command.h"
 #include"Navigation/PathCompute.h"

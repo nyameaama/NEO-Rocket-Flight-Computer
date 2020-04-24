@@ -1,3 +1,5 @@
+#ifndef Axis_Stability
+#define Axis_Stability
 #include"../../Sensors/sensors.h"
 #include<stdint.h>
 #define UNDEFINED 0
@@ -46,4 +48,6 @@ class AreaAnalysis {
 		uint8_t launch_detect(uint32_t current_altitude,double elapsed,double vel_change,double acc_change);
 
         
-};      
+};
+
+#endif

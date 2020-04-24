@@ -18,6 +18,7 @@ class FileSystem{
         uint32_t remainingCapacity;
         uint8_t DataLogRate;
         uint16_t Activity;
+        uint16_t ApproxFlightDuration;
         File DataFILE;
         SdFile root;
 
