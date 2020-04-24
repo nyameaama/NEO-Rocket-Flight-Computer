@@ -1,6 +1,6 @@
 #ifndef Error_Dump
 #define Error_Dump
-//#include"../Data Logging/FileSys.h"
+#include"../Data Logging/FileSys.h"
 #include<string.h>
 #include<Arduino.h>
 //Error Dump receives errors from system functions and saves them to SD file

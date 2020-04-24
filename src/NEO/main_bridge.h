@@ -3,6 +3,7 @@
 #include"Sensors/sensors.h"
 #include"Inertial Measurement/IMU.h"
 #include"Flight Control/Stability System/AxisStability.h" 
+#include"Trigger Systems/AreaAnalysis.h"
 #include"Flight Control/TVC.h"
 #include"Serial Comm/command.h"
 #include"Navigation/PathCompute.h"

@@ -1,3 +1,5 @@
+#ifndef FileSys
+#define FileSys
 #include<SPI.h>
 #include"SD.h"
 //#include "DateTimeStrings.h"
@@ -67,4 +69,5 @@ class FileSystem{
         String FOREIGN_READ(String PID,String searchParam);
 
 
-};    
+}; 
+#endif   
