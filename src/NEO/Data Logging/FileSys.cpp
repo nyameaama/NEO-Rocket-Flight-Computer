@@ -23,20 +23,17 @@ FileSystem::FileSystem()
 
 //Function compares two strings
 boolean FileSystem::compare(String x, String y){
-    if (x != y)
-    {
+    if (x != y){
         return false;
     }
-    else
-    {
+    else{
         return true;
     }
 }
 //Function computes total of values in an array
 uint16_t FileSystem::total(double *arr){
     uint16_t total;
-    for (size_t i = 0; i < 10; i++)
-    {
+    for (size_t i = 0; i < 10; i++){
         total += arr[i];
     }
     return total;
@@ -183,7 +180,8 @@ uint8_t FileSystem::fileHandler(String PID){
     uint8_t index = confirm[1];
     String type = ".txt";
     if (confirm[0] == FALSE){
-        return ERROR;
+        ErrorDump dump;
+        return dump.ERROR_DUMP("503");
     }
     else{
         //Check if any file is active and close it
@@ -240,6 +238,12 @@ void FileSystem::ACTIVITY_LOG(){
         Activity = WRITE_TO_FILE(data, tag);
     }
 }
+
+String FileSystem::FOREIGN_READ(String PID,String searchParam){
+     fileHandler(PID);
+
+ }
+
 uint8_t FileSystem::VELOCITY_RECORD(double vel){
     String ProccessID = "6C298Y3";
     //Make request to file handler
@@ -301,6 +305,4 @@ uint8_t FileSystem::YAW_RECORD(double yaw){
     }
  }
 
- String FOREIGN_READ(String PID,String searchParam){
-
- }
+ 

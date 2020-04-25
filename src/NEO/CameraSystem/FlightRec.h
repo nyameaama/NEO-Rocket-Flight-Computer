@@ -6,6 +6,7 @@
 #include <SPI.h>
 #include <SD.h>
 #include "memorysaver.h"
+#include"../utility/ErrorDump.h"
 
 class FlightRec {
     private:

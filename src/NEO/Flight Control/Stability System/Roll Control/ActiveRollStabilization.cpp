@@ -136,5 +136,5 @@ void RollStability::finMovement(double x){
     double current_RPM = getRotationPM();
     double counterMov = computeCounterRoll(current_RPM);
     finMovement(counterMov);
-
+    return 1;
  }

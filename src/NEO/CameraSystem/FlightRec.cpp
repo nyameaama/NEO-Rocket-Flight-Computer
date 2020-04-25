@@ -52,27 +52,19 @@ byte FlightRec::camCapture(ArduCAM myCAM){
     myCAM.clear_fifo_flag();
     //Start capture
     myCAM.start_capture();
-    //Serial.println("start Capture");
     while (!myCAM.get_bit(ARDUCHIP_TRIG, CAP_DONE_MASK));
-    //Serial.println(F("Capture Done."));
     //Get fifo length
     length = myCAM.read_fifo_length();
-    //Serial.print(F("The fifo length is :"));
-    //Serial.println(length, DEC);
-    if (length >= MAX_FIFO_SIZE){ //384K
-        //Serial.println(F("Over size."));
-        return;
-    }
-    if (length == 0){ //0KB
-        //Serial.println(F("Size is 0."));
+    if (length >= MAX_FIFO_SIZE || length == 0){ //384K
+        //If fifo length is over size or is equals to 0
+        ErrorDump dump;
+        dump.ERROR_DUMP("206");
         return;
     }
     SavetoSD(length,myCAM);
-    
 }
 
 uint8_t FlightRec::SavetoSD(uint32_t length,ArduCAM myCAM){
-    //Construct a file name 
     static int k = 0;   
     static int i = 0;
     bool is_header = false;
@@ -83,7 +75,9 @@ uint8_t FlightRec::SavetoSD(uint32_t length,ArduCAM myCAM){
     //Open the new file
     outFile = SD.open(ConstructFileName(k,str), O_WRITE | O_CREAT | O_TRUNC);
     if (!outFile){
-        Serial.println(F("File open faild"));
+       //File Open Failed
+        ErrorDump dump;
+        dump.ERROR_DUMP("206");
         return;
     }
     myCAM.CS_LOW();
@@ -99,7 +93,7 @@ uint8_t FlightRec::SavetoSD(uint32_t length,ArduCAM myCAM){
             outFile.write(buf, i);
             //Close the file
             outFile.close();
-            Serial.println(F("Image save OK."));
+            //Serial.println(F("Image save OK."));
             is_header = false;
             i = 0;
         }

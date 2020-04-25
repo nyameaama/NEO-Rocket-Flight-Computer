@@ -5,6 +5,8 @@
 #include"SD.h"
 //#include "DateTimeStrings.h"
 #include"time.h"
+#include"../utility/ErrorDump.h"
+
 #define ERROR 0
 #define SUCCESS 1
 #define TRUE 1

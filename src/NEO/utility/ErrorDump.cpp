@@ -4,6 +4,10 @@ ErrorDump::ErrorDump(){
     //Initialize error codes
     ErrorCodes[0] = "Serial Error";
     ErrorCodes[1] = "404";
+    ErrorCodes[2] = "FileSys Error";
+    ErrorCodes[3] = "503";
+    ErrorCodes[4] = "Camera Error";
+    ErrorCodes[5] = "206";
 
 }
 
