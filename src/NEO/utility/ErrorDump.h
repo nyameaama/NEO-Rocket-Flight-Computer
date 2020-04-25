@@ -1,5 +1,6 @@
 #ifndef Error_Dump
 #define Error_Dump
+
 #include"../Data Logging/FileSys.h"
 #include<string.h>
 #include<Arduino.h>
@@ -27,4 +28,5 @@ class ErrorDump {
 
         uint8_t ERROR_DUMP(String code);
 };
+
 #endif

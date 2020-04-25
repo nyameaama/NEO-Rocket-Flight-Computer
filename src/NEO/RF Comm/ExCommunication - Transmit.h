@@ -1,3 +1,6 @@
+#ifndef Comm
+#define Comm
+
 #include"RH_ASK.h"
 #include<SPI.h>
 
@@ -8,12 +11,15 @@ class ExCommunication{
         int delayTime = 250;
     public:
         void transmit(char *msg){
-             if (!driver.init()){
+    if (!driver.init()){
 
-            }
-            driver.send((uint8_t *)msg, strlen(msg));
-            driver.waitPacketSent();
-            delay(delayTime);
-        }
+    }
+    driver.send((uint8_t *)msg, strlen(msg));
+    driver.waitPacketSent();
+    delay(delayTime);
+}
+
+
 
 };
+#endif

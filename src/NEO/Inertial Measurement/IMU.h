@@ -1,5 +1,6 @@
 #ifndef InertialMeasurement
 #define InertialMeasurement
+
 #include<Wire.h>
 #include<math.h>
 #include"Arduino.h"
@@ -30,5 +31,6 @@ class Gyro {
     public:
         double AccGyroVals(uint8_t SenData);
         
-};            
+}; 
+           
 #endif

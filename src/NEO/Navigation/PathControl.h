@@ -1,5 +1,6 @@
 #ifndef PathControl_F
 #define PathControl_F
+
 #include<stdlib.h>
 #include<stdint.h>
 
@@ -19,4 +20,5 @@ class PathControl {
          //Path Controller Function for altitude control
 		double alt_PathController(double cLoc,uint8_t haslaunched);    
 };
+
 #endif       

@@ -1,5 +1,9 @@
+#ifndef EEPROM_F
+#define EEPROM_F
+
 #include<EEPROM.h>
 #include<Arduino.h>
+
 //EEPROM Storage is used as alternate method in case of SD overflow!!
 //Flight data during flight will be stored in EEPROM storage consisting of 1024 bytes. 
 //Apply a partition for flight setup data and onboard flight data (100B - 800B - 124B) and EEPROM management
@@ -16,4 +20,5 @@ class Data {
                                 uint16_t addr);
    
 };
-        
+
+ #endif       

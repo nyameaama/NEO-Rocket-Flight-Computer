@@ -1,5 +1,6 @@
 #ifndef Area
 #define Area
+
 #include<Arduino.h>
 #include"../Sensors/sensors.h"
 #include"../Flight Control/Stability System/AxisStability.h"
@@ -16,5 +17,6 @@ class AreaAnalysis {
 		uint8_t launch_detect(uint32_t current_altitude,double elapsed,double vel_change,double acc_change);
 
         
-};        
+};   
+     
 #endif

@@ -1,5 +1,6 @@
 #ifndef ThrustVectorControl
 #define ThrustVectorControl
+
 #include<stdint.h>
 #include<stddef.h>
 #include<Arduino.h>
@@ -45,4 +46,5 @@ class Control : public Tools {
                 void multithreadServo(uint8_t x,uint8_t y);
 
 };        
+
 #endif

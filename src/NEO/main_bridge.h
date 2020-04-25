@@ -9,7 +9,7 @@
 #include"Navigation/PathCompute.h"
 #include"Navigation/PathControl.h"
 #include"Data Logging/FileSys.h"
-#include"RF Comm/ExCommunication - Transmit.cpp"
+#include"RF Comm/ExCommunication - Transmit.h"
 #include"Data Logging/EEPROM/EEPROMStorage.h"
 #include"Flight Control/ThrustRegulation/PropThrustControl.h"
 #include<Servo.h>

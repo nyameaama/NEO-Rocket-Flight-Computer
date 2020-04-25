@@ -1,4 +1,3 @@
-
 #include "EEPROMStorage.h"
 
 uint8_t Data::EEPROM_READ_WRITE(uint8_t x, uint32_t y, uint16_t z, uint32_t eepromCycle, uint16_t addr){

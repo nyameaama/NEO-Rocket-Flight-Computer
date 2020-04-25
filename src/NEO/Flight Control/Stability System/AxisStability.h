@@ -1,5 +1,6 @@
 #ifndef Axis_Stability
 #define Axis_Stability
+
 #include"../../Sensors/sensors.h"
 #include<stdint.h>
 #define UNDEFINED 0

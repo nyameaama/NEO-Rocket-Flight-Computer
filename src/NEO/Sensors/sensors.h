@@ -1,5 +1,6 @@
 #ifndef Sensors_F
 #define Sensors_F
+
 #include<SoftwareSerial.h>
 #include<TinyGPS++.h>
 #include<Adafruit_BMP085.h>
@@ -23,5 +24,6 @@ class Sensors {
         //This function takes in a parameter 1 or 2. Parameter one returns latitude and parameter 2 returns longitude
         double GPS_LOC(uint8_t coordinatePref);
 
-}; 
+};
+ 
 #endif   
