@@ -16,7 +16,8 @@ class AreaAnalysis {
         //Detect launch using acceleration and change in altitude 
 		uint8_t launch_detect(uint32_t current_altitude,double elapsed,double vel_change,double acc_change);
 
-        
+        //Detect Apogee using negative change in altitude
+		boolean detectApogee();
 };   
-     
+
 #endif

@@ -50,3 +50,29 @@ uint8_t AreaAnalysis::launch_detect(uint32_t current_altitude, double elapsed, d
 	}
 	return 0;
 }
+
+//Detect Apogee using negative change in altitude
+boolean AreaAnalysis::detectApogee(){
+	//To detect apogee, we sample 3 altimeter readings, then values are compared to
+	//see if they follow a direct negative trend. Ex:(98.5 -> 97.2 -> 95.6). If values 
+	//follow a negative trend, apogee is met and function returns true else function returns 
+	//false
+	Sensors apog;
+	//Get 3 readings
+	double *readings = (double*)malloc(3);
+	for(size_t i = 0; i < 3;i++){
+		readings[i] = apog.altimeter();
+	}
+	//Analyse for constant negative change in altitude readings
+	boolean change = true;
+	for(size_t j = 0; j < 3;j++){
+		if(j != 3){
+			if(readings[j] < readings[j + 1]){
+				change = false;
+			}
+		}else{
+			break;
+		}
+	}
+	return change;
+}
