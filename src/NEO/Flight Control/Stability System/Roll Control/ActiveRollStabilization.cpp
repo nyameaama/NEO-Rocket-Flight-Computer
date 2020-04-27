@@ -1,6 +1,8 @@
 #include"ActiveRollStabilization.h"
 
 RollStability::RollStability(){
+    //Constructor attaches servo motors to appropriate pins and retrieves
+    //servo position from SD
     s1.attach(MOTOR_PIN_1);
     s2.attach(MOTOR_PIN_2);
     s3.attach(MOTOR_PIN_3);
@@ -10,13 +12,16 @@ RollStability::RollStability(){
 }
 
 RollStability::~RollStability(){
+    //Destructor function saves servo position to SD for
+    //next class call
       FileSystem get;
       get.FOREIGN_LOG(PID,CURRENT_SERVO_POSITION);
 }
 
 String RollStability::determineRollDirection(){
     //Roll direction can be calculated by using two roll values to
-    // 
+    //determine whether values follow a positive trend. If roll trend is negative
+    //rocket rolls anticlockwise but if roll trend is positive rocket roll is cllockwise
     uint8_t sampleAmount = 3;
     double *rollV = compileValues(sampleAmount);
     uint8_t count;
@@ -31,6 +36,9 @@ String RollStability::determineRollDirection(){
 }
 
 uint8_t RollStability::updateCurrentRollAxis(){
+    //Update current Roll axis updates/stores roll axis. Roll axis:
+    //Negative = (0 -> -179) 
+    //Positive = (0 -> 179)
      uint8_t sampleAmount = 2;
     double *Val = compileValues(sampleAmount);
     if(Val[0] < 0){
@@ -39,6 +47,7 @@ uint8_t RollStability::updateCurrentRollAxis(){
 }
 
 double *RollStability::compileValues(uint8_t count){
+    //Helper function to compile values
     Gyro rSen;
     double *vals = (double*)malloc(count);
     for(size_t i = 0;i < count;i++){
@@ -63,6 +72,8 @@ double RollStability::getRollSpeed(){
 }
 
 double RollStability::getRotationPM(){
+    //Rocket RPM is computed by calculating the surface speed then 
+    //using that to calculate rev per min
     double rSpeed = getRollSpeed();
     double diameter; //diameter in cm
     double diameter_cm_to_m,surfaceSpeed;
@@ -82,6 +93,8 @@ double RollStability::getRotationPM(){
 }
 
 uint8_t RollStability::computeCounterRoll(uint8_t RPM){
+    //Function which takes the rocket current RPM and computes counter movement
+    //for fins to stabilize roll
     double HR = updateHighestRPM();
     double servoThresh = 180;
     double temp1, temp2;
@@ -91,6 +104,9 @@ uint8_t RollStability::computeCounterRoll(uint8_t RPM){
 }
 
 double RollStability::updateHighestRPM(){ //<-- Use more efficient implementation
+    //Since the highest RPM in flight cannot be definetly measured, function constantly
+    //retrieves and updates the highest RPM that has occured during flight. This is also used
+    //to compute the counter movemet for the fins
     double RPM = getRotationPM();
     double highest = RPM_COMP[0];    
     //Add newRPM to array
@@ -107,6 +123,7 @@ double RollStability::updateHighestRPM(){ //<-- Use more efficient implementatio
 }
 
 void RollStability::finMovement(double x){
+    //Function moves servos for rocket fins to pre-calculated counter position
     uint8_t DELAY_TIME;
     uint8_t count = CURRENT_SERVO_POSITION;
     uint8_t increment;
@@ -127,6 +144,7 @@ void RollStability::finMovement(double x){
 }
 
  uint8_t RollStability::rollStabilize(uint8_t roll){
+     //Driver function to stabilize vehicle roll
     uint8_t R_axis = 0; //Initialise to negative
     updateCurrentRollAxis();
     if(POS_ROLL_AXIS == true){

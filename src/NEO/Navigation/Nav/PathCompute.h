@@ -4,7 +4,7 @@
 #include<math.h>
 #include<stdlib.h>
 #include<stdint.h>
-#include"../utility/utility.h"
+#include"../../utility/utility.h"
 
 
 #define pi 3.14159265358979323846
