@@ -11,14 +11,14 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 
 #### High Power Boost Stage
 
-##### This Stage powers the fully stacked rocket up to apogee where it deploys the landing stage away for its independent landing system. This stage uses parachutes to safely bring it to the ground.
+##### This Stage powers the fully stacked rocket up to apogee where it deploys the landing stage away for its independent landing system. The boost stage uses parachutes to safely bring it to the ground.
 
 * High Power Propulsion
-* 
+* Parachute landing
 
 #### Propulsive Landing Stage
 
-##### This stage is deployed where it uses fins to control roll with thrust vectoring to control rocket direction when landing. A suicide burn is used to slow the stage down and land.
+##### This stage is deployed where it uses fins to control roll and thrust vectoring to control rocket direction when landing. A suicide burn is used to slow the stage down and land.
 
 * Support for vertical landing,
 * Active Flight Data Logging,
@@ -29,7 +29,7 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 ### Boost Stage
 
 *  ATmega2560 microcontroller
-*  Altimeter (Adafruit_BMP085)
+*  Altimeter (Adafruit_BMP085) -> pressure
 
 
 ### Landing Stage
@@ -66,7 +66,7 @@ The flight program for the project is written in C++.
 
 #### Inertial Measurement
 
-### Flight Navigation Module
+#### Flight Navigation Module
 * Active Path Planning
 * Path Deviation Control
 
