@@ -74,5 +74,6 @@ boolean AreaAnalysis::detectApogee(){
 			break;
 		}
 	}
+	free(readings);
 	return change;
 }

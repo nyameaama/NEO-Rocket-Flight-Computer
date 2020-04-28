@@ -52,8 +52,8 @@ uint8_t ErrorDump::ERROR_DUMP(String code){
  }
 
 uint8_t ErrorDump::LOG_ERROR(String Etype){
-    //FileSystem log;
+    FileSystem log;
     uint8_t intConv = Etype.toInt();
-    //log.FOREIGN_LOG(FileSysPID,intConv);
+    log.FOREIGN_LOG(FileSysPID,intConv);
     return 1;
 }
