@@ -12,7 +12,8 @@
 
 ## Thrust Vector Control
 
-* The Thrust Vector Control module uses two servos in order to gimble the nozzle to change rocket direction during flight
+* The Thrust Vector Control module uses two servos in order to gimble the nozzle to change rocket direction during flight [IN PROGRESS]
+
 
 ## -----------------------------------------------------------------------------------------------------------------------
 ## EXPERIMENTAL

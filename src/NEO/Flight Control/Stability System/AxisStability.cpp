@@ -11,8 +11,11 @@
 //standardPitchval = //87 degrees
 
 double RPY_CHECK::roll_range(double roll_val, uint8_t standardRollval){
+	//Acceptable margin 
 	double A_margin = 0.5;
+	//Error margin rerurn value
 	double readingError = 0;
+	//Find if axis value exceeds acceptable margin 
 	if (roll_val < (standardRollval - A_margin)){
 		readingError = standardRollval - roll_val;
 	}
@@ -23,8 +26,11 @@ double RPY_CHECK::roll_range(double roll_val, uint8_t standardRollval){
 }
 
 double RPY_CHECK::pitch_range(double pitch_val, uint8_t standardPitchval){
+	//Acceptable margin 
 	double Acceptable_margin = 5.0;
+	//Error margin rerurn value
 	double readError = 0;
+	//Find if axis value exceeds acceptable margin
 	if (pitch_val < (standardPitchval - Acceptable_margin)){
 		readError = standardPitchval - pitch_val;
 	}
@@ -32,8 +38,11 @@ double RPY_CHECK::pitch_range(double pitch_val, uint8_t standardPitchval){
 }
 
 double RPY_CHECK::yaw_range(double yaw_val, uint8_t standardYawVal){
+	//Acceptable margin 
 	double AccMargin = 0.1;
+	//Error margin rerurn value
 	double readError = 0;
+	//Find if axis value exceeds acceptable margin
 	if (yaw_val < (standardYawVal - AccMargin)){
 		readError = standardYawVal - yaw_val;
 	}
@@ -44,6 +53,9 @@ double RPY_CHECK::yaw_range(double yaw_val, uint8_t standardYawVal){
 }
 
 double *RPY_CHECK::timeElapsed(){
+	//timeElapsed() takes sample readings and measures 
+	//the time taken between them. Function returns both readings
+	//and time elapsed. Helper function for velChange()
     Sensors sp;
     double time[3];
     double readings[2];
@@ -61,13 +73,14 @@ double *RPY_CHECK::timeElapsed(){
 }
 
 double *RPY_CHECK::velChange(){
+	//Function takes sample vel readings and computes acceleration change
     double ret[2];
     double *vel = timeElapsed();
     double vel_change,acc_change;
     vel_change = vel[1] - vel[0];
     ret[0] = vel_change;
 	acc_change = vel_change / vel[2];
-    vel[1] = acc_change;
+    ret[1] = acc_change;
     return ret;
 }
 

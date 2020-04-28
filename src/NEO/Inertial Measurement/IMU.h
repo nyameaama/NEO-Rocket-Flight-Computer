@@ -26,11 +26,13 @@ class Gyro {
 		float roll, pitch, yaw;
 										//Gyro = 1  Accel = 2
 	private:
+		//Function to calculate inertial measurement unit error
 		double calculate_IMU_error(uint8_t SENSOR,uint8_t XY_ERROR);
 
     public:
+		//Function to interface and calculate pitch, roll and yaw
         double AccGyroVals(uint8_t SenData);
         
 }; 
-           
+
 #endif

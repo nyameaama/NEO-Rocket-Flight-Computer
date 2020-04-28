@@ -19,14 +19,19 @@ class RPY_CHECK{
     //standardPitchval = //87 degrees
        
     public:
+        //Compute roll axis position error
         double roll_range(double roll_val,uint8_t standardRollval);
 
+        //Compute pitch axis position error
         double pitch_range(double pitch_val,uint8_t standardPitchval);
 
+        //Compute yaw axis position error
         double yaw_range(double yaw_val,uint8_t standardYawVal);
  
+        //Compute time elapsed
         double *timeElapsed();
 
+        //Compute change in velocity
         double *velChange();
 
 };
@@ -34,6 +39,7 @@ class RPY_CHECK{
 //Function to correct craft axis from variances in flight direction
 class VectorCompute {
     public:
+        //Function to translate gyro to servo range
         int *translate_to_servo(double yawR,double pitchR);
 
 };    

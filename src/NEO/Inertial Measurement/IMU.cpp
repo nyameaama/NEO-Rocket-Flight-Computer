@@ -1,7 +1,7 @@
 #include "IMU.h"
 
 double Gyro::calculate_IMU_error(uint8_t SENSOR, uint8_t XY_ERROR){
-	// We can call this funtion in the setup section to calculate the accelerometer and gyro data error. From here we will get the error values used in the above equations printed on the Serial Monitor.
+	// We can call this funtion to calculate the accelerometer and gyro data error. From here we will get the error values used in the above equations printed on the Serial Monitor.
 	// Note that we should place the IMU flat in order to get the proper values, so that we then can the correct values
 	// Read accelerometer values 200 times
 	uint32_t c;
