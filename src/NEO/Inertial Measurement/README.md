@@ -4,4 +4,4 @@
 
 * Supplementary functions for calculation of pitch, yaw and roll values
 
-![alt text](/Users/nyameaama/Documents/PlatformIO/Projects/Model Rocket/src/NEO/Inertial Measurement/resources/mpu-6050-1.jpg)
+![alt text](/resources/mpu-6050-1.jpg)
