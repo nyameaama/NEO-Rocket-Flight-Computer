@@ -1,10 +1,12 @@
 Sensors —> Guidance System —> Control System
 
+* -> Completed
+
 *New*
 -Interface AirSpeed Sensor *
 -Add support for GPS Module *
 -Add PathFind {} class with path functions
--Add support for control fins to control vehicle roll
+-Add support for control fins to control vehicle roll *
 -Add support for ultrasonic close surface detection *
 -Add support for logging of Flight Data *
 -Add support for flight data/details parsing for flight (Comm system) *
@@ -22,7 +24,7 @@ Sensors —> Guidance System —> Control System
 -Rework Altimeter function *
 -Finish axis stabilization functions (limCalcs) *
 -Finish velocity control 
--Revisit MPXV7002DP - Airspeed 
+-Revisit MPXV7002DP - Airspeed *
 
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fjourneynorth.org%2Ftm%2FLongitudeIntro.html&psig=AOvVaw0R7wwkcXBeSL2yacowkVXi&ust=1580319143554000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOifneDppucCFQAAAAAdAAAAABAJ
 

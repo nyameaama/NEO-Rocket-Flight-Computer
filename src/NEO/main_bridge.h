@@ -1,3 +1,6 @@
+//Main bridge includes all files and dependencies required by main
+//and defines all objects that would be used by main
+
 #include<Arduino.h>
 #include<EEPROM.h>
 #include"Sensors/sensors.h"
