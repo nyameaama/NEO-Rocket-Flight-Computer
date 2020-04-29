@@ -23,6 +23,7 @@
         //Compute speed of increase
         double S_O_I = diff / duration;//Samples per 
         speed_of_increase[SOI_index] = S_O_I;
+        SOI_index++;
     }
     //Determine if speed of increase follws a descending trend
     boolean deccel = true;
@@ -39,5 +40,5 @@
  }
 
  double ACC_ANALYSIS::timeBetween(double x, double y){
-     
+
  }

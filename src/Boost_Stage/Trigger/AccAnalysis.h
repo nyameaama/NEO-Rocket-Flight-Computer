@@ -5,7 +5,7 @@
 
 #define SAMPLE_SIZE 5
 
-//Acceleration analysis determines whether booster stage ignition has ended. This can be found by compiling
+//Acceleration analysis determines whether booster stage thrust has ended. This can be found by compiling
 //a considerable amount of velocity values to analyze for deccelerating pattern as well as a deccelerating pattern in altitude. 
 //Process needs to accurately trigger before apogee to successfully deploy landing stage
 
