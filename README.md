@@ -54,7 +54,7 @@ The flight program for the project is written in C++.
 
 ### Landing Stage
 
-* The Landing stage microcontroller is the main controller with the boost controller being a sub controller. It uses I2C to communicate with boost stage microcontroller to control Boost Stage Thrust Vectoring. The boost stage controller only independently handles its parachute deployment.
+* The Landing stage microcontroller is the main controller with the boost controller being a sub controller. It uses Bluetooth(HC-05, HC-06 ) to communicate with boost stage microcontroller to control Boost Stage Thrust Vectoring. The boost stage controller only independently handles its parachute deployment.
 
 #### Data Logging Module
 * EEPROM storage
