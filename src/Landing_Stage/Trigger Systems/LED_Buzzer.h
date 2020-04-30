@@ -4,6 +4,8 @@
 #include"pitches.h"
 #include<Arduino.h>
 
+#define LED_PIN 0
+
 class LED_BUZZER {
     private:
         // notes in the melody:
@@ -17,6 +19,9 @@ class LED_BUZZER {
 
         //Function to play tone
         void playTone();
+
+        //Function to blink LED
+        void blink();
 
 };
 

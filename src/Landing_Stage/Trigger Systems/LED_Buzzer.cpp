@@ -1,6 +1,7 @@
 #include"LED_Buzzer.h"
 
 LED_BUZZER::LED_BUZZER(){
+    pinMode(8, OUTPUT);
     melody[0] = NOTE_C4;
     melody[1] = NOTE_G3;
     melody[2] = NOTE_G3;
@@ -33,4 +34,9 @@ void LED_BUZZER::playTone(){
     // stop the tone playing:
     noTone(8);
   }
+}
+
+void LED_BUZZER::blink(){
+    digitalWrite(8, HIGH);   
+    delay(1000);    
 }
