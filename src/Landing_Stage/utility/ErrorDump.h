@@ -12,7 +12,7 @@ class ErrorDump {
     private:
         String *ErrorCodes = (String*)malloc(DB_SIZE);
         uint8_t code_index = -1;
-        String FileSysPID = "SYS412Y"; 
+        String ErrorDumpPID = "SYS412Y"; 
 
     private:
         boolean confirmECODE(String code);

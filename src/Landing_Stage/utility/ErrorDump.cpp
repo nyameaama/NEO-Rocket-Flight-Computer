@@ -8,6 +8,8 @@ ErrorDump::ErrorDump(){
     ErrorCodes[3] = "503";
     ErrorCodes[4] = "Camera Error";
     ErrorCodes[5] = "206";
+    ErrorCodes[6] = "MC Bridge Error";
+    ErrorCodes[7] = "908";
 
 }
 
@@ -54,6 +56,6 @@ uint8_t ErrorDump::ERROR_DUMP(String code){
 uint8_t ErrorDump::LOG_ERROR(String Etype){
     FileSystem log;
     uint8_t intConv = Etype.toInt();
-    log.FOREIGN_LOG(FileSysPID,intConv);
+    log.FOREIGN_LOG(ErrorDumpPID,intConv);
     return 1;
 }

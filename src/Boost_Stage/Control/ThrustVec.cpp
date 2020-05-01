@@ -1,6 +1,6 @@
 #include"ThrustVec.h"
 
-uint8_t *ThrustVec::thrustVector(uint8_t M_1, uint8_t M_2){
+uint8_t ThrustVec::thrustVector(uint8_t M_1, uint8_t M_2){
 	//M_1 and M_2 values will be in the range of 0 - 90
 	//but servo moves from 0 - 180 so numbers will have to
 	//be scaled
@@ -16,7 +16,7 @@ uint8_t *ThrustVec::thrustVector(uint8_t M_1, uint8_t M_2){
 	M2_reading = M2temp1 / 90;
 	servoLoc[1] = M2_reading;
 	//Multithread servo move process
-	return servoLoc;
+	multithreadServo(servoLoc[0],servoLoc[1]);
 }
 
 void ThrustVec::Motor1_Move(uint8_t val){

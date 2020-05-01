@@ -11,7 +11,7 @@ class ThrustVec {
         Servo M1,M2;
         uint8_t M1_reading, M2_reading;
     public:
-         uint8_t *thrustVector(uint8_t M_1,uint8_t M_2);
+         uint8_t thrustVector(uint8_t M_1,uint8_t M_2);
 
         void Motor1_Move(uint8_t val);
 
