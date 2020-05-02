@@ -4,6 +4,8 @@
 #include<SoftwareSerial.h>
 #include"../utility/ErrorDump.h"
 #include<Arduino.h>
+#include"BT.h"
+#include"../Sensors/sensors.h"
 
 //#define RX_PIN 0
 //#define TX_PIN 0
@@ -19,6 +21,13 @@ class CommMC {
         boolean confID(String ID);
 
         boolean compare(String x, String y);
+
+        uint8_t verifyTransmit_Receive(String ID);
+
+        uint8_t receiveDat(String ID,String data);
+
+        uint8_t sendDat(String ID,String data);
+
 
     public:
         CommMC();

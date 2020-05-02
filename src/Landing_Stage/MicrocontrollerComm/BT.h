@@ -9,6 +9,12 @@ class BT_Comm {
     private:
         uint8_t RX_PIN;
         uint8_t TX_PIN;
+        
+    private:
+         String compressStrings(String x, String y);
+
+        String *decompressString(String x);
+            
     public:
         // Connect the HC-05 TX to Arduino pin 2 RX. 
         // Connect the HC-05 RX to Arduino pin 3 TX through a voltage divider.
@@ -17,7 +23,7 @@ class BT_Comm {
 
         uint8_t request(uint8_t x);
 
-        uint8_t receiveDat(uint8_t x);
+        uint8_t send(uint8_t x);
 
         unsigned int crc32c_checksum(unsigned char *message);
 

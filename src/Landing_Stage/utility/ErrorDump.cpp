@@ -10,6 +10,8 @@ ErrorDump::ErrorDump(){
     ErrorCodes[5] = "206";
     ErrorCodes[6] = "MC Bridge Error";
     ErrorCodes[7] = "908";
+    ErrorCodes[8] = "Boost Stage System Error";
+    ErrorCodes[9] = "104";
 
 }
 
