@@ -31,3 +31,12 @@
 
 }
 
+String BT_Comm::compressStrings(String x, String y){
+    String compressed;
+    compressed = x + y;
+    return compressed;
+}
+
+String BT_Comm::*decompressString(String x){
+    String *newStr = (String*)malloc(2);
+}

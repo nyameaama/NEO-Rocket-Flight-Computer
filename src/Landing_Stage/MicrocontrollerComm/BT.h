@@ -11,10 +11,10 @@ class BT_Comm {
         uint8_t TX_PIN;
         
     private:
-         String compressStrings(String x, String y);
+        String compressStrings(String x, String y);
 
         String *decompressString(String x);
-            
+
     public:
         // Connect the HC-05 TX to Arduino pin 2 RX. 
         // Connect the HC-05 RX to Arduino pin 3 TX through a voltage divider.

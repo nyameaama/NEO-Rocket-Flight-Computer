@@ -2,6 +2,7 @@
 #define ACCELERATION ANALYSIS
 
 #include<Arduino.h>
+#include"../BSensors/B_Sensors.h"
 
 #define SAMPLE_SIZE 5
 
@@ -10,6 +11,8 @@
 //Process needs to accurately trigger before apogee to successfully deploy landing stage
 
 class ACC_ANALYSIS {
+    private:
+        BSensors get;
     private:
         //Function to compile altitude vals with time metadata
         double *getAltVals();

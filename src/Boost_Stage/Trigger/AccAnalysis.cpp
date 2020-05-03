@@ -39,6 +39,18 @@
     return deccel;
  }
 
- double ACC_ANALYSIS::timeBetween(double x, double y){
+//Function gets altitude samples with time took place. time = millis() 
+//which is the number of time passed after the program started
+double *ACC_ANALYSIS::getAltVals(){
+    double *values = (double*)malloc(SAMPLE_SIZE);
+    for(size_t i = 0;i < SAMPLE_SIZE / 2;i+=2){
+        values[i] = get.BS_altimeter();
+        values[i + 1] = millis();
+    }
+    return values;
+}
 
- }
+//Function gets duration between two timestamps
+double ACC_ANALYSIS::timeBetween(double x,double y){
+    return (y - x);
+}
