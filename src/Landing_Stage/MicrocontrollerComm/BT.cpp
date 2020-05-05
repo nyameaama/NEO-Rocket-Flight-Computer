@@ -1,6 +1,6 @@
 #include "BT.h"
 
- unsigned int BT_Comm::crc32c_checksum(unsigned char *message){
+ unsigned int BT_Comm::crc32c_checksum(char *message){
     int i, j;
     unsigned int byte, crc, mask;
     static unsigned int table[256];
@@ -27,9 +27,12 @@
       i = i + 1;
    }
    return ~crc;
-
+    //String x;
+    //uint32_t checksum = CRC32::calculate(String x,5);
 
 }
+
+
 
 String BT_Comm::compressStrings(String x, String y){
     String compressed;
@@ -39,4 +42,12 @@ String BT_Comm::compressStrings(String x, String y){
 
 String BT_Comm::*decompressString(String x){
     String *newStr = (String*)malloc(2);
+}
+
+uint8_t BT_Comm::send(String ID,String x){
+    //Compress data with process ID into one string
+    String comp = compressStrings(ID,x);
+    //Checksum
+    //crc32c_checksum(comp.c_str());
+
 }

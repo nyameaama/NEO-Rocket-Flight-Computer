@@ -43,7 +43,7 @@ uint8_t CommMC::sendDat(String ID,String data){
     if(compare(ID,"LS02")){
         BT_Comm trans;
         Sensors get;
-        trans.send(get.AirspeedVal());
+        trans.send(ID,String(get.AirspeedVal()));
     }
 
     return;

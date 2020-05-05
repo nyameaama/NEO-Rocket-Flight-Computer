@@ -2,6 +2,7 @@
 #define BT
 
 #include<SoftwareSerial.h>
+#include<CRC32.h>
 
 //Connecting 2 Arduinos by Bluetooth using a HC-05 and a HC-06: Pair, Bind, and Link
 
@@ -23,9 +24,9 @@ class BT_Comm {
 
         uint8_t request(uint8_t x);
 
-        uint8_t send(uint8_t x);
+        uint8_t send(String ID, String x);
 
-        unsigned int crc32c_checksum(unsigned char *message);
+        unsigned int crc32c_checksum(char *message);
 
 };
 
