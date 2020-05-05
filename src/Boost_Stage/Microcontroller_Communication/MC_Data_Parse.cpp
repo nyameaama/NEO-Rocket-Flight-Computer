@@ -28,6 +28,7 @@ uint8_t MC_PARSE::assign(String ID,String data){
  uint8_t MC_PARSE::receiveDat(String ID,String data){
     if(compare(ID,"LS03")){
         ThrustVec vector;
+        uint8_t vectorValue = data.toInt();
         //vector.thrustVector(); <-- Wait till thrust vectoring is fixed    
     }
     if(compare(ID,"LS02")){

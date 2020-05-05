@@ -28,7 +28,6 @@ class CommMC {
 
         uint8_t sendDat(String ID,String data);
 
-
     public:
         CommMC();
 

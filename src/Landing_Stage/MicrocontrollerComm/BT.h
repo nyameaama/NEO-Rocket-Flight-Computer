@@ -22,7 +22,7 @@ class BT_Comm {
         // SoftwareSerial BTserial(RX_PIN, TX_PIN); // RX | TX
         //SoftwareSerial BTSerial(2, 3); // RX | TX
 
-        uint8_t request(uint8_t x);
+        String *request();
 
         uint8_t send(String ID, String x);
 
