@@ -34,7 +34,7 @@ SoftwareSerial BSerial(RXPIN, TXPIN);
 
 MC_Communication::MC_Communication(){
     //Set to HC-05 default baud rate, found using AT+UART.  It is usually 38400.
-    //BSerial.begin(38400);
+    BSerial.begin(38400);
 }
 
 String * MC_Communication::request(){
