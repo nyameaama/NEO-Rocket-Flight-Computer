@@ -1,4 +1,5 @@
 #include "BT_communication.h"
+SoftwareSerial BSerial(RXPIN, TXPIN);
 
  unsigned int MC_Communication::crc32c_checksum(unsigned char *message){
     int i, j;
@@ -31,3 +32,39 @@
 
 }
 
+MC_Communication::MC_Communication(){
+    //Set to HC-05 default baud rate, found using AT+UART.  It is usually 38400.
+    //BSerial.begin(38400);
+}
+
+String * MC_Communication::request(){
+    String *ProcessInf = (String*)malloc(2);
+    String bdata;
+    String *decomp;
+    //Read from the Bluetooth module and send to the Arduino Serial Monitor
+    if(BSerial.available()){
+        bdata = String(BSerial.read());
+        decomp = decompString(bdata);
+        ProcessInf[0] = decomp[0];
+        ProcessInf[1] = decomp[1];
+    }
+    return ProcessInf;
+}
+
+uint8_t MC_Communication::send(String ID, String x){
+    // Send to the Bluetooth module
+  if (BSerial.available()) {
+    String comp = compStrings(ID,x);
+    BSerial.write(comp.toInt());  //<-- Come back and  for type
+  }
+}
+
+String MC_Communication::compStrings(String x, String y){
+    String compressed;
+    compressed = x + y;
+    return compressed;
+}
+
+String MC_Communication::*decompString(String x){
+    String *newStr = (String*)malloc(2);
+}

@@ -1,7 +1,6 @@
 #include"MC_Comm.h"
 
 CommMC::CommMC(){
-    // BTserial.begin(38400);
     //Boost Stage processes 
     processes[0] = "BS01"; // Log Error 
     processes[1] = "BS02"; // Ejection Command
