@@ -3,8 +3,9 @@
 
 #include<stdlib.h>
 #include<stdint.h>
+#include"../Nav/PathCompute.h"
 
-class PathControl {
+class PathControl : public PathCompute {
 	private:
 		//Accepts directional values to translate to t-vector range
 		//y =    0 = pitch     1 = yaw

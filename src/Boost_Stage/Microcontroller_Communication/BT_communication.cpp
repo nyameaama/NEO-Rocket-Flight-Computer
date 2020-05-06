@@ -61,10 +61,31 @@ uint8_t MC_Communication::send(String ID, String x){
 
 String MC_Communication::compStrings(String x, String y){
     String compressed;
-    compressed = x + y;
+    uint8_t combinedLength = x.length() + y.length();
+    //Separate string using "_" 
+    for(size_t i = 0; i < combinedLength + 1;i++){
+        if(i < (combinedLength + 1)/2){
+            compressed[i] = x[i];
+        }else if(i > (combinedLength + 1)/2){
+            compressed[i] = y[i];
+        }else{
+            String temp = "0";
+            //compressed[i] = temp;
+        }
+    }
     return compressed;
 }
 
 String MC_Communication::*decompString(String x){
     String *newStr = (String*)malloc(2);
+    uint8_t combLength = x.length();
+    String str1,str2;
+    for(size_t i = 0;i < combLength;i++){
+        str1 = x[i] + x[i];
+        //if(x[i] == " "){
+    
+        //}
+    }
+
+
 }
