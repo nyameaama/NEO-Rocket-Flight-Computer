@@ -18,7 +18,7 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 
 #### Propulsive Landing Stage
 
-##### This stage is deployed where it uses fins to control roll and thrust vectoring to control rocket direction when landing. A suicide burn is used to slow the stage down and land.
+##### This stage is deployed where it uses fins to control roll, pitch and yaw during descent and thrust vectoring to control rocket direction when landing. A suicide burn is used to slow the stage down and land.
 
 * Support for vertical landing,
 * Active Flight Data Logging,
@@ -28,18 +28,20 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 
 ### Boost Stage
 
-*  ATmega2560 microcontroller
+*  ATmega328P microcontroller (Arduino Uno Development Board)
 *  Altimeter (Adafruit_BMP085) -> pressure
+*  HC-05 Bluetooth Module (Slave)
 
 
 ### Landing Stage
 
-* ATmega2560 microcontroller
+* ATmega2560 microcontroller (Custom PCB)
 * Altimeter (Adafruit_BMP085)
 * MPU6050 IMU 
-* MPXV7002DP
+* MPXV7002DP - Airspeed
 * ArduCam
-
+* HC-06 Bluetooth Module (Master)
+* NEO-6M GPS module
 
 # Contribution
 
@@ -65,16 +67,33 @@ The flight program for the project is written in C++.
 * Thrust Vector Control
 
 #### Inertial Measurement
+* Axis Values(X,Y,Z)
+* Calculate pitch,yaw and roll from IMU
 
 #### Flight Navigation Module
 * Active Path Planning
 * Path Deviation Control
 
 #### RF Communication Module
+* [EXPERIMENTAL COMMUNICATION WITH GROUND STATION]
 
 #### Sensor Module
+* Interface GPS,altimeter,airspeed
 
 ### Boost Stage 
+
+#### Communication Module
+* Recieve commands from landing Stgae
+* Log Data (Errors)
+* Send ejection trigger
+
+#### Trigger Module
+* Compute decceleration to send ejection trigger
+* Detect altitude for chute deployment
+
+#### Sensor Module
+* Interface altimeter
+
 
 
 
