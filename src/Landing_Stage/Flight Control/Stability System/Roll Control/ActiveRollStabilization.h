@@ -26,7 +26,6 @@ class RollStability {
         String SPIN_DIRECTION= "clockwise";
         uint8_t arSize = 1;
         double RPM_HIGH;
-        double *RPM_COMP = (double*)malloc(arSize);
         String PID;
         uint8_t CURRENT_SERVO_POSITION;
     private:

@@ -1,5 +1,7 @@
 #include"ActiveRollStabilization.h"
 
+ double *RPM_COMP = (double*)malloc(1);
+
 RollStability::RollStability(){
     //Constructor attaches servo motors to appropriate pins and retrieves
     //servo position from SD

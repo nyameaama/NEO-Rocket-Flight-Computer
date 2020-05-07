@@ -24,7 +24,7 @@ class MC_Communication {
 
         uint8_t send(String ID, String x);
 
-        unsigned int crc32c_checksum(unsigned char *message);
+        unsigned int crc32c_checksum(String dataS);
 
 };
 

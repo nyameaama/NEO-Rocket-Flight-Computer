@@ -27,7 +27,7 @@ class BT_Comm {
 
         uint8_t send(String ID, String x);
 
-        unsigned int crc32c_checksum(char *message);
+        unsigned int crc32c_checksum(String data);
 
 };
 

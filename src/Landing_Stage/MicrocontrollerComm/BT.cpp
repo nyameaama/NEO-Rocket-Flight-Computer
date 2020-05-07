@@ -1,7 +1,8 @@
 #include "BT.h"
 SoftwareSerial BTSerial(2, 3); // RX | TX
 
- unsigned int BT_Comm::crc32c_checksum(char *message){
+ unsigned int BT_Comm::crc32c_checksum(String data){
+    const char *message = data.c_str();
     int i, j;
     unsigned int byte, crc, mask;
     static unsigned int table[256];
@@ -28,19 +29,40 @@ SoftwareSerial BTSerial(2, 3); // RX | TX
       i = i + 1;
    }
    return ~crc;
-    //String x;
-    //uint32_t checksum = CRC32::calculate(String x,5);
 
 }
 
 String BT_Comm::compressStrings(String x, String y){
     String compressed;
-    compressed = x + y;
+    uint8_t combinedLength = x.length() + y.length();
+    //Separate string using "_" 
+    for(size_t i = 0; i < combinedLength + 1;i++){
+        if(i < (combinedLength + 1)/2){
+            compressed[i] = x[i];
+        }else if(i > (combinedLength + 1)/2){
+            compressed[i] = y[i];
+        }else{
+            String temp = "0";
+            //compressed[i] = temp;
+        }
+    }
     return compressed;
 }
 
-String BT_Comm::*decompressString(String x){
+String *BT_Comm::decompressString(String x){
     String *newStr = (String*)malloc(2);
+    uint8_t combLength = x.length();
+    String str1,str2;
+    uint8_t StrIndex = x.indexOf(" ");
+    for(size_t i = 0;i < StrIndex;i++){
+        str1 += x[i];
+    }
+    for (size_t j = (StrIndex + 1); j < combLength; j++){
+        str2 += x[j];
+    }
+    newStr[0] = str1;
+    newStr[1] = str2;
+    return newStr;
 }
 
 BT_Comm::BT_Comm(){

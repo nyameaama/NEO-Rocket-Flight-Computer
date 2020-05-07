@@ -1,7 +1,8 @@
 #include "BT_communication.h"
 SoftwareSerial BSerial(RXPIN, TXPIN);
 
- unsigned int MC_Communication::crc32c_checksum(unsigned char *message){
+ unsigned int MC_Communication::crc32c_checksum(String dataS){
+    const char *message = dataS.c_str();
     int i, j;
     unsigned int byte, crc, mask;
     static unsigned int table[256];
@@ -28,8 +29,6 @@ SoftwareSerial BSerial(RXPIN, TXPIN);
       i = i + 1;
    }
    return ~crc;
-
-
 }
 
 MC_Communication::MC_Communication(){
@@ -55,7 +54,7 @@ uint8_t MC_Communication::send(String ID, String x){
     // Send to the Bluetooth module
   if (BSerial.available()) {
     String comp = compStrings(ID,x);
-    BSerial.write(comp.toInt());  //<-- Come back and  for type
+    BSerial.write(comp.toInt());  //<-- Come back for type error
   }
 }
 
@@ -76,16 +75,18 @@ String MC_Communication::compStrings(String x, String y){
     return compressed;
 }
 
-String MC_Communication::*decompString(String x){
+String *MC_Communication::decompString(String x){
     String *newStr = (String*)malloc(2);
     uint8_t combLength = x.length();
     String str1,str2;
-    for(size_t i = 0;i < combLength;i++){
-        str1 = x[i] + x[i];
-        //if(x[i] == " "){
-    
-        //}
+    uint8_t StrIndex = x.indexOf(" ");
+    for(size_t i = 0;i < StrIndex;i++){
+        str1 += x[i];
     }
-
-
+    for (size_t j = (StrIndex + 1); j < combLength; j++){
+        str2 += x[j];
+    }
+    newStr[0] = str1;
+    newStr[1] = str2;
+    return newStr;
 }
