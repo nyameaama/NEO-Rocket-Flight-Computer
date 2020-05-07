@@ -3,6 +3,7 @@
 
 #include<Arduino.h>
 #include"../BSensors/B_Sensors.h"
+#include"../Microcontroller_Communication/MC_Data_Parse.h"
 
 #define SAMPLE_SIZE 5
 
@@ -22,6 +23,8 @@ class ACC_ANALYSIS {
 
         //Function gets duration between two timestamps
         double timeBetween(double x,double y);
+
+        String waitUntil();
 
     public:
         //Function to analyse velocity for a decceleration pattern

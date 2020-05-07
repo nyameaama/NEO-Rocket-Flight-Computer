@@ -7,7 +7,7 @@ MC_PARSE::MC_PARSE(){
     // Landing Stage Processes
     processesNum[2] = "LS02"; //Send velocity
     processesNum[3] = "LS03"; //Send/Receive thrust Vector gimbal position
-
+    processesNum[4] = "LS04"; //Ejection confirmation
 }
 
 uint8_t MC_PARSE::assign(String ID,String data){
@@ -32,7 +32,11 @@ uint8_t MC_PARSE::assign(String ID,String data){
         //vector.thrustVector(); <-- Wait till thrust vectoring is fixed    
     }
     if(compare(ID,"LS02")){
-
+        //velocity
+    }
+    if(compare(ID,"LS04")){
+        //Ejection confirmation
+        
     }
     return;
  }

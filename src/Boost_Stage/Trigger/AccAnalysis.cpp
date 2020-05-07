@@ -54,3 +54,15 @@ double *ACC_ANALYSIS::getAltVals(){
 double ACC_ANALYSIS::timeBetween(double x,double y){
     return (y - x);
 }
+
+boolean ACC_ANALYSIS::ejectStage(){
+    if(analyseAltDecceleration()){
+        MC_PARSE mov;
+        String ID = "BS02";
+        mov.assign(ID,"Y");
+
+        
+    }else{
+        //Do nothing
+    }
+}

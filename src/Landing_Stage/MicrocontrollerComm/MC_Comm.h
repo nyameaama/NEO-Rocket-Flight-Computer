@@ -6,6 +6,7 @@
 #include<Arduino.h>
 #include"BT.h"
 #include"../Sensors/sensors.h"
+#include"../Trigger Systems/AreaAnalysis.h"
 
 //#define RX_PIN 0
 //#define TX_PIN 0

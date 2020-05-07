@@ -3,11 +3,11 @@
 CommMC::CommMC(){
     //Boost Stage processes 
     processes[0] = "BS01"; // Log Error 
-    processes[1] = "BS02"; // Ejection Command
+    processes[1] = "BS02"; // Ejection Trigger
     // Landing Stage Processes
     processes[2] = "LS02"; //Send velocity
     processes[3] = "LS03"; //Send thrust Vector gimbal position
-
+    processes[4] = "LS04"; //Ejection confirmation
 }
 
 uint8_t CommMC::assign(String ID,String data){
@@ -22,7 +22,6 @@ uint8_t CommMC::assign(String ID,String data){
     }else{
         return dump.ERROR_DUMP("908");
     }
-
 }
 
  uint8_t CommMC::receiveDat(String ID,String data){
@@ -38,13 +37,25 @@ uint8_t CommMC::assign(String ID,String data){
  }
 
 uint8_t CommMC::sendDat(String ID,String data){
+     BT_Comm trans;
+    Sensors get;
     //Send vehicle velocity
     if(compare(ID,"LS02")){
-        BT_Comm trans;
-        Sensors get;
         trans.send(ID,String(get.AirspeedVal()));
     }
+    if(compare(ID,"LS03")){
+        //Send BS gimbal value
 
+    }
+    if(compare(ID,"LS04")){
+        //Ejection confirmation
+        AreaAnalysis anal;
+        String verify = "N";
+        if(anal.analyseAltDecceleration()){
+            verify = "Y";
+        }
+        trans.send(ID,verify);
+    }
     return;
 }
 
