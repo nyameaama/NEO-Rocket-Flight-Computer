@@ -42,10 +42,11 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 * ArduCam
 * HC-06 Bluetooth Module (Master)
 * NEO-6M GPS module
+* RF 433MHz Transmitter/Receiver modules
 
 # Contribution
 
-You can fork this reposirtory to introduce new features, changes or bug fixes and create a pull request to merge with master. This repository can be cloned at https://github.com/nyameaama/NEO-Rocket-Flight-Computer. 
+You can fork this repository to introduce new features, changes or bug fixes and create a pull request to merge with master. This repository can be cloned at https://github.com/nyameaama/NEO-Rocket-Flight-Computer. 
 
 # Documentation
 
