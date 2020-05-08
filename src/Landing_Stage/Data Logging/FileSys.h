@@ -17,6 +17,8 @@
 class FileSystem{
     public:
         FileSystem();
+        ~FileSystem();
+        
     private:
         String *PrIDS = (String*)malloc(16);
         uint8_t PIN_OUTPUT;

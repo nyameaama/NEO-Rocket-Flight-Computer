@@ -21,6 +21,10 @@ FileSystem::FileSystem()
     PrIDS[11] = "SYS412Y";
 }
 
+FileSystem::~FileSystem(){
+    free(PrIDS);
+}
+
 //Function compares two strings
 boolean FileSystem::compare(String x, String y){
     if (x != y){
