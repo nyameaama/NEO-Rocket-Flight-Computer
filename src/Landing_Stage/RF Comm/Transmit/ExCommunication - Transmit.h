@@ -10,7 +10,7 @@ class ExCommunication{
         RH_ASK driver;
         int delayTime = 250;
     public:
-        void transmit(char *msg){
+        void transmit(const char *msg){
     if (!driver.init()){
 
     }
