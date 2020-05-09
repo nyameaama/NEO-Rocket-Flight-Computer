@@ -19,9 +19,6 @@
 //double currentHeading[2] = {AccGyroVals(2),AccGyroVals(3)};// <— Pitch = [0] Yaw = [1]
 
 class PathCompute {
-    private:
-        double kp = 1,ki = 0,kd = 1;
-	    double error_previous = 0,error_integral = 0;
 	private:
         double ang_to_PitchYaw();
 

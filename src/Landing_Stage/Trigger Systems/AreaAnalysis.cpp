@@ -1,5 +1,6 @@
 #include"AreaAnalysis.h"
-
+ double *speed_of_increase = (double*)malloc(SAMPLE_SIZE);
+ 
 //Creates altimeter and ultrasonic sensor readings relationship and determines if craft is in safe alt range after
 //launch or during landing
 uint8_t AreaAnalysis::closeSurfaceDetection(double senRead, double altRead){
@@ -107,7 +108,6 @@ boolean AreaAnalysis::analyseAltDecceleration(){
     }
     //Find speed of increase between each pair of values
     //s = d /t --> speed_of_increase = difference / time_duration
-    double *speed_of_increase = (double*)malloc(SAMPLE_SIZE);
     uint8_t SOI_index; 
     for(size_t i = 0;i < SAMPLE_SIZE;i++){
         //Get difference
@@ -132,3 +132,15 @@ boolean AreaAnalysis::analyseAltDecceleration(){
     }
     return deccel;
  }
+
+ double AreaAnalysis::time_to_Apogee(){
+    if(analyseAltDecceleration()){
+        double time;
+        double speed = speed_of_increase[SAMPLE_SIZE] - speed_of_increase[SAMPLE_SIZE - 1];
+        double distance = speed_of_increase[SAMPLE_SIZE];
+        time = distance / speed;
+        return time;
+    }else{
+        return -1;
+    }
+}

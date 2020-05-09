@@ -28,4 +28,86 @@ Sensors —> Guidance System —> Control System
 
 https://www.google.com/url?sa=i&url=https%3A%2F%2Fjourneynorth.org%2Ftm%2FLongitudeIntro.html&psig=AOvVaw0R7wwkcXBeSL2yacowkVXi&ust=1580319143554000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCOifneDppucCFQAAAAAdAAAAABAJ
 
-BUILD AUTOCAD MODEL
+BUILD CAD MODEL
+
+
+Flight States
+
+Landing Stage = Pad Idle -> Launch -> MECO/Eject -> Apogee/ReOrient -> Controlled Coast -> Motor Burn/Propulsive Land -> Land
+                                                          |
+                                                          \/
+Boost Stage =                                        Parachute Deploy 
+
+
+State Processes
+
+LANDING STAGE AND BOOST STAGE
+
+Pad Idle:
+* Initialise sensors 
+* Listen to ground station for flight data (GPS Dest loc) through RF
+* Compute Path to dest
+* Test Microcontroller Bluetooth communication
+* Perform system check (Landing stage and Boost Stage)
+* Begin Camera Record 
+* Begin Flight State SD storage 
+* Check for next flight state - Detect Launch
+
+Launch:
+* Begin navigation with actuve thrust Vectoring
+* Begin fin based active roll stabilization
+* Send flight state data to ground station
+* Continue Camera Record 
+* Continue Flight State SD storage 
+* Check for next flight state - Detect MECO by acceleration differential
+
+MECO/Eject:
+* Compute approximate time till Apogee
+* Begin fin based path navigation
+* Continue fin based active roll stabilization
+* Boost stage sends ejection signal
+* Send flight state data to ground station
+* Continue Camera Record 
+* Continue Flight State SD storage 
+* Check for next flight state
+
+BOOST STAGE
+
+Parachute Deploy:
+* End communication with landing stage
+* Deploy parachue
+
+LANDING STAGE
+
+Apogee/ReOrient:
+* Continue fin based active roll stabilization
+* Continue fin based path navigation
+* Perform gradual reorientation with fins
+* Send flight state data to ground station
+* Continue Camera Record 
+* Continue Flight State SD storage 
+* Check for next flight state
+
+Controlled Coast:
+* Continue fin based active roll stabilization
+* Continue fin based path navigation
+* Send flight state data to ground station
+* Continue Camera Record 
+* Continue Flight State SD storage
+* Check for next flight state
+
+Motor Burn/Propulsive Land:
+* Begin navigation with actuve thrust Vectoring
+* Continue fin based active roll stabilization
+* Detect altitude for landing leg deployment
+* Send flight state data to ground station
+* Continue Camera Record 
+* Continue Flight State SD storage
+* Check for next flight state
+
+Land:
+* End navigation with actuve thrust Vectoring
+* End fin based active roll stabilization
+* End sending of flight state data to ground station
+* End camera Record 
+* End flight State SD storage

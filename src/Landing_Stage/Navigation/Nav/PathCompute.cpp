@@ -1,5 +1,8 @@
 #include "PathCompute.h"
 
+double kp = 0.5,ki = 0.2,kd = 0.1;
+double error_previous = 0,error_integral = 0;
+
 //Convert 1D array to 2D array
 double *PathCompute::arrayConversion1D_2D(double array[64]){
 	double temp2[64][64];
@@ -8,7 +11,7 @@ double *PathCompute::arrayConversion1D_2D(double array[64]){
 	}
 }
 //Distance between two pairs of coordinates. Returns Kilometers
-//With 6 Decimal places range,we get an gps range accuracy of about 9cm off pouint32_t
+//With 6 Decimal places range,we get an gps range accuracy of about 9cm off point
 double PathCompute::distance_lat_long(double current_lat, double current_long, double final_lat, double final_long){
 	//double current_lat = gps.GPS_LOC(1),current_long = gps.GPS_LOC(2);
 	double theta, dist;
@@ -33,7 +36,7 @@ double PathCompute::computeBearing(double current_lat,double current_long,double
 	 bearing = atan2(temp2, funcs.rad2deg(temp1));
 	 return bearing;
 }
-//Compiled distance is the distance from a pouint32_t to another pouint32_t including altitude as well as GPS-coord for a distance estimate
+//Compiled distance is the distance from a point to another point including altitude as well as GPS-coord for a distance estimate
 double PathCompute::compiled_distance(double current_lat, double current_long, double current_alt, double final_lat, double final_long, double final_alt){
 	//Pythagoras theorem is used to find compiled distance
 	//Problem!! = equation assumes current altitude will be the same as final altitiude <-Fixed
@@ -69,7 +72,7 @@ double *PathCompute::LatLongDist_gen(double latitude, double longitude, double m
 }
 //Function to determine Heading closest point
 uint8_t PathCompute::HeadingclosestPoint(double FLat, double FLong, double array[64][2], uint32_t HcurrentIndex){
-	//Check every distance for pouint32_ts in array and compare to determine smallest
+	//Check every distance for points in array and compare to determine smallest
 	double smallest_dist = 0;
 	uint8_t index, i = HcurrentIndex;
 	for (size_t i; i < funcs.TDlength(array); i++){
@@ -83,7 +86,7 @@ uint8_t PathCompute::HeadingclosestPoint(double FLat, double FLong, double array
 }
 //Function to determine Altitude closest point
 double PathCompute::AltitudeclosestPoint(double current_alt, double array[64], uint8_t AcurrentIndex){
-	//Check every distance for pouint32_ts in array and compare to determine smallest
+	//Check every distance for points in array and compare to determine smallest
 	double smallest_dist = array[0];
 	uint8_t index = AcurrentIndex;
 	for (size_t i; i < funcs.ODlength(array); i++){
@@ -121,9 +124,9 @@ double PathCompute::Proportional_integral_derivative(double rocketPos,double set
     return servoRotation;
 }
 //Function to compute deviation angle
-double PathCompute::deviationAngle(double latStartingpouint32_t, double longStartingpouint32_t, double latEndpouint32_t, double longEndpouint32_t){
+double PathCompute::deviationAngle(double latStartingpoint, double longStartingpoint, double latEndpoint, double longEndpoint){
 	double deviation_angle, path_line_deviation, temp1, temp2;
-	//temp1 = atan2(latEndpouint32_t - latStartingpouint32_t / longEndpouint32_t - longStartingpouint32_t); //<-Fix issue
+	//temp1 = atan2(latEndpoint - latStartingpoint / longEndpoint - longStartingpoint); //<-Fix issue
 	temp2;
 
 	return deviation_angle;
@@ -133,7 +136,7 @@ double PathCompute::pathLineDeviation(double devAngle){
 	double temp1, temp2;
 	double path_line_deviation;
 	temp1 = sin(devAngle);
-	//temp2 = distance_lat_long(startingpouint32_t[0],startingpouint32_t[1],endpouint32_t[0],endpouint32_t[1]);
+	//temp2 = distance_lat_long(startingpoint[0],startingpoint[1],endpoint[0],endpoint[1]);
 	path_line_deviation = temp1 * temp2;
 	return path_line_deviation;
 }
@@ -167,8 +170,8 @@ double PathCompute::LatLongDist_helper(double current_lat, double current_long, 
 	}
 	return;
 }
-//Functions to generate heading path pouint32_ts for launch stage,transfer stage and landing stage
-//Function writes path pouint32_ts to a two dimensional array and is coverted to return a one dimensional array
+//Functions to generate heading path points for launch stage,transfer stage and landing stage
+//Function writes path points to a two dimensional array and is coverted to return a one dimensional array
 double *PathCompute::generate_path_points(double current_lat, double current_long, double final_lat, double final_long){
 	//array - xF_pathData
 	//double current_lat = gps.GPS_LOC(1),current_long = gps.GPS_LOC(2);

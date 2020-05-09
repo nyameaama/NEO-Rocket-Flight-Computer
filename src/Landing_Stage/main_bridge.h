@@ -41,3 +41,4 @@
     Control thrust;
     //Object for Data class
     Data inf;
+

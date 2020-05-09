@@ -1,5 +1,7 @@
 #include"main_bridge.h"
 
+#define FLIGHT_STATE 1
+
 //limCalcs
 String launch_time;
 uint8_t has_launched = 0;
@@ -38,15 +40,7 @@ void setup(){
     }else if(stat == "Y"){
         Serial.println("FLIGHT STATS");
     }
-    //Set Path
-    //uint32_t length;
-    double FINAL_LAT = sys.GET_LATITUDE(xF_FCoordinates);
-    double FINAL_LONG = sys.GET_LONGITUDE(xF_FCoordinates);
-    double *pInitPoints = pInit.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    pInit.generate_path_points_helper(pInitPoints);
-   // double *Fdata = sys.COMPILED_FLIGHT_DATA();
-    flightDistance = pInit.distance_lat_long(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    xF_apPoints = pInit.generate_alt(tel.altimeter(),pInit.peak_altitude(flightDistance));
+    
     //SET LAUNCH
     sys.TEST_SYS();
     //30 sec wait before launch
@@ -55,29 +49,78 @@ void setup(){
 }
 
 void loop(){
-    //Launch Detect
+    #if FLIGHT_STATE == 1
+    //Listen to ground station for flight data (GPS Dest loc) through RF
+
+    //Compute Path to dest
+    double FINAL_LAT = sys.GET_LATITUDE(xF_FCoordinates);
+    double FINAL_LONG = sys.GET_LONGITUDE(xF_FCoordinates);
+    double *pInitPoints = pInit.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
+    pInit.generate_path_points_helper(pInitPoints);
+    flightDistance = pInit.distance_lat_long(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
+    xF_apPoints = pInit.generate_alt(tel.altimeter(),pInit.peak_altitude(flightDistance));
+    //Test Microcontroller Bluetooth communication
+
+    //Perform system check (Landing stage and Boost Stage)
+
+    //Launch signal
+
+    //Check for next flight state - Launch Detect
     double *elaps = obj3.timeElapsed();
     double *ret = obj3.velChange();
     if(lD.launch_detect(tel.altimeter(),elaps[2],ret[0],ret[1]) != 1){
-        //Pre - Launch
+        #undef FLIGHT_STATE
+        #define FLIGHT_STATE 2
     }else{
-        //Define Launch Time
-        String*time = sav.GET_TIME();
-        launch_time = time[3];
-        has_launched = 1;
-        //Check functions
-        uint8_t mov1,mov2,mov3;
-        double standardPitchval = 87;   
-        double standardYawval = 0; 
-        if(obj3.pitch_range(stat.AccGyroVals(2),standardPitchval) != 0){
-            axisCorrect(mov1,mov2);
-        }else if(obj3.yaw_range(stat.AccGyroVals(3),standardYawval) != 0){
-            axisCorrect(mov1,mov2);
-        }
+        //Do nothing 
+    }     
+    #endif
+    
+    #if FLIGHT_STATE == 2
+    //Begin navigation with actuve thrust Vectoring
+
+    //Begin fin based active roll stabilization
+
+    //Check for next flight state - Detect MECO by acceleration differential
+    if(lD.analyseAltDecceleration()){
+        #undef FLIGHT_STATE
+        #define FLIGHT_STATE 3
+    }else{
+
     }
-    //pInit.pathController(4.6,5.8,20.4,&xF_pathData);
-    //Record Flight Data
-    FileBridge();
+    #endif
+
+    #if FLIGHT_STATE == 3
+    //Compute approximate time till Apogee
+    if(lD.time_to_Apogee() == 0){
+        #undef FLIGHT_STATE
+        #define FLIGHT_STATE 4
+    }else{
+
+    }
+    //Begin fin based path navigation
+
+    //Continue fin based active roll stabilization
+
+    //wait for Boost stage ejection signal
+
+     #endif
+
+    #if FLIGHT_STATE == 4
+
+
+    #endif
+
+    #if FLIGHT_STATE == 5
+
+
+
+    #endif
+    //Continuous Processes
+    //Send flight state data to ground station
+
+    //Continue Flight State SD storage 
+
 }
 //Control Systems
 void axisCorrect(uint8_t mov1,uint8_t mov2){

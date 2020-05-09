@@ -31,6 +31,8 @@ class AreaAnalysis {
 
 		//Function to analyse velocity for a decceleration pattern
         boolean analyseAltDecceleration();
+
+		double time_to_Apogee();
 };   
 
 #endif
