@@ -6,6 +6,7 @@
 #include"Sensors/sensors.h"
 #include"Inertial Measurement/IMU.h"
 #include"Flight Control/Stability System/AxisStability.h" 
+#include"Flight Control/Stability System/Roll Control/ActiveRollStabilization.h" 
 #include"Trigger Systems/AreaAnalysis.h"
 #include"Flight Control/Thrust_Vector_Control/TVC.h"
 #include"Serial Comm/command.h"
@@ -41,4 +42,7 @@
     Control thrust;
     //Object for Data class
     Data inf;
-
+    //Object for Roll Stability class
+    RollStability stab;
+    //Object for RF Communication class
+    RF_ASSIGN comm;

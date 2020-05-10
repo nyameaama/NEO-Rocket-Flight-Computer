@@ -106,7 +106,7 @@ Motor Burn/Propulsive Land:
 * Check for next flight state
 
 Land:
-* End navigation with actuve thrust Vectoring
+* End navigation with active thrust Vectoring
 * End fin based active roll stabilization
 * End sending of flight state data to ground station
 * End camera Record 

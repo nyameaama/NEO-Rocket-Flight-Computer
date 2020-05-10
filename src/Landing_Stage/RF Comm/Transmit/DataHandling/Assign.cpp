@@ -26,3 +26,25 @@ uint8_t RF_ASSIGN::RF_SEND(String RFID,String data){
    // tr.transmit(final_data);
     return;
 }
+
+String *dcString(String x){
+
+}
+
+String *RF_ASSIGN::RF_REC(){
+    //return array
+    //String *result = (String*)malloc(2);
+    //Get string
+    //RecRF str;
+    //String rfStr = str.fileReceive();
+    //Decompress string
+    //String *decomp = dcString(rfStr);
+    //result[0] = decomp[0];
+    //result[1] = decomp[1];
+    //return result;
+}
+
+uint8_t RF_ASSIGN::designate(String RFID,String data){
+    
+
+}

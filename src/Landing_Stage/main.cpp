@@ -11,8 +11,6 @@ uint16_t alt_address,vel_address,pitch_address,yaw_address;
 uint16_t addr,eepromCycle;
 uint8_t fData();
 
-//ControlSystems
-void axisCorrect(uint8_t mov1,uint8_t mov2);
 
 //Path
 double xF_pathData[1024][2];
@@ -23,10 +21,6 @@ uint8_t HcurrentIndex;
 uint8_t AcurrentIndex;
 double flightDistance;
 double *xF_apPoints;
-
-
-//FileSys
-uint8_t FileBridge();
 
 
 void setup(){
@@ -49,7 +43,7 @@ void setup(){
 }
 
 void loop(){
-    #if FLIGHT_STATE == 1
+    #if FLIGHT_STATE == 1 //<-- Pad Idle 
     //Listen to ground station for flight data (GPS Dest loc) through RF
 
     //Compute Path to dest
@@ -64,7 +58,8 @@ void loop(){
     //Perform system check (Landing stage and Boost Stage)
 
     //Launch signal
-
+    
+    delay(1000);
     //Check for next flight state - Launch Detect
     double *elaps = obj3.timeElapsed();
     double *ret = obj3.velChange();
@@ -76,11 +71,11 @@ void loop(){
     }     
     #endif
     
-    #if FLIGHT_STATE == 2
+    #if FLIGHT_STATE == 2 //<--  Launch
     //Begin navigation with actuve thrust Vectoring
 
     //Begin fin based active roll stabilization
-
+    stab.rollStabilize(stat.AccGyroVals(1));
     //Check for next flight state - Detect MECO by acceleration differential
     if(lD.analyseAltDecceleration()){
         #undef FLIGHT_STATE
@@ -90,9 +85,9 @@ void loop(){
     }
     #endif
 
-    #if FLIGHT_STATE == 3
+    #if FLIGHT_STATE == 3 //<-- MECO/Eject
     //Compute approximate time till Apogee
-    if(lD.time_to_Apogee() == 0){
+    if(lD.time_to_Apogee() <= 0){
         #undef FLIGHT_STATE
         #define FLIGHT_STATE 4
     }else{
@@ -101,63 +96,53 @@ void loop(){
     //Begin fin based path navigation
 
     //Continue fin based active roll stabilization
-
+     stab.rollStabilize(stat.AccGyroVals(1));
     //wait for Boost stage ejection signal
 
      #endif
 
-    #if FLIGHT_STATE == 4
+    #if FLIGHT_STATE == 4 //<-- Apogee/ReOrient 
+    //Continue fin based active roll stabilization
+    stab.rollStabilize(stat.AccGyroVals(1));
+
+    #endif
+
+    #if FLIGHT_STATE == 5 //<-- Controlled Coast
+    // Continue fin based active roll stabilization
+    stab.rollStabilize(stat.AccGyroVals(1));
+    //Continue fin based path navigation
+
+    //Check for next flight state
+
+    #endif
+    
+    #if FLIGHT_STATE == 6  //<-- Motor Burn/Propulsive Land
+    // Continue fin based active roll stabilization
+    stab.rollStabilize(stat.AccGyroVals(1));
+
 
 
     #endif
 
-    #if FLIGHT_STATE == 5
+     #if FLIGHT_STATE == 7 //<-- Land
 
 
-
-    #endif
+     #endif
     //Continuous Processes
     //Send flight state data to ground station
+    comm.RF_SEND("VEL",String(tel.AirspeedVal()));
+    comm.RF_SEND("ALT",String(tel.altimeter()));
+    comm.RF_SEND("PIT",String(stat.AccGyroVals(2)));
+    comm.RF_SEND("YAW",String(stat.AccGyroVals(3)));
 
     //Continue Flight State SD storage 
-
-}
-//Control Systems
-void axisCorrect(uint8_t mov1,uint8_t mov2){
-    int *translate = change.translate_to_servo(mov1,mov2);
-    //Gimbal will thrust opposite to the axis misdirection, correcting orientation and direction
-	//By using the negative axis - servo translated value, gimbal can thrust opposite to direction of movement
-	//Vector
-    uint8_t *servoPos = thrust.thrustVector(-(translate[1]),-(translate[0]));
-    thrust.multithreadServo(servoPos[0],servoPos[1]);
-}
-
-uint8_t fData(){
-    inf.Flight_Data_Save(alt_address,vel_address,pitch_address,yaw_address,tel.altimeter(),tel.AirspeedVal(),stat.AccGyroVals(2),stat.AccGyroVals(3),eepromCycle,addr);
-    return 1;
-}
-
-uint8_t FileBridge(){
-    //Send data to file    
-    sav.VELOCITY_RECORD(tel.AirspeedVal());
     sav.ALTITUDE_RECORD(tel.altimeter());
+    sav.VELOCITY_RECORD(tel.AirspeedVal());
     sav.PITCH_RECORD(stat.AccGyroVals(2));
     sav.YAW_RECORD(stat.AccGyroVals(3));
-    //transmit data through RF
-    //teld Flight Data
-    FileSystem data;
-    char* Vdatateld = "VELdata";
-    char* Adatateld = "ALTdata";
-    char* Pdatateld = "PITCHdata";
-    char* Ydatateld = "YAWdata";
-    /*String data[4][4] = {{"VELdata",String(tel.AirspeedVal())},
-                         {"ALTdata",String(tel.altimeter())},
-                         {"PITCHdata",String(stat.AccGyroVals(2))},
-                         {"YAWdata",String(stat.AccGyroVals(3))}};*/
-    //ExCommunication comm;
-    //comm.transmit(Vdatateld);
 }
 
+//Control Systems
 //Path
 void adjustHeadingHelper(double orientVals[2]){
     thrust.thrustVector(orientVals[0],orientVals[1]);

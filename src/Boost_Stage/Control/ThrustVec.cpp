@@ -1,5 +1,8 @@
 #include"ThrustVec.h"
 
+uint8_t currentServo_1_Position;
+uint8_t currentServo_2_Position;
+
 uint8_t ThrustVec::thrustVector(uint8_t M_1, uint8_t M_2){
 	//M_1 and M_2 values will be in the range of 0 - 90
 	//but servo moves from 0 - 180 so numbers will have to
@@ -15,8 +18,10 @@ uint8_t ThrustVec::thrustVector(uint8_t M_1, uint8_t M_2){
 	M2temp1 = M_2 * 180;
 	M2_reading = M2temp1 / 90;
 	servoLoc[1] = M2_reading;
-	//Multithread servo move process
-	multithreadServo(servoLoc[0],servoLoc[1]);
+	//servo move process
+	//200ms delay
+	M1.write(servoLoc[0]);
+	M2.write(servoLoc[1]);
 }
 
 void ThrustVec::Motor1_Move(uint8_t val){
