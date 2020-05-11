@@ -19,7 +19,5 @@ class ExCommunication{
     delay(delayTime);
 }
 
-
-
 };
 #endif
