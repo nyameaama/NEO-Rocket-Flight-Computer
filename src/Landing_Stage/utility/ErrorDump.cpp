@@ -12,7 +12,8 @@ ErrorDump::ErrorDump(){
     ErrorCodes[7] = "908";
     ErrorCodes[8] = "Boost Stage System Error";
     ErrorCodes[9] = "104";
-
+    ErrorCodes[10] = "RF Module Error";
+    ErrorCodes[11] = "662";
 }
 
 boolean ErrorDump::strcompare(String x, String y){

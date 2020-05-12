@@ -56,7 +56,7 @@ void loop(){
     //Test Microcontroller Bluetooth communication
 
     //Perform system check (Landing stage and Boost Stage)
-
+    
     //Launch signal
     
     delay(1000);
@@ -69,6 +69,7 @@ void loop(){
     }else{
         //Do nothing 
     }     
+
     #endif
     
     #if FLIGHT_STATE == 2 //<--  Launch

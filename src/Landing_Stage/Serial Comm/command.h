@@ -5,6 +5,8 @@
 #include<stddef.h>
 #include<Arduino.h>
 #include"../utility/ErrorDump.h"
+#include"SYS_CHECK/SystemInspect.h"
+
 #define NULL 0
 #define LAUNCHCONFIRM 1
 

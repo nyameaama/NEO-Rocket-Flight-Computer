@@ -13,6 +13,7 @@
 #define FALSE 0
 #define PASS 1
 #define FAIL 0
+#define  PIN_OUTPUT 0
 
 class FileSystem{
     public:
@@ -21,7 +22,6 @@ class FileSystem{
         
     private:
         String *PrIDS = (String*)malloc(16);
-        uint8_t PIN_OUTPUT;
         uint32_t remainingCapacity;
         uint8_t DataLogRate;
         uint16_t Activity;

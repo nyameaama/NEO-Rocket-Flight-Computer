@@ -3,9 +3,14 @@
 
 #include<Arduino.h>
 #include<SoftwareSerial.h>
+#include<SPI.h>
+#include"SD.h"
+#include"RH_ASK.h"
 #include"../../Sensors/sensors.h"
 #include"../../Inertial Measurement/IMU.h"
 #include"../../MicrocontrollerComm/BT.h"
+
+#define  PIN_OUTPUT 0
 
 class Inspect {
     public:
@@ -23,7 +28,7 @@ class Inspect {
 
         boolean SDCheck();
 
-
+        String *InspectMain();
 };
 
 #endif

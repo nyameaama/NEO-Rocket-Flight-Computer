@@ -3,8 +3,8 @@
 FileSystem::FileSystem()
 {
     if (!SD.begin(PIN_OUTPUT)){
-        while (1)
-            ;
+        ErrorDump dp;
+        dp.ERROR_DUMP("503");
     }
     //PIDS
     PrIDS[0] = "velocity_log";

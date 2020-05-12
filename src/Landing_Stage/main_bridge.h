@@ -10,6 +10,7 @@
 #include"Trigger Systems/AreaAnalysis.h"
 #include"Flight Control/Thrust_Vector_Control/TVC.h"
 #include"Serial Comm/command.h"
+#include"Serial Comm/SYS_CHECK/SystemInspect.h"
 #include"Navigation/Nav/PathCompute.h"
 #include"Navigation/Guidance/PathControl.h"
 #include"Data Logging/FileSys.h"
@@ -46,3 +47,4 @@
     RollStability stab;
     //Object for RF Communication class
     RF_ASSIGN comm;
+    
