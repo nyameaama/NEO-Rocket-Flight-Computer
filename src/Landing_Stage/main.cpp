@@ -36,13 +36,8 @@ void setup(){
     }
     
     //SET LAUNCH
-    sys.TEST_SYS();
-    //30 sec wait before launch
-    delay(30000);
-
-}
-
-void loop(){
+   
+  
     #if FLIGHT_STATE == 1 //<-- Pad Idle 
     //Listen to ground station for flight data (GPS Dest loc) through RF
 
@@ -56,10 +51,15 @@ void loop(){
     //Test Microcontroller Bluetooth communication
 
     //Perform system check (Landing stage and Boost Stage)
-    
+    String OK;
+    if(sys.TEST_SYS() != OK){
+
+    }else{
+
+    }
     //Launch signal
-    
-    delay(1000);
+    //10 sec wait before launch
+    delay(10000);
     //Check for next flight state - Launch Detect
     double *elaps = obj3.timeElapsed();
     double *ret = obj3.velChange();
@@ -69,9 +69,11 @@ void loop(){
     }else{
         //Do nothing 
     }     
-
     #endif
-    
+
+}
+
+void loop(){
     #if FLIGHT_STATE == 2 //<--  Launch
     //Begin navigation with actuve thrust Vectoring
 

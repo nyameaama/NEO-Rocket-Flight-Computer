@@ -81,10 +81,14 @@ String *Inspect::InspectMain(){
             count++;
         }
     }
-    realloc(temp2,count);
-    for(size_t j = 0;j < count;j++){
-        strReturn[j] = PNames[temp2[j]];
+    realloc(temp2,count + 1);
+    strReturn[0] = String(count);
+    for(size_t j = 1;j < count + 1;j++){
+        strReturn[j] = PNames[temp2[j - 1]];
     }
+    free(temp);
+    free(temp2);
+    free(PNames);
     return strReturn;
 
 }
