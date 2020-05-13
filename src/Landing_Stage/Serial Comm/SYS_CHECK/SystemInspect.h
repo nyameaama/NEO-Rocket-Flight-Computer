@@ -13,6 +13,8 @@
 #define  PIN_OUTPUT 0
 
 class Inspect {
+    private:
+         String *PNames = (String*)malloc(7);
     public:
         boolean altitudeCheck();
 
@@ -28,7 +30,11 @@ class Inspect {
 
         boolean SDCheck();
 
+        uint8_t *iterThrough();
+
         String *InspectMain();
+
+        Inspect();
 };
 
 #endif

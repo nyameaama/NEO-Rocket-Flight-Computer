@@ -111,3 +111,8 @@ Land:
 * End sending of flight state data to ground station
 * End camera Record 
 * End flight State SD storage
+
+
+
+
+System Check error - Repeated LED blinking and repeated buzzer

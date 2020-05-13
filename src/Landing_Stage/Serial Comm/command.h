@@ -51,10 +51,12 @@ class SYS_FUNCTIONS {
         void CLEAR_F_DATA(double *xF_FCoordinates,double *xF_altitude);
 
         //Testing Functions
-        String TEST_SYS();
+        String *TEST_SYS();
 
         //Launch Functions
         uint8_t LAUNCH_DATA();
+
+
 };
 
 #endif        

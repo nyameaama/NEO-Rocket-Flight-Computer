@@ -1,5 +1,16 @@
 #include"SystemInspect.h"
 
+uint8_t count;
+Inspect::Inspect(){
+    PNames[0] = "Altitude Module Error";
+    PNames[1] = "Velocity Module Error";
+    PNames[2] = "IMU Module Error";
+    PNames[3] = "GPS Module Error";
+    PNames[4] = "Bluetooth Module Error";
+    PNames[5] = "RF Module Error";
+    PNames[6] = "SD Module Error";
+}
+
  boolean Inspect::altitudeCheck(){
      Sensors alt;
      return (alt.altimeter() != 0.00) ? true : false;
@@ -55,16 +66,34 @@ String *Inspect::InspectMain(){
     uint8_t size = 7,count;
     uint8_t *temp = (uint8_t*)malloc(size);
     uint8_t *temp2 = (uint8_t*)malloc(size);
-    String *PNames = (String*)malloc(7);
+    //String *PNames = (String*)malloc(7);
     String *strReturn = (String*)malloc(5);
     //Descriptions
-    PNames[0] = "Altitude Module Error";
-    PNames[1] = "Velocity Module Error";
-    PNames[2] = "IMU Module Error";
-    PNames[3] = "GPS Module Error";
-    PNames[4] = "Bluetooth Module Error";
-    PNames[5] = "RF Module Error";
-    PNames[6] = "SD Module Error";
+    temp2 = iterThrough();
+    realloc(temp2,count + 1);
+    strReturn[0] = String(count);
+    //if no errors
+    if(count == 0){
+        strReturn[1] = "OK";
+        free(temp);
+        free(temp2);
+        free(PNames);
+        return strReturn;
+    }else{
+        //if errors, put in array and return
+        for(size_t j = 1;j < count + 1;j++){
+            strReturn[j] = PNames[temp2[j - 1]];
+        }
+        free(temp);
+        free(temp2);
+        free(PNames);
+        return strReturn;
+    }
+}
+uint8_t *Inspect::iterThrough(){
+    uint8_t size = 7,count;
+    uint8_t *temp = (uint8_t*)malloc(size);
+    uint8_t *newTemp = (uint8_t*)malloc(size);
     uint8_t altitude,velocity,IMU,GPS,bT,RF,SD;
     //Check to see if functions return 1(denoting fail).If 
     //fail return the errors with their description
@@ -77,18 +106,9 @@ String *Inspect::InspectMain(){
     temp[6] = SD = (SDCheck()) ? 0 : 1;
     for(size_t i = 0; i < size;i++){
         if(temp[i] == 1){
-            temp2[count] = i;
+            newTemp[count] = i;
             count++;
         }
     }
-    realloc(temp2,count + 1);
-    strReturn[0] = String(count);
-    for(size_t j = 1;j < count + 1;j++){
-        strReturn[j] = PNames[temp2[j - 1]];
-    }
-    free(temp);
-    free(temp2);
-    free(PNames);
-    return strReturn;
-
+    return newTemp;
 }

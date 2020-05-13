@@ -140,13 +140,13 @@ void SYS_FUNCTIONS::CLEAR_F_DATA(double *xF_FCoordinates, double *xF_altitude){
     }
 }
 //Testing Functions
-String SYS_FUNCTIONS::TEST_SYS(){
+String *SYS_FUNCTIONS::TEST_SYS(){
     uint8_t BASE_SIZE = 7;
     String *state = (String*)malloc(BASE_SIZE);
     Inspect sysFuncs;
     state = sysFuncs.InspectMain();
     realloc(state,state[0].toInt());
-    
+    return state;
 }
 
 //Launch Functions

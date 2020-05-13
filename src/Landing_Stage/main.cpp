@@ -51,11 +51,18 @@ void setup(){
     //Test Microcontroller Bluetooth communication
 
     //Perform system check (Landing stage and Boost Stage)
-    String OK;
-    if(sys.TEST_SYS() != OK){
-
+    String *systemProblems = sys.TEST_SYS();
+    //If greater than 1, errors are present
+    if(systemProblems[0].toInt() > 1){
+        //Send Problems to ground
+        
+        //Set unbreakable loop and blink LED and buzzer till controller is restarted
+        while(true){
+            ring.blink();
+            ring.playTone();
+        }
     }else{
-
+        //Check passed. Continue to launch
     }
     //Launch signal
     //10 sec wait before launch
@@ -68,7 +75,8 @@ void setup(){
         #define FLIGHT_STATE 2
     }else{
         //Do nothing 
-    }     
+    }
+
     #endif
 
 }
