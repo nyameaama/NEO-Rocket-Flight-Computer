@@ -144,3 +144,17 @@ boolean AreaAnalysis::analyseAltDecceleration(){
         return -1;
     }
 }
+
+boolean AreaAnalysis::checkState(){
+	//Check if rocket orientation is within bounds and not spiraling out 
+	//of control
+	//If out of control stop all control actions
+	Gyro state;
+	double pitch = state.AccGyroVals(2);
+	boolean inBounds = (pitch < -25.0) ? false : true;
+	if(inBounds){
+		return true;
+	}else{
+		return false;
+	}
+}

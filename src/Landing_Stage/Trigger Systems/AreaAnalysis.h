@@ -4,6 +4,7 @@
 #include<Arduino.h>
 #include"../Sensors/sensors.h"
 #include"../Flight Control/Stability System/AxisStability.h"
+#include"../Inertial Measurement/IMU.h"
 
 #define SAMPLE_SIZE 5
 
@@ -31,6 +32,9 @@ class AreaAnalysis {
 
 		//Function to analyse velocity for a decceleration pattern
         boolean analyseAltDecceleration();
+
+		//Function to check if rocket orientation is within bounds
+		boolean checkState();
 
 		double time_to_Apogee();
 };   
