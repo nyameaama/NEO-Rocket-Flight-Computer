@@ -12,7 +12,6 @@
 class LLDeploy{
     private:
         Servo l1,l2,l3,l4;
-        uint8_t currentServosPos;
         Sensors ul;
 
     public:

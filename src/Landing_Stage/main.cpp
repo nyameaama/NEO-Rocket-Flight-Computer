@@ -151,6 +151,12 @@ void loop(){
     sav.VELOCITY_RECORD(tel.AirspeedVal());
     sav.PITCH_RECORD(stat.AccGyroVals(2));
     sav.YAW_RECORD(stat.AccGyroVals(3));
+
+    //Check flight State to see if orientation is in bounds else 
+    //begin emrgency routine
+    if(lD.checkState()){
+
+    }
 }
 
 //Control Systems

@@ -36,6 +36,7 @@ class AreaAnalysis {
 		//Function to check if rocket orientation is within bounds
 		boolean checkState();
 
+		//Function to determine time to Apogee
 		double time_to_Apogee();
 };   
 

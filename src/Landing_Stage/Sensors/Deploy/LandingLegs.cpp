@@ -1,5 +1,7 @@
 #include"LandingLegs.h"
 
+uint8_t currentServosPos;
+
 LLDeploy::LLDeploy(){
     //Attaching Servos to pins
     uint8_t num;
