@@ -147,13 +147,16 @@ void loop(){
     comm.RF_SEND("YAW",String(stat.AccGyroVals(3)));
 
     //Continue Flight State SD storage 
-    sav.ALTITUDE_RECORD(tel.altimeter());
-    sav.VELOCITY_RECORD(tel.AirspeedVal());
-    sav.PITCH_RECORD(stat.AccGyroVals(2));
-    sav.YAW_RECORD(stat.AccGyroVals(3));
-
+    String VelID = "6C298Y3";
+    String AltID = "67U34PO";
+    String PitchID = "376FG0T";
+    String YawID = "7GN31Q0";
+    sav.FOREIGN_LOG(AltID,tel.altimeter());
+    sav.FOREIGN_LOG(VelID,tel.AirspeedVal());
+    sav.FOREIGN_LOG(PitchID,stat.AccGyroVals(2));
+    sav.FOREIGN_LOG(YawID,stat.AccGyroVals(3));
     //Check flight State to see if orientation is in bounds else 
-    //begin emrgency routine
+    //begin emergency routine
     if(lD.checkState()){
 
     }

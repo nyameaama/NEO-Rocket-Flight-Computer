@@ -34,14 +34,7 @@ boolean FileSystem::compare(String x, String y){
         return true;
     }
 }
-//Function computes total of values in an array
-uint16_t FileSystem::total(double *arr){
-    uint16_t total;
-    for (size_t i = 0; i < 10; i++){
-        total += arr[i];
-    }
-    return total;
-}
+
 double FileSystem::TimeHelper(double x){
     double num;
     double temp = round(x);
@@ -137,23 +130,7 @@ uint8_t FileSystem::parse(String x){
     }
     return 0;
 }
-//Function calculates portion of SD disk space used
-double *FileSystem::volume_size_used(){
-    double *temp = (double *)malloc(10);
-    uint8_t count;
-    DataFILE.rewindDirectory();
-    while (true){
-        DataFILE.openNextFile();
-        if (DataFILE.isDirectory()){
-            DataFILE.openNextFile();
-        }
-        else{
-            temp[count] = DataFILE.size();
-            count++;
-        }
-    }
-    return temp;
-}
+
 //Function verifies PID
 uint8_t *FileSystem::confirmPID(String x){
     //Confirm PID
@@ -170,6 +147,7 @@ uint8_t *FileSystem::confirmPID(String x){
     }
     return retArr;
 }
+
 //Function performs checks on every request to make sure full duration
 // flight data logging is successful
 uint8_t FileSystem::fileHandler(String PID){
@@ -203,35 +181,27 @@ uint8_t FileSystem::fileHandler(String PID){
             DataFILE.close();
             fileHandler(PID);
         }
-        double *temp = volume_size_used();
-        uint32_t Volume_Capacity = 8192;
-        uint32_t fileSizeTotal = total(temp);
-        remainingCapacity = Volume_Capacity - fileSizeTotal;
-        //Find Rate of data logging by dividing amount of logs done over flight duration
-        uint32_t flightDuration = millis() / 1000; //secs
-        DataLogRate = Activity / flightDuration;   //logs/sec
         return 1;
     }
 }
+
 //Function handles scheduling and validation on request side
-uint8_t FileSystem::LogRateManagement(String x, String PID){
+uint8_t FileSystem::FILE_LOG(String x,String PID){
     String *ret = (String *)malloc(2);
     ret[0] = x;
     ret[1] = PID;
     uint8_t *PID_vals = confirmPID(PID);
-    uint32_t Time_on_Capacity = remainingCapacity / DataLogRate;
-    uint32_t Time_Needed;
-    //Determine
-    uint8_t status = PASS;
-
-    //
-    if (status){
+     //if log main returns true data can be written to file
+    //LogRateManagement proc;
+    if(/*proc.logMain()*/1){
         String data = formatToData(PID, x);
         WRITE_TO_FILE(data, PrIDS[PID_vals[1] - 1]);
         return 1;
+    }else{
+        return 0;
     }
-    return 0;
 }
+
 //Function logs file read/write activity
 void FileSystem::ACTIVITY_LOG(){
     String PID = "SYS347P";
@@ -248,60 +218,11 @@ String FileSystem::FOREIGN_READ(String PID,String searchParam){
 
  }
 
-uint8_t FileSystem::VELOCITY_RECORD(double vel){
-    String ProccessID = "6C298Y3";
-    //Make request to file handler
-    if (fileHandler(ProccessID) == 1){
-        String strVel = toString(vel);
-        LogRateManagement(strVel, ProccessID);
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-uint8_t FileSystem::ALTITUDE_RECORD(double alt){
-    String ProccessID = "67U34PO";
-    //Make request to file handler
-    if (fileHandler(ProccessID) == 1){
-        String strAlt = toString(alt);
-        LogRateManagement(strAlt, ProccessID);
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-uint8_t FileSystem::PITCH_RECORD(double pitch){
-    String ProccessID = "376FG0T";
-    //Make request to file handler
-    if (fileHandler(ProccessID) == 1){
-        String strPitch = toString(pitch);
-        LogRateManagement(strPitch, ProccessID);
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-uint8_t FileSystem::YAW_RECORD(double yaw){
-    String ProccessID = "7GN31Q0";
-    //Make request to file handler
-    if (fileHandler(ProccessID) == 1){
-        String strYaw = toString(yaw);
-        LogRateManagement(strYaw, ProccessID);
-        return 1;
-    }
-    else{
-        return 0;
-    }
-}
-
- uint8_t FileSystem::FOREIGN_LOG(String PID,uint8_t x){
+ uint8_t FileSystem::FOREIGN_LOG(String PID,double x){
      //Make request to file handler
     if (fileHandler(PID) == 1){
         String strVal = toString(x);
-        LogRateManagement(strVal, PID);
+        FILE_LOG(strVal, PID);
         return 1;
     }
     else{

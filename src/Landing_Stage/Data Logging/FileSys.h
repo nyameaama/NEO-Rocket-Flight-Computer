@@ -4,6 +4,7 @@
 #include<SPI.h>
 #include"SD.h"
 //#include "DateTimeStrings.h"
+#include"LRM.h"
 #include"time.h"
 #include"../utility/ErrorDump.h"
 
@@ -15,12 +16,12 @@
 #define FAIL 0
 #define  PIN_OUTPUT 0
 
-class FileSystem{
+class FileSystem {
     public:
         FileSystem();
         ~FileSystem();
         
-    private:
+    public:
         String *PrIDS = (String*)malloc(16);
         uint32_t remainingCapacity;
         uint8_t DataLogRate;
@@ -33,8 +34,6 @@ class FileSystem{
 
         boolean compare(String x, String y);
 
-        uint16_t total(double *arr);
-
         double TimeHelper(double x);
 
         uint8_t WRITE_TO_FILE(String x,String tag);
@@ -43,33 +42,20 @@ class FileSystem{
 
         uint8_t parse(String x);
 
-        double *volume_size_used();
-
         uint8_t *confirmPID(String x);
 
         uint8_t fileHandler(String PID);
 
-        uint8_t LogRateManagement(String x,String PID);
+        uint8_t FILE_LOG(String x,String PID);
 
         void ACTIVITY_LOG();
 
-        
-
-    public:
-
-         String *GET_TIME();
-
          String formatToData(String PID,String data);
 
-        uint8_t VELOCITY_RECORD(double vel);
+    public:
+        String *GET_TIME();
 
-        uint8_t ALTITUDE_RECORD(double alt);
-
-        uint8_t PITCH_RECORD(double pitch);
-
-        uint8_t YAW_RECORD(double yaw);
-
-        uint8_t FOREIGN_LOG(String PID,uint8_t x);
+        uint8_t FOREIGN_LOG(String PID,double x);
 
         String FOREIGN_READ(String PID,String searchParam);
 
