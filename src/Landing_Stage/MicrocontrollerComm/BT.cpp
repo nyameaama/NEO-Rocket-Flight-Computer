@@ -42,7 +42,7 @@ String BT_Comm::compressStrings(String x, String y){
         }else if(i > (combinedLength + 1)/2){
             compressed[i] = y[i];
         }else{
-            String temp = "0";
+            String temp = " ";
             //compressed[i] = temp;
         }
     }
