@@ -35,14 +35,11 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 
 ### Landing Stage
 
-* ATmega2560 microcontroller (Custom PCB)
+* ATmega2560 microcontroller [Custom PCB](https://github.com/nyameaama/NEO-PCB-Design---Flight-)
 * Altimeter (Adafruit_BMP085)
 * MPU6050 IMU 
 * MPXV7002DP - Airspeed
-* ArduCam
-* HC-06 Bluetooth Module (Master)
-* NEO-6M GPS module
-* RF 433MHz Transmitter/Receiver modules
+* ArduCam/Receiver modules
 
 # Contribution
 
