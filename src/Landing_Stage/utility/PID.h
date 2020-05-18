@@ -2,6 +2,7 @@
 #define PID
 
 #include<Arduino.h>
+#include"ErrorDump.h"
 
 //Different instances of PID computation will be called from this class so each unique process will
 //need to have constants stored so individual processes can be continued after end of class call

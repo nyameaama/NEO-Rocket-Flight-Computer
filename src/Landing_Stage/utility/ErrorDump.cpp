@@ -14,6 +14,8 @@ ErrorDump::ErrorDump(){
     ErrorCodes[9] = "104";
     ErrorCodes[10] = "RF Module Error";
     ErrorCodes[11] = "662";
+    ErrorCodes[12] = "311";
+    ErrorCodes[13] = "PID Module Error";
 }
 
 boolean ErrorDump::strcompare(String x, String y){

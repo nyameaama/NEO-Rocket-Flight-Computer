@@ -1,0 +1,11 @@
+Interfacing sensors
+
+* Altimeter (Adafruit_BMP085) - (VCC,GND,D1,D2)
+* MPU6050 IMU - (VCC,GND,A0,A1)
+* MPXV7002DP - Airspeed  (VCC,GND,A0)
+* ArduCam - 
+* HC-06 Bluetooth Module (Master) (VCC,GND,RX,TX)
+* NEO-6M GPS module (VCC,GND,RX,TX)
+* RF 433MHz Transmitter/Receiver modules (VCC,GND,D1)
+* Micro SD module (VCC,GND,D1,D2,D3,D4)
+

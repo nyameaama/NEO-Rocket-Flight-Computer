@@ -54,17 +54,22 @@ double PROPORTIONAL_INTEGRAL_DERIVATIVE::PID_MAIN(String Process,double current,
 }
 
 void PROPORTIONAL_INTEGRAL_DERIVATIVE::updateConstants(String Process){
-    uint8_t index;
+    uint8_t index = -1;
     for(size_t i = 0; i < tagCount;i++){
         if(compare(tags[i],Process)){
             index = i;
         }
     }
-    kp = PID_PR[index][0];
-    ki = PID_PR[index][1];
-    kd = PID_PR[index][2];
-    error_previous = PID_PR[index][3];
-    error_integral = PID_PR[index][4];
+    ErrorDump sen;
+    if(index != -1){
+        kp = PID_PR[index][0];
+        ki = PID_PR[index][1];
+        kd = PID_PR[index][2];
+        error_previous = PID_PR[index][3];
+        error_integral = PID_PR[index][4];
+   }else{
+       sen.ERROR_DUMP("311");
+   }
 }
 
 boolean PROPORTIONAL_INTEGRAL_DERIVATIVE::compare(String x, String y){
