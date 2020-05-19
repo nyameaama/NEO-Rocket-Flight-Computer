@@ -56,3 +56,23 @@ double *Utility::arrayConversion2D_1D(double array[][2]){
 	free(c);
 	return b;
 }
+
+uint16_t Utility::HCF(uint32_t x, uint32_t y){
+	//Function to compute the Highest Common Factor between two numbers
+	uint16_t HCF;
+	for (size_t i = 1; i <= x && i <= y; i++){
+		if (x % i == 0 && y % i == 0){
+			HCF = i;
+		}
+	}
+	return HCF;
+}
+
+uint8_t Utility::greater(uint32_t x, uint32_t y){
+	//Function to compare two uint32_tegers and determine which is greater
+	uint32_t greater = x;
+	if (y > x){
+		greater = y;
+	}
+	return greater;
+}

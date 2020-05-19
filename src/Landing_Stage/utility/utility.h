@@ -36,6 +36,13 @@ class Utility {
         //Convert 2D array to 1D array    
         double *arrayConversion2D_1D(double array[][2]);
 
+        //Function to compute the Highest Common Factor between two numbers
+ 		uint16_t HCF(uint32_t x,uint32_t y);
+
+        //Function to compare two uint32_tegers and determine which is greater
+        uint8_t greater(uint32_t x,uint32_t y);
+
+    
 };
 
 #endif

@@ -8,42 +8,24 @@
 #include<Thread.h>
 #include<ThreadController.h>
 
-class Tools {
- 	public:
-        //Function to compute the Highest Common Factor between two numbers
- 		uint16_t HCF(uint32_t x,uint32_t y);
+#define SERVOPIN1 0
+#define SERVOPIN2 0
 
-        //Function to compare two uint32_tegers and determine which is greater
-                uint8_t greater(uint32_t x,uint32_t y);
-
-        //Function to find length of an array
-                uint8_t length(uint8_t arr[]);
-
-};
-
-class Control : public Tools {
+class Control {
  	private:
- 	        uint8_t inputL1;
- 		uint8_t inputL2;
-                uint8_t currentM1; // Current degrees for motor M1 and M2
-                uint8_t currentM2; 
                 Servo M1,M2;
                 uint8_t M2_reading,M1_reading;
-        private:
-
 
  	public:
-                uint8_t *Equation_of_Line(uint32_t ROT,uint32_t MOV);
+                Control();
 
-                void ExpVectorM(uint8_t ROT,uint8_t MOV);
+                uint8_t thrustVector(uint8_t M_1,uint8_t M_2);
 
-                uint8_t *thrustVector(uint8_t M_1,uint8_t M_2);
+                uint8_t getHorizontalMotorValue(uint8_t x);
 
-                void Motor1_Move(uint8_t val);
+                uint8_t getVerticalMotorValue(uint8_t x);
 
-                void Motor2_Move(uint8_t val);
-                
-                void multithreadServo(uint8_t x,uint8_t y);
+                void MoveMotors(uint8_t val1,uint8_t val2);
 
 };        
 
