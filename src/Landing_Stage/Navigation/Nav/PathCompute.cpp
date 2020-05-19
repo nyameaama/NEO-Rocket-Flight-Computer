@@ -106,23 +106,7 @@ double PathCompute::AltitudeclosestPoint(double current_alt, double array[64], u
 	AcurrentIndex = index;
 	return index;
 }
-/*double PathCompute::Proportional_integral_derivative(double rocketPos,double setpoint){
-	//function to determine the rotation of both the first servo and second servo for thrust vectoring
-	//to adjust the course so that the rocket heads towards the straight line and follow that straight line.
-	uint8_t dt;
-	double error,processVar;
-	double derivative,proportional,integral;
-	processVar = rocketPos;
-	error = setpoint - processVar;
-	error_integral += error * dt;
-    derivative = (error - error_previous) / dt;
-    error_previous = error;
-    proportional = kp * error;
-    integral = ki * error_integral;
-    derivative = kd * derivative;
-	auto servoRotation = proportional + integral + derivative;
-    return servoRotation;
-}*/
+
 //Function to compute deviation angle
 double PathCompute::deviationAngle(double latStartingpoint, double longStartingpoint, double latEndpoint, double longEndpoint){
 	double deviation_angle, path_line_deviation, temp1, temp2;

@@ -40,17 +40,22 @@ double PROPORTIONAL_INTEGRAL_DERIVATIVE::PID_MAIN(String Process,double current,
     return result;
 }
 
- void PROPORTIONAL_INTEGRAL_DERIVATIVE::createPIDinstance(String tag,double kp,double ki,double kd){
-    tags[tagCount] = tag;
-    tagCount++;
-    PID_PR[PR_count][0] = kp;
-    PID_PR[PR_count][1] = ki;
-    PID_PR[PR_count][2] = kd;
-    //Create error variables
-    double erPrev = 0,erInteg = 0;
-    PID_PR[PR_count][3] = erPrev;
-    PID_PR[PR_count][4] = erInteg;
-    PR_count++;
+void PROPORTIONAL_INTEGRAL_DERIVATIVE::createPIDinstance(String tag,double kp,double ki,double kd){ 
+    if(!checkforInstance(tag)){
+        tags[tagCount] = tag;
+        tagCount++;
+        PID_PR[PR_count][0] = kp;
+        PID_PR[PR_count][1] = ki;
+        PID_PR[PR_count][2] = kd;
+        //Create error variables
+        double erPrev = 0,erInteg = 0;
+        PID_PR[PR_count][3] = erPrev;
+        PID_PR[PR_count][4] = erInteg;
+        PR_count++;
+    }else{
+        //Do nothing
+    }
+    
 }
 
 void PROPORTIONAL_INTEGRAL_DERIVATIVE::updateConstants(String Process){
@@ -79,4 +84,14 @@ boolean PROPORTIONAL_INTEGRAL_DERIVATIVE::compare(String x, String y){
     else{
         return true;
     }
+}
+
+boolean PROPORTIONAL_INTEGRAL_DERIVATIVE::checkforInstance(String tag){
+    boolean instanceTrue = false;
+    for(size_t i = 0; i < tagCount;i++){
+        if(compare(tag,tags[i])){
+            instanceTrue = true;
+        }
+    }
+    return instanceTrue;
 }

@@ -22,6 +22,8 @@ class PROPORTIONAL_INTEGRAL_DERIVATIVE {
 
         boolean compare(String x, String y);
 
+        boolean checkforInstance(String tag);
+
     public:
         //
         double PID_MAIN(String Process,double rocketPos,double setpoint);
