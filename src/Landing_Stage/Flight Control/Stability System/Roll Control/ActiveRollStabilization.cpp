@@ -1,6 +1,7 @@
 #include"ActiveRollStabilization.h"
 
  double *RPM_COMP = (double*)malloc(1);
+ uint8_t CURRENT_SERVO_POSITION;
 
 RollStability::RollStability(){
     //Constructor attaches servo motors to appropriate pins and retrieves
@@ -9,15 +10,6 @@ RollStability::RollStability(){
     s2.attach(MOTOR_PIN_2);
     s3.attach(MOTOR_PIN_3);
     String search;
-    FileSystem get;
-    CURRENT_SERVO_POSITION = get.FOREIGN_READ(PID,search).toInt();
-}
-
-RollStability::~RollStability(){
-    //Destructor function saves servo position to SD for
-    //next class call
-      FileSystem get;
-      get.FOREIGN_LOG(PID,CURRENT_SERVO_POSITION);
 }
 
 String RollStability::determineRollDirection(){
@@ -153,8 +145,13 @@ void RollStability::finMovement(double x){
         R_axis = 1;  //If pos set to pos  
     }
     determineRollDirection();
-    double current_RPM = getRotationPM();
-    double counterMov = computeCounterRoll(current_RPM);
-    finMovement(counterMov);
+    //PID control
+    PROPORTIONAL_INTEGRAL_DERIVATIVE ax;
+    Gyro read;
+    double servoMov, referencePoint;
+    double initkp,initki,initkd;
+    ax.createPIDinstance("ROLL_STABILITY",initkp,initki,initkd);
+    servoMov = ax.PID_MAIN("ROLL_STABILITY",read.AccGyroVals(1),referencePoint);
+    finMovement(servoMov);
     return 1;
  }

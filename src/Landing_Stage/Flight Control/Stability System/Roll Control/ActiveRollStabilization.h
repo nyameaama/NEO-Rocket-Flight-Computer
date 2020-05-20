@@ -6,6 +6,7 @@
 #include"../../../Data Logging/FileSys.h"
 #include<Thread.h>
 #include<ThreadController.h>
+#include"../../../utility/PID.h"
 
 #define MOTOR_PIN_1 0
 #define MOTOR_PIN_2 0
@@ -26,8 +27,8 @@ class RollStability {
         String SPIN_DIRECTION= "clockwise";
         uint8_t arSize = 1;
         double RPM_HIGH;
-        String PID;
-        uint8_t CURRENT_SERVO_POSITION;
+        String ProcessID;
+
     private:
         //Function to compile two roll values
         double *compileValues(uint8_t count);
@@ -56,9 +57,6 @@ class RollStability {
     public:
         //Constructor
         RollStability();
-
-        //Destructor
-        ~RollStability();
 
         //Driver function which takes current roll values
        uint8_t rollStabilize(uint8_t roll); 
