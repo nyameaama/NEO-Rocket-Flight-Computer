@@ -47,10 +47,6 @@ class PathCompute {
         //Function to determine Altitude closest point
 		double AltitudeclosestPoint(double current_alt,double array[64],uint8_t AcurrentIndex);
 
-        //Function to determine the rotation of both the first servo and second servo for thrust vectoring
-		//to adjust the course so that the rocket heads towards the straight line and follow that straight line.
-        double Proportional_integral_derivative(double deviation,double setpoint);
-
         double setWeightingConstants();
 
         //Function to compute deviation angle 

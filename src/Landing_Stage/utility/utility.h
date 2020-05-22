@@ -42,7 +42,8 @@ class Utility {
         //Function to compare two uint32_tegers and determine which is greater
         uint8_t greater(uint32_t x,uint32_t y);
 
-    
+        template <typename COMPARE> 
+        boolean compare(COMPARE x, COMPARE y);
 };
 
 #endif

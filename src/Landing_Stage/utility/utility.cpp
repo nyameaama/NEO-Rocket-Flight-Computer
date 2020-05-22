@@ -76,3 +76,8 @@ uint8_t Utility::greater(uint32_t x, uint32_t y){
 	}
 	return greater;
 }
+
+template <typename COMPARE> 
+boolean Utility::compare(COMPARE x, COMPARE y){
+	return (x != y) ? false : true;
+}

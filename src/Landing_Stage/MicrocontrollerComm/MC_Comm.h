@@ -3,6 +3,7 @@
 
 #include<SoftwareSerial.h>
 #include"../utility/ErrorDump.h"
+#include"../utility/utility.h"
 #include<Arduino.h>
 #include"BT.h"
 #include"../Sensors/sensors.h"
@@ -18,10 +19,10 @@ class CommMC {
     private:
        String *processes = (String*)malloc(PROCESSES_SIZE);
 
+       Utility st;
+
     private:
         boolean confID(String ID);
-
-        boolean compare(String x, String y);
 
         uint8_t verifyTransmit_Receive(String ID);
 

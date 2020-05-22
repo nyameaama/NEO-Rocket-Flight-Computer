@@ -28,30 +28,28 @@ double PredictedThrustVectoring::final_pitch_estimate(){
     //where(t) = Nav TVC command time
     //Get Measurement Error
     double mError;
-    posEst.setMeasurementError(mError);
     //Get State Estimate Error
     double sEst = eq_of_Motion_estimate(2);
-    posEst.setEstimateError(sEst);
     //Set process noise 
     double pNoise;
-    posEst.setProcessNoise(pNoise);
+    //init k filter
+    SimpleKalmanFilter pitchFilter(mError,sEst,pNoise);
     //Estimate
-    double finalEst = posEst.updateEstimate(mError);
+    double finalEst = posEst.updateEstimate(sEst);
     return finalEst;
 }
 
 double PredictedThrustVectoring::final_yaw_estimate(){
     //Get Measurement Error
     double measureError;
-    posEst.setMeasurementError(measureError);
     //Get State Estimate Error
     double stateEst = eq_of_Motion_estimate(2);
-    posEst.setEstimateError(stateEst);
     //Set process noise 
     double prNoise;
-    posEst.setProcessNoise(prNoise);
+    //init k filter
+    SimpleKalmanFilter pitchFilter(measureError,stateEst,prNoise);
     //Estimate
-    double finalEst = posEst.updateEstimate(measureError);
+    double finalEst = posEst.updateEstimate(stateEst);
     return finalEst;
 }
 

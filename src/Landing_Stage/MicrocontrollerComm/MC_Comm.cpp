@@ -27,10 +27,10 @@ uint8_t CommMC::assign(String ID,String data){
  uint8_t CommMC::receiveDat(String ID,String data){
      ErrorDump dump;
      //Receive Log Errors
-        if(compare(ID,"BS01")){
+        if(st.compare<String>(ID,"BS01")){
             dump.ERROR_DUMP(data);
         }
-        if(compare(ID,"BS02")){
+        if(st.compare<String>(ID,"BS02")){
 
         }
         return;
@@ -40,14 +40,14 @@ uint8_t CommMC::sendDat(String ID,String data){
      BT_Comm trans;
     Sensors get;
     //Send vehicle velocity
-    if(compare(ID,"LS02")){
+    if(st.compare<String>(ID,"LS02")){
         trans.send(ID,String(get.AirspeedVal()));
     }
-    if(compare(ID,"LS03")){
+    if(st.compare<String>(ID,"LS03")){
         //Send BS gimbal value
 
     }
-    if(compare(ID,"LS04")){
+    if(st.compare<String>(ID,"LS04")){
         //Ejection confirmation
         AreaAnalysis anal;
         String verify = "N";
@@ -74,19 +74,9 @@ boolean CommMC::confID(String x){
     boolean confirm = false;
     uint8_t index;
     for (size_t i = 1; i < PROCESSES_SIZE; i += 2){
-        if (compare(x, processes[i]) == true){
+        if (st.compare<String>(x, processes[i]) == true){
             confirm = true;
         }
     }
    return confirm;
-}
-
-//Function compares two strings
-boolean CommMC::compare(String x, String y){
-    if (x != y){
-        return false;
-    }
-    else{
-        return true;
-    }
 }
