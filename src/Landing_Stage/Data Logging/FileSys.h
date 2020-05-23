@@ -23,7 +23,6 @@ class FileSystem {
         
     public:
         String *PrIDS = (String*)malloc(16);
-        uint32_t remainingCapacity;
         uint8_t DataLogRate;
         uint16_t Activity;
         uint16_t ApproxFlightDuration;
@@ -31,8 +30,8 @@ class FileSystem {
         SdFile root;
 
     private:
-
-        boolean compare(String x, String y);
+        template <typename FC>
+        boolean compare(FC x, FC y);
 
         double TimeHelper(double x);
 

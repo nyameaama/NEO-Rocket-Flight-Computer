@@ -3,6 +3,7 @@
 
 #include"../../utility/SimpleKalmanFilter.h"
 #include"../../Inertial Measurement/IMU.h"
+#include"../../Sensors/sensors.h"
 
 class PredictedThrustVectoring {
     public:
@@ -15,13 +16,20 @@ class PredictedThrustVectoring {
 
         double getDelayTime();
 
-    public:
+        double *getCurrentState();
+
         double eq_of_Motion_estimate(uint8_t DOF); 
 
         double final_pitch_estimate();
 
         double final_yaw_estimate();
 
+        double estimateThrustOutput();
+
+        template <typename T>
+        T forceToVel(T force);
+
+    public:   
         double computeMotorVector(double x);
 
 };

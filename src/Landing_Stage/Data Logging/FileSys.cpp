@@ -25,15 +25,11 @@ FileSystem::~FileSystem(){
     free(PrIDS);
 }
 
-//Function compares two strings
-boolean FileSystem::compare(String x, String y){
-    if (x != y){
-        return false;
-    }
-    else{
-        return true;
-    }
+template <typename FC>
+boolean FileSystem::compare(FC x, FC y){
+    return (x != y) ? false : true;
 }
+
 
 double FileSystem::TimeHelper(double x){
     double num;
@@ -120,7 +116,7 @@ uint8_t FileSystem::parse(String x){
     temp[1] = "Y";
     temp[2] = "S";
     for (size_t i = 0; i < 3; i++){
-        if (compare(String(x[i]), temp[i]) == 1){
+        if (compare<String>(String(x[i]), temp[i]) == 1){
             count++;
         }
     }
@@ -138,7 +134,7 @@ uint8_t *FileSystem::confirmPID(String x){
     boolean confirm = false;
     uint8_t index;
     for (size_t i = 1; i < 10; i += 2){
-        if (compare(x, PrIDS[i]) == true){
+        if (compare<String>(x, PrIDS[i]) == true){
             confirm = true;
             retArr[0] = 1;
             index = i;
@@ -176,7 +172,7 @@ uint8_t FileSystem::fileHandler(String PID){
         else{
             //Create file and add breakpoint
             DataFILE = SD.open(PID[index - 1] + type, FILE_WRITE);
-            uint32_t breakPoint = 1; //The point/position in which the last character exists in the file
+            uint16_t breakPoint = 1; //The point/position in which the last character exists in the file
             WRITE_TO_FILE(String(breakPoint), String(PID[index - 1]));
             DataFILE.close();
             fileHandler(PID);

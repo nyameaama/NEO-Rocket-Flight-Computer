@@ -53,6 +53,32 @@ double PredictedThrustVectoring::final_yaw_estimate(){
     return finalEst;
 }
 
+ double *PredictedThrustVectoring::getCurrentState(){
+     double *state = (double*)malloc(2);
+     //Get Pitch
+     state[0] = vGet.AccGyroVals(2);
+     //Get Yaw
+     state[1] = vGet.AccGyroVals(3);
+    return state;
+ }
+
+ double PredictedThrustVectoring::estimateThrustOutput(){
+     //Estimate rocket motor thrust
+     double vehicleMass;
+     Sensors data;
+     double V1 = data.AirspeedVal();
+     double t1 = millis();
+     double V2 = data.AirspeedVal();
+     double t2 = millis();
+     //Force = ((m * V)2 - (m * V)1) / (t2 - t1)
+     double force = ((vehicleMass * V2) - (vehicleMass * V1) / (t2 - t1));
+     return force;
+ }
+
+template <typename T>
+T PredictedThrustVectoring::forceToVel(T force){
+
+}
 double PredictedThrustVectoring::computeMotorVector(double x){
 
 }
