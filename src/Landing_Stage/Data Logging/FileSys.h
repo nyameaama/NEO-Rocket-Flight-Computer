@@ -3,7 +3,6 @@
 
 #include<SPI.h>
 #include"SD.h"
-//#include "DateTimeStrings.h"
 #include"LRM.h"
 #include"time.h"
 #include"../utility/ErrorDump.h"
@@ -56,7 +55,7 @@ class FileSystem {
 
         uint8_t FOREIGN_LOG(String PID,double x);
 
-        String FOREIGN_READ(String PID,String searchParam);
+        uint8_t FOREIGN_READ(String PID,String searchParam);
 
 
 }; 

@@ -4,20 +4,27 @@
 #include<Arduino.h>
 #include<SPI.h>
 #include"SD.h"
-#include"FileSys.h"
+//#include"FileSys.h"
 
 class LogRateManagement {
     private:
-        File DataFILE;
+        //File DataFILE;
 
     private:
-         uint16_t total(double *arr);        
+         uint16_t total(double *arr);
+
+         double getRemainingCapacity();
+
+         double getDiskUsed();
+
     public:
-        double *volume_size_used();
+        double *compileFileSizes();
 
         double getLogRate();
 
-        double logMain();
+        template <typename DataType>
+        boolean logMain(DataType x);
+
 };
 
 #endif

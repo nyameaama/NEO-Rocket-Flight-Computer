@@ -153,7 +153,7 @@ uint8_t FileSystem::fileHandler(String PID){
     if (parse(PID) == 1){
         return 1;
     }
-    //PID Check
+    //PrID Check
     uint8_t *confirm = confirmPID(PID);
     uint8_t index = confirm[1];
     String type = ".txt";
@@ -188,8 +188,8 @@ uint8_t FileSystem::FILE_LOG(String x,String PID){
     ret[1] = PID;
     uint8_t *PID_vals = confirmPID(PID);
      //if log main returns true data can be written to file
-    //LogRateManagement proc;
-    if(/*proc.logMain()*/1){
+    LogRateManagement proc;
+    if(/*proc.logMain(x.toInt())*/1){
         String data = formatToData(PID, x);
         WRITE_TO_FILE(data, PrIDS[PID_vals[1] - 1]);
         return 1;
@@ -209,7 +209,7 @@ void FileSystem::ACTIVITY_LOG(){
     }
 }
 
-String FileSystem::FOREIGN_READ(String PID,String searchParam){
+uint8_t FileSystem::FOREIGN_READ(String PID,String searchParam){
      fileHandler(PID);
 
  }
