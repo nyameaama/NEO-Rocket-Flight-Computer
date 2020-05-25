@@ -1,127 +1,97 @@
 #include "FlightRec.h"
 
 FlightRec::FlightRec(){
-    ArduCAM myCAM1(OV3640, CS1);
-    uint8_t vid, pid;
-   
+    noInterrupts(); //Disable all interrupts
+    XCLK_SETUP();   //Setup 8MHz clock at pin 11
+    OV7670_PINS();  // Setup Data-in and interrupt pins from camera
+    delay(1000);
+    TWI_SETUP();    // Setup SCL for 100KHz
+    interrupts();
     Wire.begin();
-    Serial.begin(115200);
-    Serial.println(F("ArduCAM Start!"));
-    // set the CS output:
-    pinMode(CS1, OUTPUT);
-    digitalWrite(CS1, HIGH);
-    // initialize SPI:
-    SPI.begin();
-    //Reset the CPLD
-    myCAM1.write_reg(0x07, 0x80);
-    delay(100);
-    myCAM1.write_reg(0x07, 0x00);
-    delay(100);
-    SPI_BUS_CHECK(myCAM1);
-    myCAM1.OV3640_set_JPEG_size(OV3640_640x480);
-}
-void FlightRec::SPI_BUS_CHECK(ArduCAM myCAM1){
-    //Check if the 4 ArduCAM Mini 2MP Cameras' SPI bus is OK
-     uint8_t temp;
-    while (1){
-        myCAM1.write_reg(ARDUCHIP_TEST1, 0x55);
-        temp = myCAM1.read_reg(ARDUCHIP_TEST1);
-        if (temp != 0x55){
-            //SPI1 interface Error!
-            //Serial.println(F("SPI1 interface Error!"));
-        }
-        else{
-            //SPI1 interface OK
-            CAM1_EXIST = true;
-            //Serial.println(F("SPI1 interface OK."));
-        }
-        if (!(CAM1_EXIST)){
-            delay(1000);
-            continue;
-        }
-        else{
-            break;
-        }    
-    }
-}
-byte FlightRec::camCapture(ArduCAM myCAM){
-    uint32_t length = 0;
-    //Flush the FIFO
-    myCAM.flush_fifo();
-    //Clear the capture done flag
-    myCAM.clear_fifo_flag();
-    //Start capture
-    myCAM.start_capture();
-    while (!myCAM.get_bit(ARDUCHIP_TRIG, CAP_DONE_MASK));
-    //Get fifo length
-    length = myCAM.read_fifo_length();
-    if (length >= MAX_FIFO_SIZE || length == 0){ //384K
-        //If fifo length is over size or is equals to 0
-        ErrorDump dump;
-        dump.ERROR_DUMP("206");
-        return;
-    }
-    SavetoSD(length,myCAM);
+    setup.Init_OV7670();
+    setup.Init_QVGA();
+    setup.Init_YUV422();
+    setup.WriteOV7670(0x11, 0x1F); //Range 00-1F
+    noInterrupts();
+    Serial.begin(9600);
+    pinMode(setup.CS_Pin, OUTPUT);
+    SD.begin(setup.CS_Pin);
 }
 
-uint8_t FlightRec::SavetoSD(uint32_t length,ArduCAM myCAM){
-    static int k = 0;   
-    static int i = 0;
-    bool is_header = false;
-    uint8_t temp = 0, temp_last = 0;
-    char str[8];
-    byte buf[256];
-    File outFile;
-    //Open the new file
-    outFile = SD.open(ConstructFileName(k,str), O_WRITE | O_CREAT | O_TRUNC);
-    if (!outFile){
-       //File Open Failed
-        ErrorDump dump;
-        dump.ERROR_DUMP("206");
-        return;
-    }
-    myCAM.CS_LOW();
-    myCAM.set_fifo_burst();
-    while (length--){
-        temp_last = temp;
-        temp = SPI.transfer(0x00);
-        //Read JPEG data from FIFO
-        if ((temp == 0xD9) && (temp_last == 0xFF)){          //If find the end ,break while,
-            buf[i++] = temp; //save the last  0XD9
-                             //Write the remain bytes in the buffer
-            myCAM.CS_HIGH();
-            outFile.write(buf, i);
-            //Close the file
-            outFile.close();
-            //Serial.println(F("Image save OK."));
-            is_header = false;
-            i = 0;
-        }
-        if (is_header == true){
-            //Write image data to buffer if not full
-            if (i < 256)
-                buf[i++] = temp;
-            else{
-                //Write 256 bytes image data to file
-                myCAM.CS_HIGH();
-                outFile.write(buf, 256);
-                i = 0;
-                buf[i++] = temp;
-                myCAM.CS_LOW();
-                myCAM.set_fifo_burst();
-            }
-        }
-        else if ((temp == 0xD8) & (temp_last == 0xFF)){
-            is_header = true;
-            buf[i++] = temp_last;
-            buf[i++] = temp;
-        }
-    }
+void FlightRec::XCLK_SETUP(void){
+    // Nyame - > Set output pin
+  pinMode(OUTPUT_PIN, OUTPUT); //Set pin 9 to output
+
+  
+  //Initialize timer 1
+  
+  //WGM13, WGM12, WGM11 & WGM10 bits SET- Fast PWM mode
+  //COM1A0 SET- Toggle OC1A on compare match
+  TCCR1A = (1 << COM1A0) | (1 << WGM11) | (1 << WGM10);
+  //SET CS10 bit for clock select with no prescaling
+  TCCR1B = (1 << WGM13) | (1 << WGM12) | (1 << CS10); 
+  //Output Compare Register 1A(OCR1A) = 0
+  //This will lead to a match on every clock cycle
+  //Toggle OC1A output pin on every match instance
+  //Therefore, the generated waveform will have half
+  //the frequency of the driving clock i.e. 8Mhz
+  //OC1A pin- PB1 (alternate functn) pin i.e. Arduino pin 9
+  OCR1A = 0;
+
 }
 
- char *FlightRec::ConstructFileName(int k,char str[28]){
-     k = k + 1;
-    itoa(k, str, 10);
-    strcat(str, ".jpg");
-    return str;
+// Two Wire Interface Setup
+// Sets the frequency of the SCL line
+// Default is 100KHz so we won't use this function
+void FlightRec::TWI_SETUP(void){
+  //Set prescaler bits in TWI Status Register (TWSR) to 0
+  TWSR &= ~3;
+  //Set SCL frequency to 100KHz
+  //SCLfreq = CPUfreq/(16 + 2(TWBR) - 4^(TWPS))
+  //TWBR = 72, TWPS(prescaler) = 0
+  TWBR = 72;
+
+}
+
+void FlightRec::OV7670_PINS(void){
+  //Setup Data input pins and Interrupt pins
+  //DDRC bits 3:0 = 0 =>  bits configured as Data Inputs
+  //DDRC 3:0 - A3,A2,A1,A0
+  DDRC &= ~15;//low d0-d3 camera
+  
+  //~(0b11111100) = 0b00000011
+  //make DDRD 7:2 = 0 => Inputs
+  //d7-d4 as data inputs, d3-INT1 is VSYNC and d2-INT0 is PCLK
+  DDRD &= ~252;
+}
+
+void FlightRec::QVGA_Image(String title){
+  int h,w;
+  
+  File dataFile = SD.open(title, FILE_WRITE);
+  while (!(PIND & 8));//wait for high
+  while ((PIND & 8));//wait for low
+
+    h = 240;
+  while (h--){
+        w = 320;
+       byte dataBuffer[320];
+    while (w--){
+      while ((PIND & 4));   //wait for low
+        dataBuffer[319-w] = (PINC & 15) | (PIND & 240);
+      while (!(PIND & 4));  //wait for high
+      while ((PIND & 4));   //wait for low
+      while (!(PIND & 4));  //wait for high
+    }
+    dataFile.write(dataBuffer,320);
+
+    
+  }
+
+    dataFile.close();
+    delay(100);
+}
+
+ void FlightRec::camCapture(String FileName){
+     QVGA_Image(FileName);
  }

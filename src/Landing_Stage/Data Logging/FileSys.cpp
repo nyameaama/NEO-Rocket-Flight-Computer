@@ -35,13 +35,11 @@ double FileSystem::TimeHelper(double x){
     double num;
     double temp = round(x);
     num = x - temp;
-    if (num < 0)
-    {
+    if (num < 0){
         -(num);
         num = 0.10 - num;
     }
-    else
-    {
+    else{
     }
     return num;
 }
