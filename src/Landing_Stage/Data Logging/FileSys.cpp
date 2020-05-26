@@ -181,9 +181,6 @@ uint8_t FileSystem::fileHandler(String PID){
 
 //Function handles scheduling and validation on request side
 uint8_t FileSystem::FILE_LOG(String x,String PID){
-    String *ret = (String *)malloc(2);
-    ret[0] = x;
-    ret[1] = PID;
     uint8_t *PID_vals = confirmPID(PID);
      //if log main returns true data can be written to file
     LogRateManagement proc;
