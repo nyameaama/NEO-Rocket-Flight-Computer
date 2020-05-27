@@ -34,17 +34,13 @@ double PathControl::translate(double x, double y){
 	}
 }
 //Accepts new pitch and yaw heading values and vectors appropriately
-double *PathControl::adjustHeading(double pitch, double yaw, double current_pitch, double current_yaw){
+double PathControl::adjustHeading(double pitch, double yaw){
 	//Calculate Distance of values from the current axis pouint32_t to new axis pouint32_t
 	//double stable_axis_pouint32_t[2] = {}; //<— Come back and compensate for Dynamic board orientation
-	double values[2];
-	double new_pitch, new_yaw;
-	new_pitch = pitch - current_pitch;
-	new_yaw = yaw - current_yaw;
-	//Vector new heading
-	values[0] = pitch;
-	values[1] = yaw;
-	return values;
+	VectorCompute axis;
+	axis.transitionPitch(pitch);
+	axis.transitionYaw(yaw);
+	return;
 }
 
 double *PathControl::pathController(double latC, double longC, double alt, double *xF_pathData[64][2]){

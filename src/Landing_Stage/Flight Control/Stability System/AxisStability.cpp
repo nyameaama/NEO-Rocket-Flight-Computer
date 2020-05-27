@@ -116,6 +116,22 @@ int *VectorCompute::translate_to_servo(double yawR, double pitchR){
 	return ranges;
 }
 
-//---------EXPERIMENTAL-------------//
+double VectorCompute::transitionYaw(double newYaw){
+	double kp,ki,kd;
+	Gyro getY;
+	String ID = "YAW_STAB";
+	instance.createPIDinstance(ID,kp,ki,kd);
+	double pos = instance.PID_MAIN(ID,getY.AccGyroVals(3),newYaw);
+
+}
+
+double VectorCompute::transitionPitch(double newPitch){
+	double kp,ki,kd;
+	Gyro getP;
+	String ID = "PITCH_STAB";
+	instance.createPIDinstance(ID,kp,ki,kd);
+	double pos = instance.PID_MAIN(ID,getP.AccGyroVals(3),newPitch);
+	
+}
 
 

@@ -4,6 +4,7 @@
 #include<stdlib.h>
 #include<stdint.h>
 #include"../Nav/PathCompute.h"
+#include"../../Flight Control/Stability System/AxisStability.h"
 
 class PathControl : public PathCompute {
 	private:
@@ -13,7 +14,7 @@ class PathControl : public PathCompute {
 
         public:
 		//Accepts new pitch and yaw heading values and vectors appropriately
-		double *adjustHeading(double pitch,double yaw,double current_pitch,double current_yaw);
+		double adjustHeading(double pitch,double yaw);
 
     public:
          double *pathController(double latC,double longC,double alt,double *xF_pathData[64][2]);

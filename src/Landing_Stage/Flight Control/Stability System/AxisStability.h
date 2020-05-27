@@ -2,6 +2,8 @@
 #define Axis_Stability
 
 #include"../../Sensors/sensors.h"
+#include"../../utility/PID.h"
+#include"../../Inertial Measurement/IMU.h"
 #include<stdint.h>
 #define UNDEFINED 0
 #define HORIZONTAL_PITCH_VAL 87
@@ -38,9 +40,18 @@ class RPY_CHECK{
 
 //Function to correct craft axis from variances in flight direction
 class VectorCompute {
-    public:
+    private:
         //Function to translate gyro to servo range
         int *translate_to_servo(double yawR,double pitchR);
+
+    private:
+        PROPORTIONAL_INTEGRAL_DERIVATIVE instance;     
+
+    public:
+    //Use PID to change axis direction
+        double transitionYaw(double newYaw);
+
+        double transitionPitch(double newPitch);    
 
 };    
 
