@@ -1,4 +1,5 @@
 #include "PathControl.h"
+double STATE;
 
 //Accepts directional values to translate to t-vector range
 //y =    0 = pitch     1 = yaw

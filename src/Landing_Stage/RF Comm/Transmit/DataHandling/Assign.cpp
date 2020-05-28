@@ -6,6 +6,7 @@ RF_ASSIGN::RF_ASSIGN(){
     logs[2] = "PIT";
     logs[3] = "ROL";
     logs[4] = "YAW";
+    logs[5] = "E-BRICK";
 }
 
  RF_ASSIGN::~RF_ASSIGN(){

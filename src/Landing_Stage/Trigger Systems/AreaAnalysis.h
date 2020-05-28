@@ -5,6 +5,7 @@
 #include"../Sensors/sensors.h"
 #include"../Flight Control/Stability System/AxisStability.h"
 #include"../Inertial Measurement/IMU.h"
+#include"../RF Comm/Transmit/DataHandling/Assign.h"
 
 #define SAMPLE_SIZE 5
 
@@ -38,6 +39,9 @@ class AreaAnalysis {
 
 		//Function to determine time to Apogee
 		double time_to_Apogee();
+
+		//Function to disable main loop and all processes - emergency routine
+		void BRICK_ALL_PROCESSES();
 };   
 
 #endif

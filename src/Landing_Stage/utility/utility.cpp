@@ -81,3 +81,4 @@ template <typename COMPARE>
 boolean Utility::compare(COMPARE x, COMPARE y){
 	return (x != y) ? false : true;
 }
+

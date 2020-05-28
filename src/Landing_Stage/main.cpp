@@ -158,7 +158,8 @@ void loop(){
     //Check flight State to see if orientation is in bounds else 
     //begin emergency routine
     if(lD.checkState()){
-
+        AreaAnalysis EM;
+        EM.BRICK_ALL_PROCESSES();
     }
 }
 

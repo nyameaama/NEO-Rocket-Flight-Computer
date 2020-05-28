@@ -2,6 +2,7 @@
 
 LED_BUZZER::LED_BUZZER(){
     pinMode(8, OUTPUT);
+    pinMode(13,OUTPUT);
     melody[0] = NOTE_C4;
     melody[1] = NOTE_G3;
     melody[2] = NOTE_G3;
@@ -37,6 +38,21 @@ void LED_BUZZER::playTone(){
 }
 
 void LED_BUZZER::blink(){
-    digitalWrite(8, HIGH);   
-    delay(1000);    
+  uint8_t p[5] = {1,0,1,0,1};
+    for(size_t i : p){
+      if(i == 1){
+        digitalWrite(8, HIGH);
+         delay(100);  
+        digitalWrite(13, HIGH);
+         delay(100); 
+
+      }else if(i == 0){
+        digitalWrite(8, LOW);
+         delay(100); 
+        digitalWrite(13, LOW);
+         delay(100); 
+      }
+    }
+     
+     
 }

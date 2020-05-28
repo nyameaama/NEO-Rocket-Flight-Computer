@@ -13,6 +13,9 @@ class LED_BUZZER {
         // note durations: 4 = quarter note, 8 = eighth note, etc.:
         int noteDurations[];
 
+    private:
+            
+
     public:
         //Constructor
         LED_BUZZER();
@@ -22,6 +25,7 @@ class LED_BUZZER {
 
         //Function to blink LED
         void blink();
+
 
 };
 

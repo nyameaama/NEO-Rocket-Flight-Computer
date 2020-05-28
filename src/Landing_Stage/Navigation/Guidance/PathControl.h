@@ -20,7 +20,13 @@ class PathControl : public PathCompute {
          double *pathController(double latC,double longC,double alt,double *xF_pathData[64][2]);
 
          //Path Controller Function for altitude control
-		double alt_PathController(double cLoc,uint8_t haslaunched);    
+		double alt_PathController(double cLoc,uint8_t haslaunched);
+
+		template <typename T>
+		T state(T current_State);
 };
 
-#endif       
+#endif      
+
+
+//TO-DO : Refactor path controller
