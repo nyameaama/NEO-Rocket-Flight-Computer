@@ -16,6 +16,9 @@ class PathControl : public PathCompute {
 		//Accepts new pitch and yaw heading values and vectors appropriately
 		double adjustHeading(double pitch,double yaw);
 
+		//Function to change between fin based control and thrust vectoring control
+		void changeControlSurface(uint8_t surf);
+
     public:
          double *pathController(double latC,double longC,double alt,double *xF_pathData[64][2]);
 
