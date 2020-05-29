@@ -2,6 +2,7 @@
 #define LEDBUZZER
 
 #include"pitches.h"
+#include"../utility/utility.h"
 #include<Arduino.h>
 
 #define LED_PIN 0
@@ -13,8 +14,11 @@ class LED_BUZZER {
         // note durations: 4 = quarter note, 8 = eighth note, etc.:
         int noteDurations[];
 
+        Utility com;
+
     private:
-            
+        template <typename type>
+        void playCombination(type x);
 
     public:
         //Constructor
@@ -24,7 +28,7 @@ class LED_BUZZER {
         void playTone();
 
         //Function to blink LED
-        void blink();
+        void blink(uint8_t x);
 
 
 };

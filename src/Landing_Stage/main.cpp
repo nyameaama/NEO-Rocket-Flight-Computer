@@ -4,12 +4,7 @@
 
 //limCalcs
 String launch_time;
-uint8_t has_launched = 0;
-
-//Data
-uint16_t alt_address,vel_address,pitch_address,yaw_address;
-uint16_t addr,eepromCycle;
-uint8_t fData();
+boolean has_launched = false;
 
 
 //Path
@@ -58,7 +53,7 @@ void setup(){
         
         //Set unbreakable loop and blink LED and buzzer till controller is restarted
         while(true){
-            ring.blink();
+            ring.blink(1);
             ring.playTone();
         }
     }else{
@@ -73,6 +68,7 @@ void setup(){
     if(lD.launch_detect(tel.altimeter(),elaps[2],ret[0],ret[1]) != 1){
         #undef FLIGHT_STATE
         #define FLIGHT_STATE 2
+        has_launched = true;
     }else{
         //Do nothing 
     }

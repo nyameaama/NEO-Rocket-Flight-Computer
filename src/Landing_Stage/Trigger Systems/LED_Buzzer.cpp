@@ -1,5 +1,9 @@
 #include"LED_Buzzer.h"
 
+uint8_t blinkCombinations[3][5] = { {1,0,1,0,1,},
+                                    {1,0,0,0,1},
+                                    {0,0,1,0,0}};
+
 LED_BUZZER::LED_BUZZER(){
     pinMode(8, OUTPUT);
     pinMode(13,OUTPUT);
@@ -37,22 +41,25 @@ void LED_BUZZER::playTone(){
   }
 }
 
-void LED_BUZZER::blink(){
-  uint8_t p[5] = {1,0,1,0,1};
-    for(size_t i : p){
-      if(i == 1){
-        digitalWrite(8, HIGH);
-         delay(100);  
-        digitalWrite(13, HIGH);
-         delay(100); 
-
-      }else if(i == 0){
-        digitalWrite(8, LOW);
-         delay(100); 
-        digitalWrite(13, LOW);
-         delay(100); 
+void LED_BUZZER::blink(uint8_t x){
+  for(size_t i = 0; i < 3;i++){
+    if(x == i){
+      for(size_t j = 0; j < 5;j++){
+        playCombination(blinkCombinations[i][j]);
       }
+      break;
     }
-     
-     
+  }
+}
+
+template <typename type>
+void LED_BUZZER::playCombination(type x){
+  uint8_t low = 0, high = 0;
+  if(x == low){
+    digitalWrite(8,LOW);
+    digitalWrite(13,LOW);
+  }else if(x == high){
+    digitalWrite(8,HIGH);
+    digitalWrite(13,HIGH);
+  }
 }
