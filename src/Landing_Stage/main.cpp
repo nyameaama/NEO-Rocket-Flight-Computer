@@ -79,7 +79,8 @@ void setup(){
 
 void loop(){
     #if FLIGHT_STATE == 2 //<--  Launch
-    //Begin navigation with actuve thrust Vectoring
+    //Begin navigation with active thrust Vectoring
+    control.state(VECTOR_STATE);
 
     //Begin fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
@@ -101,7 +102,7 @@ void loop(){
 
     }
     //Begin fin based path navigation
-
+    control.state(FIN_STATE);
     //Continue fin based active roll stabilization
      stab.rollStabilize(stat.AccGyroVals(1));
     //wait for Boost stage ejection signal
@@ -118,7 +119,7 @@ void loop(){
     // Continue fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
     //Continue fin based path navigation
-
+    control.state(FIN_STATE);
     //Check for next flight state
 
     #endif
@@ -126,12 +127,16 @@ void loop(){
     #if FLIGHT_STATE == 6  //<-- Motor Burn/Propulsive Land
     // Continue fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
-
-
+    //Continue fin based path navigation
+    control.state(FIN_STATE);
+    //Begin navigation with active thrust Vectoring
+    control.state(VECTOR_STATE);
 
     #endif
 
      #if FLIGHT_STATE == 7 //<-- Land
+    // Continue fin based active roll stabilization
+    stab.rollStabilize(stat.AccGyroVals(1));
 
 
      #endif

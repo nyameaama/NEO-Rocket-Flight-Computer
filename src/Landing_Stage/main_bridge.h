@@ -48,6 +48,12 @@
     RollStability stab;
     //Object for RF Communication class
     RF_ASSIGN comm;
-    //Object for LED_BUZZER CLASS
+    //Object for LED_BUZZER class
     LED_BUZZER ring;
+    //Object for PathControl class
+    PathControl control;
+
+
+#define VECTOR_STATE 0
+#define FIN_STATE 1
     

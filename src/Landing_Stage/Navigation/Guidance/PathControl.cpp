@@ -1,5 +1,5 @@
 #include "PathControl.h"
-double STATE;
+uint8_t STATE;
 
 //Accepts directional values to translate to t-vector range
 //y =    0 = pitch     1 = yaw
@@ -44,6 +44,8 @@ double PathControl::adjustHeading(double pitch, double yaw){
 	return;
 }
 
+
+
 double *PathControl::pathController(double latC, double longC, double alt, double *xF_pathData[64][2]){
 	//double pouint32_ts[32][64] = path_pouint32_ts;
 	//Firstly, current loc is compared to generated path pouint32_ts to determine which pouint32_t vehicle
@@ -56,12 +58,16 @@ double *PathControl::pathController(double latC, double longC, double alt, doubl
 	currentCoord[2] = alt;
 	//double cPouint32_t = HeadingclosestPouint32_t(currentCoord[0],currentCoord[1],xF_pathData,4);
 }
+
 //Path Controller Function for altitude control
-double PathControl::alt_PathController(double cLoc, uint8_t haslaunched){
+double PathControl::altitudeController(double cLoc, uint8_t haslaunched){
 	if (haslaunched == 1){
 		//double cLoc = gps.altimeter();
-	}
-	else{
+	}else{
 		//Do nothing
 	}
+}
+
+void PathControl::state(uint8_t current_State){
+	STATE = current_State;
 }
