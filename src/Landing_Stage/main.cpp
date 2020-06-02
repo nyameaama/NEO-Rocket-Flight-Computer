@@ -63,9 +63,7 @@ void setup(){
     //10 sec wait before launch
     delay(10000);
     //Check for next flight state - Launch Detect
-    double *elaps = obj3.timeElapsed();
-    double *ret = obj3.velChange();
-    if(lD.launch_detect(tel.altimeter(),elaps[2],ret[0],ret[1]) != 1){
+    if(sw.checkforLaunch()){
         #undef FLIGHT_STATE
         #define FLIGHT_STATE 2
         has_launched = true;
@@ -85,7 +83,7 @@ void loop(){
     //Begin fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
     //Check for next flight state - Detect MECO by acceleration differential
-    if(lD.analyseAltDecceleration()){
+    if(sw.checkforMECO()){
         #undef FLIGHT_STATE
         #define FLIGHT_STATE 3
     }else{
@@ -95,7 +93,7 @@ void loop(){
 
     #if FLIGHT_STATE == 3 //<-- MECO/Eject
     //Compute approximate time till Apogee
-    if(lD.time_to_Apogee() <= 0){
+    if(sw.checkforApogeee()){
         #undef FLIGHT_STATE
         #define FLIGHT_STATE 4
     }else{

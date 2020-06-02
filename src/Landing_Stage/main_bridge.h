@@ -18,6 +18,7 @@
 #include"RF Comm/Transmit/DataHandling/Assign.h"
 #include"Data Logging/EEPROM/EEPROMStorage.h"
 #include"Flight Control/ThrustRegulation/PropThrustControl.h"
+#include"StateMachine/state.h"
 #include<Servo.h>
 #include<stdlib.h>
 
@@ -52,6 +53,8 @@
     LED_BUZZER ring;
     //Object for PathControl class
     PathControl control;
+    //Object for StateMachine class
+    StateMachine sw;
 
 
 #define VECTOR_STATE 0

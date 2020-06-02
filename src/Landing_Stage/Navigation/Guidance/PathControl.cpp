@@ -1,4 +1,5 @@
 #include "PathControl.h"
+
 uint8_t STATE;
 
 //Accepts directional values to translate to t-vector range
@@ -35,15 +36,20 @@ double PathControl::translate(double x, double y){
 	}
 }
 //Accepts new pitch and yaw heading values and vectors appropriately
-double PathControl::adjustHeading(double pitch, double yaw){
+double PathControl::adjustAltitude(double pitch){
 	//Calculate Distance of values from the current axis pouint32_t to new axis pouint32_t
 	//double stable_axis_pouint32_t[2] = {}; //<— Come back and compensate for Dynamic board orientation
 	VectorCompute axis;
 	axis.transitionPitch(pitch);
-	axis.transitionYaw(yaw);
+	
 	return;
 }
 
+double PathControl::adjustPath(double yaw){
+	VectorCompute axis;
+	axis.transitionYaw(yaw);
+
+}
 
 
 double *PathControl::pathController(double latC, double longC, double alt, double *xF_pathData[64][2]){
