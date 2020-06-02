@@ -58,15 +58,18 @@ double PathCompute::peak_altitude(double distance){ //The distance of the flight
 	temp2 = temp1 / minimum_dist_limit;
 	return temp2;
 }
-double *PathCompute::LatLongDist_gen(double latitude, double longitude, double metres){
+//Function to find a lat lon point, when bearing, distance and another lat lon is given
+double *PathCompute::LatLongDist_gen(double latitude, double longitude,double bearing, double metres){
 	double newCOORD[2];
 	//Latitude
 	double earth_radius = 6378.137;							 //radius of the earth in kilometer
-	double m = (1 / ((2 * pi / 360) * earth_radius)) / 1000; //1 meter in degree
-	double new_latitude = latitude + (metres * m);
+	//latitude of second point = la2 =  asin(sin la1 * cos Ad  + cos la1 * sin Ad * cos θ), 
+	double m = sin(latitude) * cos(metres / earth_radius) + cos(latitude) * sin(metres / earth_radius) * cos(bearing);
+	double new_latitude = asin(m);
 	newCOORD[0] = new_latitude;
-	//Longitude
-	double new_longitude = longitude + (metres * m) / cos(latitude * (pi / 180));
+	//Longitude of second point = lo2 = lo1 + atan2(sin θ * sin Ad * cos la1 , cos Ad – sin la1 * sin la2)
+	double temp = atan2(sin(bearing) * sin(metres / earth_radius) * cos(latitude), cos(metres / earth_radius) - sin(latitude) * sin(new_latitude));
+	double new_longitude = longitude + temp;
 	newCOORD[1] = new_longitude;
 	return newCOORD;
 }
@@ -142,41 +145,38 @@ double *PathCompute::generate_alt(double current_alt, double high){
 	return tempPath;
 }
 //Helper function for LatLongDist()
-double PathCompute::LatLongDist_helper(double current_lat, double current_long, double latlong, double distance){
+double PathCompute::LatLongDist_helper(double current_lat, double current_long, double bearing,double latlong, double distance){
 	//double current_lat = gps.GPS_LOC(1),current_long = gps.GPS_LOC(2);
 	if (latlong == 0){
-		double *temp1 = LatLongDist_gen(current_lat, current_long, distance);
+		double *temp1 = LatLongDist_gen(current_lat, current_long,bearing, distance);
 		return temp1[0];
 	}
 	else if (latlong == 1){
-		double *temp2 = LatLongDist_gen(current_lat, current_long, distance);
+		double *temp2 = LatLongDist_gen(current_lat, current_long,bearing, distance);
 		return temp2[1];
 	}
 	return;
 }
-//Functions to generate heading path points for launch stage,transfer stage and landing stage
-//Function writes path points to a two dimensional array and is coverted to return a one dimensional array
-double *PathCompute::generate_path_points(double current_lat, double current_long, double final_lat, double final_long){
-	//array - xF_pathData
-	//double current_lat = gps.GPS_LOC(1),current_long = gps.GPS_LOC(2);
-	double lat_increment, long_increment;
-	//Distance between location and final location
-	double dist = distance_lat_long(current_lat, current_long, final_lat, final_long); //Returns kilometres
-	//Translates from km to m
-	uint32_t translateMetric = dist * 1000;
-	double tempPoints[translateMetric][2];
-	//For every metre create a path point
-	for (size_t i = 0; i < translateMetric; i++){
-		tempPoints[i][0] = LatLongDist_helper(lat_increment, long_increment, 0, 1.0);
-		tempPoints[i][1] = LatLongDist_helper(lat_increment, long_increment, 1, 1.0);
-		lat_increment = tempPoints[i][0];
-		long_increment = tempPoints[i][1];
+//Function allows for the generation of heading path points for launch stage,transfer stage and landing stage
+//Function writes path points to a two dimensional array and is converted to return a one dimensional array
+double *PathCompute::createPathVector(double la1,double lo1,double la2,double lo2,double startAltitude,
+														double altDiff,double bearing,double pointStep){
+	//Distance between location and final location														
+	double dist = distance_lat_long(la1,lo1,la2,lo2); //Returns kilometres
+	//Total distance divided by step(metres) gives the number of points
+	uint8_t noOfPoints = (dist * 1000) / pointStep;
+	double lat_increment, long_increment,alt_increment = startAltitude;
+	double altStep = altDiff / noOfPoints;
+	double pathVector[noOfPoints][3];
+	//For the specified step count, create a path point
+	for(size_t i = 0; i < noOfPoints; i++){
+		pathVector[i][0] = LatLongDist_helper(lat_increment,long_increment,bearing,0,pointStep);
+		pathVector[i][1] = LatLongDist_helper(lat_increment,long_increment,bearing,0,pointStep);
+		pathVector[i][2] = alt_increment + altStep;
+		lat_increment = pathVector[i][0];
+		long_increment = pathVector[i][1];
+		alt_increment = pathVector[i][2];
 	}
-	double *conv = funcs.arrayConversion2D_1D(tempPoints);
-	return conv;
-}
-double **PathCompute::generate_path_points_helper(double array[]){
-	double **ret;
-	//ret =  funcs.arrayConversion1D_2D(array);
-
+	double *scaledPathVecor = funcs.arrayConversion2D_1D(pathVector);
+	return scaledPathVecor;
 }

@@ -39,7 +39,7 @@ class PathCompute {
         //Function to determine peak altitude
 		double peak_altitude(double distance);
 
-        double *LatLongDist_gen(double latitude,double longitude,double metres);
+        double *LatLongDist_gen(double latitude,double longitude,double bearing,double metres);
 
         //Function to determine Heading closest point
 		uint8_t HeadingclosestPoint(double FLat,double FLong,double array[64][2],uint32_t HcurrentIndex);
@@ -59,13 +59,15 @@ class PathCompute {
 		double *generate_alt(double current_alt,double high);
 
         //Helper function for LatLongDist()
-		double LatLongDist_helper(double current_lat,double current_long, double latlong,double distance);
+		double LatLongDist_helper(double current_lat,double current_long, double bearing,double latlong,double distance);
 
         //Functions to generate heading path pouint32_ts for launch stage,transfer stage and landing stage
 		//Function writes path pouint32_ts to a two dimensional array and is coverted to return a one dimensional array
-		double *generate_path_points(double current_lat,double current_long,double final_lat,double final_long);
+		//double *generate_path_points(double current_lat,double current_long,double final_lat,double final_long);
 
         double **generate_path_points_helper(double array[]);
+
+        double *createPathVector(double la1,double lo1,double la2,double lo2,double startAltitude,double altDiff,double bearing,double pointStep);
 };    
 
 #endif

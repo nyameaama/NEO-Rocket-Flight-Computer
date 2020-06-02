@@ -42,7 +42,7 @@ uint32_t Utility::TDlength(double arr[][2]){
 	//String str = String(arr);
 }
 //Convert 2D array to 1D array
-double *Utility::arrayConversion2D_1D(double array[][2]){
+double *Utility::arrayConversion2D_1D(double array[][3]){
 	uint16_t n = 64;
 	double a[n][n], b[n * n];
 	uint16_t *c = (uint16_t *)malloc(n * n);

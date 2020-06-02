@@ -34,7 +34,7 @@ class Utility {
 		uint32_t TDlength(double arr[][2]);
 
         //Convert 2D array to 1D array    
-        double *arrayConversion2D_1D(double array[][2]);
+        double *arrayConversion2D_1D(double array[][3]);
 
         //Function to compute the Highest Common Factor between two numbers
  		uint16_t HCF(uint32_t x,uint32_t y);

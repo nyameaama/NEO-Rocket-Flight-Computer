@@ -39,8 +39,8 @@ void setup(){
     //Compute Path to dest
     double FINAL_LAT = sys.GET_LATITUDE(xF_FCoordinates);
     double FINAL_LONG = sys.GET_LONGITUDE(xF_FCoordinates);
-    double *pInitPoints = pInit.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    pInit.generate_path_points_helper(pInitPoints);
+    //double *pInitPoints = pInit.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
+    //pInit.generate_path_points_helper(pInitPoints);
     flightDistance = pInit.distance_lat_long(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
     xF_apPoints = pInit.generate_alt(tel.altimeter(),pInit.peak_altitude(flightDistance));
     //Test Microcontroller Bluetooth communication
