@@ -1,11 +1,10 @@
 #include"main_bridge.h"
 
-#define FLIGHT_STATE 1
+#define FLIGHT_STATE 0
 
 //limCalcs
 String launch_time;
 boolean has_launched = false;
-
 
 //Path
 double xF_pathData[1024][2];
@@ -17,8 +16,20 @@ uint8_t AcurrentIndex;
 double flightDistance;
 double *xF_apPoints;
 
+void InterruptServiceRoutine();
+
 
 void setup(){
+    //If button is held for 5 seconds computer will brick all processes
+    interrupts();
+    attachInterrupt(digitalPinToInterrupt(0),InterruptServiceRoutine,HIGH);
+    #if FLIGHT_STATE == 0 //<-- Startup Idle
+        sw.startupRoutine();
+        #undef FLIGHT_STATE
+        #define FLIGHT_STATE 1
+    #endif
+  
+    #if FLIGHT_STATE == 1 //<-- Pad Idle 
     Serial.begin(9600);
     char *function = string.prompt();
     char *stat = string.prompt();
@@ -31,9 +42,6 @@ void setup(){
     }
     
     //SET LAUNCH
-   
-  
-    #if FLIGHT_STATE == 1 //<-- Pad Idle 
     //Listen to ground station for flight data (GPS Dest loc) through RF
 
     //Compute Path to dest
@@ -157,13 +165,11 @@ void loop(){
     //Check flight State to see if orientation is in bounds else 
     //begin emergency routine
     if(lD.checkState()){
-        AreaAnalysis EM;
-        EM.BRICK_ALL_PROCESSES();
+        lD.BRICK_ALL_PROCESSES();
     }
 }
 
-//Control Systems
-//Path
-void adjustHeadingHelper(double orientVals[2]){
-    thrust.thrustVector(orientVals[0],orientVals[1]);
+//If button is held for 5 seconds computer will brick all processes
+void InterruptServiceRoutine(){
+    ring.PIN_HOLD_DOWN();
 }

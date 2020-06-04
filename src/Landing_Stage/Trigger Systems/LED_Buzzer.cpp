@@ -5,6 +5,7 @@ uint8_t blinkCombinations[3][5] = { {1,0,1,0,1,},
                                     {0,0,1,0,0}};
 
 LED_BUZZER::LED_BUZZER(){
+  //LED
     pinMode(8, OUTPUT);
     pinMode(13,OUTPUT);
     melody[0] = NOTE_C4;
@@ -23,6 +24,9 @@ LED_BUZZER::LED_BUZZER(){
     noteDurations[1] = 4;
     noteDurations[1] = 4;
     noteDurations[1] = 4;
+    //Button
+    //initialize the pushbutton pin as an input:
+    pinMode(BUTTON_PIN, INPUT);
 }
 
 void LED_BUZZER::playTone(){
@@ -63,3 +67,27 @@ void LED_BUZZER::playCombination(type x){
     digitalWrite(13,HIGH);
   }
 }
+
+boolean LED_BUZZER::buttonPressed(){
+   // read the state of the pushbutton value:
+  uint8_t buttonState = digitalRead(BUTTON_PIN);
+  // check if the pushbutton is pressed. If it is, the buttonState is HIGH:
+  if (buttonState == HIGH) {
+    return true;
+  } else {
+    return false;
+  }
+}
+
+void LED_BUZZER::PIN_HOLD_DOWN(){
+  while(buttonPressed()){
+    delayMicroseconds(5000000);
+    if(!buttonPressed()){
+      //Do nothing
+    }else{
+      AreaAnalysis routine;
+      routine.BRICK_ALL_PROCESSES();
+    }
+  }
+  //While loop terminated which means button wasnt held for > 5 secs
+ }

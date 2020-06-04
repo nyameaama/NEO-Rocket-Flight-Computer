@@ -4,8 +4,10 @@
 #include"pitches.h"
 #include"../utility/utility.h"
 #include<Arduino.h>
+#include"AreaAnalysis.h"
 
 #define LED_PIN 0
+#define BUTTON_PIN 0
 
 class LED_BUZZER {
     private:
@@ -29,6 +31,11 @@ class LED_BUZZER {
 
         //Function to blink LED
         void blink(uint8_t x);
+
+        boolean buttonPressed();
+
+        //If button is held for 5 seconds computer will brick all processes
+        void PIN_HOLD_DOWN();
 
 
 };
