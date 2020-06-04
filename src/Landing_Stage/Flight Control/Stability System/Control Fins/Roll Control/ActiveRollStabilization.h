@@ -2,11 +2,11 @@
 #define ActiveRollStabilization
 
 #include<Servo.h>
-#include"../../../Inertial Measurement/IMU.h"
-#include"../../../Data Logging/FileSys.h"
+#include"../../../../Inertial Measurement/IMU.h"
+#include"../../../../Data Logging/FileSys.h"
 #include<Thread.h>
 #include<ThreadController.h>
-#include"../../../utility/PID.h"
+#include"../../../../utility/PID.h"
 
 #define MOTOR_PIN_1 0
 #define MOTOR_PIN_2 0

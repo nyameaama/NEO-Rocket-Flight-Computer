@@ -18,16 +18,13 @@ class PathControl : public PathCompute {
 
 		double adjustPath(double yaw);
 
-		//Function to change between fin based control and thrust vectoring control
-		void changeControlSurface(uint8_t surf);
-
     public:
          double *pathController(double latC,double longC,double alt,double *xF_pathData[64][2]);
 
          //Path Controller Function for altitude control
 		double altitudeController(double cLoc,uint8_t haslaunched);
 
-
+		//Function to change between fin based control and thrust vectoring control
 		void state(uint8_t current_State);
 };
 
