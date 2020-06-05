@@ -1,13 +1,13 @@
 BILL OF COMPONENTS				
 				
 Component	Description	Quantitiy	Price	Buy Source
-BMP180		BMP180 - Pressure Sensor Evaluation Board	2	$9.95	https://www.digikey.com/products/en?mpart=1603&v=1528
-MPU-6050	Accelerometer, Gyroscope, 6 Axis Sensor I_C Output	1	$8.31	https://www.digikey.com/product-detail/en/tdk-invensense/MPU-6050/1428-1007-1-ND/4038010
+BMP180	"	BMP180 - Pressure Sensor Evaluation Board"	2	$9.95	https://www.digikey.com/products/en?mpart=1603&v=1528
+MPU-6050	"Accelerometer, Gyroscope, 6 Axis Sensor I_C Output"	1	$8.31	https://www.digikey.com/product-detail/en/tdk-invensense/MPU-6050/1428-1007-1-ND/4038010
 MPXV7002DP	PRESSURE SENSOR DUAL PORT 8-SOP	1	$8.83	https://www.digipart.com/part/MPXV7002DP
-HC-05 	 Bluetooth Module	1		
-HC-06	 Bluetooth Module	1		
+HC-05 	 Bluetooth Module	1	x	x
+HC-06	 Bluetooth Module	1	x	x
 ARDUINO UNO	Microcontroller Development Board	1	$20.00	https://store.arduino.cc/arduino-uno-rev3
-OV7670	CMOS Camera Moduleï¿½	1	$25.00	https://www.amazon.com/0-3-Megapixel-Interface-Resolution-640X480-Support/dp/B07HSXJBM7
+OV7670	CMOS Camera ModuleÊ	1	$25.00	https://www.amazon.com/0-3-Megapixel-Interface-Resolution-640X480-Support/dp/B07HSXJBM7
 Momentary Pushbutton Switch	Standard 12mm square momentary button	2	$0.50	https://www.sparkfun.com/products/9190
 				
 				
