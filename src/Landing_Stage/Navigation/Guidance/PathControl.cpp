@@ -1,6 +1,7 @@
 #include "PathControl.h"
 
 uint8_t STATE;
+uint8_t motor_state;
 
 //Accepts directional values to translate to t-vector range
 //y =    0 = pitch     1 = yaw
@@ -35,6 +36,17 @@ double PathControl::translate(double x, double y){
 		return translateP;
 	}
 }
+
+//Function to move thrust vectoring mount to pos
+double PathControl::TVC(uint8_t M1pos, uint8_t M2pos){
+	Control vec;
+	double x;
+	//PredictedThrustVectoring pvec;
+	uint8_t stage = (motor_state == LANDING_STAGE) ? 0 : BOOST_STAGE;
+	//uint8_t tvc = (stage == LANDING_STAGE) ? vec.thrustVector(M1pos,M2pos) : pvec.computeMotorVector(x); // <-- Change pvec function
+	
+}
+
 //Accepts new pitch and yaw heading values and vectors appropriately
 double PathControl::adjustAltitude(double pitch){
 	//Calculate Distance of values from the current axis pouint32_t to new axis pouint32_t
@@ -77,3 +89,9 @@ double PathControl::altitudeController(double cLoc, uint8_t haslaunched){
 void PathControl::state(uint8_t current_State){
 	STATE = current_State;
 }
+
+void PathControl::VECTOR_MOUNT_STATE(uint8_t state){
+	motor_state = state;
+}
+
+

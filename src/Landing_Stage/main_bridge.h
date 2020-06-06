@@ -60,3 +60,5 @@
 #define VECTOR_STATE 0
 #define FIN_STATE 1
     
+#define BOOST_STAGE 0
+#define LANDING_STAGE 1

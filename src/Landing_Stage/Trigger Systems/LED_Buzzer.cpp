@@ -28,7 +28,7 @@ LED_BUZZER::LED_BUZZER(){
     //initialize the pushbutton pin as an input:
     pinMode(BUTTON_PIN, INPUT);
     //Electric Ignitor
-    pinMode(IGNITE_PIN,OUTPUT)
+    pinMode(IGNITE_PIN,OUTPUT);
 }
 
 void LED_BUZZER::playTone(){
