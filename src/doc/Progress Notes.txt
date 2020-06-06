@@ -30,6 +30,7 @@ https://www.google.com/url?sa=i&url=https%3A%2F%2Fjourneynorth.org%2Ftm%2FLongit
 
 BUILD CAD MODEL
 
+!! Spark Gap Igniter - 4.8V for motor ignition
 
 Flight States
 

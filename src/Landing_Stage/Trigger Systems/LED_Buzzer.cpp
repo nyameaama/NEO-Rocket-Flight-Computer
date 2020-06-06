@@ -27,6 +27,8 @@ LED_BUZZER::LED_BUZZER(){
     //Button
     //initialize the pushbutton pin as an input:
     pinMode(BUTTON_PIN, INPUT);
+    //Electric Ignitor
+    pinMode(IGNITE_PIN,OUTPUT)
 }
 
 void LED_BUZZER::playTone(){
@@ -91,3 +93,7 @@ void LED_BUZZER::PIN_HOLD_DOWN(){
   }
   //While loop terminated which means button wasnt held for > 5 secs
  }
+
+  void igniteMotor(){
+    digitalWrite(IGNITE_PIN, HIGH);
+  }

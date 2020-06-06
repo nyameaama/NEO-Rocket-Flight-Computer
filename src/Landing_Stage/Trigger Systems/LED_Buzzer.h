@@ -8,6 +8,7 @@
 
 #define LED_PIN 0
 #define BUTTON_PIN 0
+#define IGNITE_PIN 0
 
 class LED_BUZZER {
     private:
@@ -33,6 +34,8 @@ class LED_BUZZER {
         void blink(uint8_t x);
 
         boolean buttonPressed();
+
+        void igniteMotor();
 
         //If button is held for 5 seconds computer will brick all processes
         void PIN_HOLD_DOWN();
