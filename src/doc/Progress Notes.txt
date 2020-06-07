@@ -117,3 +117,8 @@ Land:
 
 
 System Check error - Repeated LED blinking and repeated buzzer
+
+Motor F15-8 
+Burn Time: 3.5
+Impulse: 49.6
+Max Thrust: 25.3
