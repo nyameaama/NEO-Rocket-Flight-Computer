@@ -41,9 +41,9 @@ double PathControl::translate(double x, double y){
 double PathControl::TVC(uint8_t M1pos, uint8_t M2pos){
 	Control vec;
 	double x;
-	//PredictedThrustVectoring pvec;
+	PredictedThrustVectoring pvec;
 	uint8_t stage = (motor_state == LANDING_STAGE) ? 0 : BOOST_STAGE;
-	//uint8_t tvc = (stage == LANDING_STAGE) ? vec.thrustVector(M1pos,M2pos) : pvec.computeMotorVector(x); // <-- Change pvec function
+	uint8_t tvc = (stage == LANDING_STAGE) ? vec.thrustVector(M1pos,M2pos) : pvec.computeMotorVector(x); // <-- Change pvec function
 	
 }
 

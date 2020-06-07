@@ -6,7 +6,7 @@
 #include"../../Sensors/sensors.h"
 
 class PredictedThrustVectoring {
-    public:
+    private:
          Gyro vGet;
          SimpleKalmanFilter posEst;
          double DELAYTIME;
@@ -29,7 +29,9 @@ class PredictedThrustVectoring {
         template <typename T>
         T forceToVel(T force);
 
-    public:   
+    public:
+        PredictedThrustVectoring();
+        
         double computeMotorVector(double x);
 
 };

@@ -80,5 +80,5 @@ T PredictedThrustVectoring::forceToVel(T force){
 
 }
 double PredictedThrustVectoring::computeMotorVector(double x){
-
+    return x;
 }
