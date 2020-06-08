@@ -1,21 +1,25 @@
 import time
-#Simulation
+#Simulation of change in altitude during ascent 
 
 def PathSimulationMain():
+    total_time = time.time()
     speed = 0
     time_between_path_point = 0.2
-    time1 = time.time()
-    Altitude = 1
-    while((time.time() - time1) < 3.5):
-        vehicleAcc = AccelerationInSetTime(time.time() - time1)
+    Altitude = 0
+    previousTime = time.time()
+    while((time.time() - total_time) < 3.5):
+        vehicleAcc = AccelerationInSetTime(time.time() - previousTime)
+        #distance = vehicleAcc * (time.time() - previousTime) 
+        previousTime = time.time()
         speed += vehicleAcc
-        distanceFromSurface = speed * time.time()
-        print(distanceFromSurface)
+        #Altitude += distance
+        print(speed)
+        
 
 
 #Function to find acceleration of rocket in () time
 def AccelerationInSetTime(seconds):
-    rocketMass = 2 #kg
+    rocketMass = 0.5 #kg
     engineThrust = 25.3
     engineThrustTime = 3.5 #secs
 
@@ -25,3 +29,4 @@ def AccelerationInSetTime(seconds):
     return Acceleration * seconds
 
 PathSimulationMain()
+#print(AccelerationInSetTime(1))

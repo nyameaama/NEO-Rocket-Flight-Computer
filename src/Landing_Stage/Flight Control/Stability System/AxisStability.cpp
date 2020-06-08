@@ -122,7 +122,7 @@ double VectorCompute::transitionYaw(double newYaw){
 	String ID = "YAW_STAB";
 	instance.createPIDinstance(ID,kp,ki,kd);
 	double pos = instance.PID_MAIN(ID,getY.AccGyroVals(3),newYaw);
-
+	return pos;
 }
 
 double VectorCompute::transitionPitch(double newPitch){
@@ -131,7 +131,7 @@ double VectorCompute::transitionPitch(double newPitch){
 	String ID = "PITCH_STAB";
 	instance.createPIDinstance(ID,kp,ki,kd);
 	double pos = instance.PID_MAIN(ID,getP.AccGyroVals(3),newPitch);
-	
+	return pos;
 }
 
 
