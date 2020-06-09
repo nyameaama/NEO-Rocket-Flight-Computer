@@ -5,6 +5,7 @@
 #include"../Flight Control/Stability System/AxisStability.h"
 #include"../Sensors/sensors.h"
 #include"../Trigger Systems/LED_Buzzer.h"
+#include"../Inertial Measurement/IMU.h"
 
 class StateMachine {
     private:
@@ -29,7 +30,10 @@ class StateMachine {
         boolean checkforCoast();
 
         //Detect Landing Program
-        boolean checkforLand();
+        boolean checkforLand_begin();
+
+        //Detect successful landing
+        boolean checkforSuccessLand();
 
 
 };

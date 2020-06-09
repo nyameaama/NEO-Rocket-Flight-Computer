@@ -11,6 +11,7 @@
 #define MOTOR_PIN_1 0
 #define MOTOR_PIN_2 0
 #define MOTOR_PIN_3 0
+#define MOTOR_PIN_4 0
 
 #define NEG_THRESHOLD -179
 #define POS_THRESHOLD 179
@@ -22,7 +23,7 @@
 
 class RollStability {
     private:
-        Servo s1,s2,s3;
+        Servo s1,s2,s3,s4;
         boolean POS_ROLL_AXIS = true;
         String SPIN_DIRECTION= "clockwise";
         uint8_t arSize = 1;

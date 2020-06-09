@@ -9,6 +9,7 @@ RollStability::RollStability(){
     s1.attach(MOTOR_PIN_1);
     s2.attach(MOTOR_PIN_2);
     s3.attach(MOTOR_PIN_3);
+    s4.attach(MOTOR_PIN_4);
     String search;
 }
 
@@ -132,6 +133,8 @@ void RollStability::finMovement(double x){
        s2.write(count);
        delay(DELAY_TIME);
        s3.write(count);
+       delay(DELAY_TIME);
+       s4.write(count);
        delay(DELAY_TIME);
        count += increment;
     }

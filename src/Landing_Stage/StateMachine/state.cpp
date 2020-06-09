@@ -38,3 +38,27 @@ boolean StateMachine::checkforLaunch(){
     return Apogee;
  }
 
+//Detect Landing Program
+boolean StateMachine::checkforLand_begin(){
+
+
+}
+
+//Detect successful landing
+boolean StateMachine::checkforSuccessLand(){
+    Sensors verify;
+    Gyro bounds;
+    uint8_t boundary = 3;
+    //If vel == 0 and rocket is upright propulsive land successful
+    boolean successLand = true;
+    if(verify.AirspeedVal() > 5){
+        successLand = false;
+    }
+    if((bounds.AccGyroVals(2)) > (90 + boundary) || (bounds.AccGyroVals(2)) < (90 - boundary)){
+        successLand = false;
+    }
+    if((bounds.AccGyroVals(3)) > (90 + boundary) || (bounds.AccGyroVals(3)) < (90 - boundary)){
+        successLand = false;
+    }
+    return successLand;
+}
