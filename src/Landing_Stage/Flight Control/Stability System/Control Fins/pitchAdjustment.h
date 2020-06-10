@@ -1,7 +1,7 @@
-#ifndef PITCH_ADJUSTMENT
-#define PITCH_ADJUSTMENT
+#ifndef AXIS_ADJUSTMENT
+#define AXIS_ADJUSTMENT
 
-class FinPithAdjustment {
+class FinAxisAdjustment {
     public:
         
 
