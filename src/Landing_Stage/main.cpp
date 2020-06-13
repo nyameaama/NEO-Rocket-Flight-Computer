@@ -137,7 +137,11 @@ void loop(){
     //Begin navigation with active thrust Vectoring
     control.state(VECTOR_STATE);
     control.VECTOR_MOUNT_STATE(LANDING_STAGE);
-
+    //Check for successful landing
+    if(sw.checkforSuccessLand()){
+        #undef FLIGHT_STATE //<-- Come back
+        #define FLIGHT_STATE 7
+    }
     #endif
 
      #if FLIGHT_STATE == 7 //<-- Land
