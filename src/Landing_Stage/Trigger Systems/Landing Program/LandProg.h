@@ -6,7 +6,7 @@
 //Trigger program to begin firing of motor for propulsive landing sequence
 
 class AutoLand {
-    public:
+    private:
         //Function to find acceleration of rocket in () time
         double AccelerationInSetTime(double seconds);
 
@@ -14,7 +14,12 @@ class AutoLand {
         double calculatePropulsiveAccelerationTime();
 
         //Function to compensate motor ignition delay to calculation
-        double compensateIgnitionDelay(double altitude);        
+        double compensateIgnitionDelay(double altitude);
+
+
+    public:
+        //Driver Function
+        double propulsionAltitude();        
 
 };
 

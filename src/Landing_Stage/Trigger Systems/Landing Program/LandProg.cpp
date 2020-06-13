@@ -4,7 +4,6 @@
 double AutoLand::AccelerationInSetTime(double seconds){
     double rocketMass = 0.5; //kg
     double engineThrust = 25.3;
-
     double rocket_Weight = rocketMass * 9.8;
     double resultant_force = engineThrust - rocket_Weight;
     double Acceleration = resultant_force / rocketMass;
@@ -19,3 +18,15 @@ double AutoLand::calculatePropulsiveAccelerationTime(){
     double pTime = vel / acc;
     return pTime * 1000;
 }
+
+//Function to compensate motor ignition delay to calculation
+double AutoLand::compensateIgnitionDelay(double altitude){
+    double IGNITION_DELAY; //seconds
+    double revAlt;
+
+}
+
+//Driver function
+double AutoLand::propulsionAltitude(){
+
+}       

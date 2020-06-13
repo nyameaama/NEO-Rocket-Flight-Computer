@@ -9,6 +9,7 @@
 #include"Flight Control/Stability System/Control Fins//Roll Control/ActiveRollStabilization.h" 
 #include"Trigger Systems/AreaAnalysis.h"
 #include"Trigger Systems/LED_Buzzer.h"
+#include"Trigger Systems/Landing Program/LandProg.h"
 #include"Flight Control/Thrust_Vector_Control/TVC.h"
 #include"Serial Comm/command.h"
 #include"Serial Comm/SYS_CHECK/SystemInspect.h"

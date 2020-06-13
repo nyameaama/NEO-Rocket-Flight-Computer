@@ -6,6 +6,7 @@
 #include"../Sensors/sensors.h"
 #include"../Trigger Systems/LED_Buzzer.h"
 #include"../Inertial Measurement/IMU.h"
+#include"../Trigger Systems/Landing Program/LandProg.h"
 
 class StateMachine {
     private:
@@ -30,7 +31,7 @@ class StateMachine {
         boolean checkforCoast();
 
         //Detect Landing Program
-        boolean checkforLand_begin();
+        boolean checkforPropulsion_begin();
 
         //Detect successful landing
         boolean checkforSuccessLand();

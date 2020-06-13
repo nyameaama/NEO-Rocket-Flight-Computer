@@ -39,9 +39,14 @@ boolean StateMachine::checkforLaunch(){
  }
 
 //Detect Landing Program
-boolean StateMachine::checkforLand_begin(){
-
-
+boolean StateMachine::checkforPropulsion_begin(){
+    Sensors alt;
+    boolean begin = false;
+    AutoLand determine;
+    if(determine.propulsionAltitude() >= alt.altimeter()){
+        begin = true;
+    }
+    return begin;
 }
 
 //Detect successful landing

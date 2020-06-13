@@ -128,7 +128,10 @@ void loop(){
     //Continue fin based path navigation
     control.state(FIN_STATE);
     //Check for next flight state
-
+    if(sw.checkforPropulsion_begin()){
+        #undef FLIGHT_STATE
+        #define FLIGHT_STATE 6
+    }
     #endif
     
     #if FLIGHT_STATE == 6  //<-- Motor Burn/Propulsive Land
