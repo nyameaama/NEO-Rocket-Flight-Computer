@@ -20,7 +20,7 @@ def PathSimulationMain():
 
 #Function to find acceleration of rocket in () time
 def AccelerationInSetTime(seconds):
-    rocketMass = 0.5 #kg
+    rocketMass = 1.0 #kg
     engineThrust = 25.3
 
     rocket_Weight = rocketMass * 9.8

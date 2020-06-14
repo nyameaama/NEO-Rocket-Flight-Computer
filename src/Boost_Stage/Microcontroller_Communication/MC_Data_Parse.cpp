@@ -22,7 +22,7 @@ uint8_t MC_PARSE::assign(String ID,String data){
     }else{
         return sec.route("908");
     }
-
+    return;
 }
 
  uint8_t MC_PARSE::receiveDat(String ID,String data){

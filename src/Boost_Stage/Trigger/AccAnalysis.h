@@ -1,5 +1,5 @@
-#ifndef ACCELERATION ANALYSIS
-#define ACCELERATION ANALYSIS
+#ifndef ACCELERATION_ANALYSIS
+#define ACCELERATION_ANALYSIS
 
 #include<Arduino.h>
 #include"../BSensors/B_Sensors.h"

@@ -7,6 +7,8 @@
 
 class AutoLand {
     private:
+         Sensors comp;
+    private:
         //Function to find acceleration of rocket in () time
         double AccelerationInSetTime(double seconds);
 
