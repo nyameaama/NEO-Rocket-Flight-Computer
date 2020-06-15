@@ -3,6 +3,11 @@
 uint8_t STATE;
 uint8_t motor_state;
 
+uint8_t altitudeTotal;
+
+double *final_coordinates = (double*)malloc(2);
+double *xF_altitudePoints = (double*)malloc(20);
+
 //Accepts directional values to translate to t-vector range
 //y =    0 = pitch     1 = yaw
 double PathControl::translate(double x, double y){
@@ -78,12 +83,31 @@ double *PathControl::pathController(double latC, double longC, double alt, doubl
 }
 
 //Path Controller Function for altitude control
-double PathControl::altitudeController(double cLoc, uint8_t haslaunched){
-	if (haslaunched == 1){
-		//double cLoc = gps.altimeter();
-	}else{
-		//Do nothing
+double PathControl::altitudeController(){
+	//To control vehicle altitude, the altitude guidance function
+	//compares the current altitude to the altitude path reference, the
+	//closest altitude point reference which is greater than the current altitude
+	//is then determined and an adjustion is made
+	uint8_t tempIndex;
+	double currentAltitude = readings.altimeter();
+	double *temp = (double*)malloc(altitudeTotal);
+	for(size_t i = 0; i < altitudeTotal;++i){
+		double diff = currentAltitude - i;
+		if(diff < 0){
+			temp[tempIndex] = diff;
+			tempIndex++;
+		}
 	}
+	//Find largest negative difference
+	double largest = temp[0],index;
+	for(size_t i = 0; i < altitudeTotal;++i){
+		if(temp[i] > largest){
+			largest = temp[i];
+			index = i;
+		}
+	}
+	
+
 }
 
 void PathControl::state(uint8_t current_State){
@@ -95,3 +119,8 @@ void PathControl::VECTOR_MOUNT_STATE(uint8_t state){
 }
 
 
+uint8_t PathControl::INITIALISE_DEST(double latitude,double longitude){
+	final_coordinates[0] = latitude;
+	final_coordinates[1] = longitude;
+	return;
+}

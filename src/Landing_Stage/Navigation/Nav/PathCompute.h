@@ -19,11 +19,11 @@
 //double currentHeading[2] = {AccGyroVals(2),AccGyroVals(3)};// <— Pitch = [0] Yaw = [1]
 
 class PathCompute {
+    private:
+          Utility funcs;
+
 	private:
         double ang_to_PitchYaw();
-
-    public: 
-         Utility funcs;
 
 		 //Convert 1D array to 2D array 
         double *arrayConversion1D_2D(double array[64]);
@@ -55,17 +55,17 @@ class PathCompute {
         //Function to compute path line deviation
 		double pathLineDeviation(double devAngle);
 
-        //Function to Generate Altitude path
-		double *generate_alt(double current_alt,double high);
+       double **generate_path_points_helper(double array[]);
 
         //Helper function for LatLongDist()
 		double LatLongDist_helper(double current_lat,double current_long, double bearing,double latlong,double distance);
 
+    public:
         //Functions to generate heading path pouint32_ts for launch stage,transfer stage and landing stage
 		//Function writes path pouint32_ts to a two dimensional array and is coverted to return a one dimensional array
 		//double *generate_path_points(double current_lat,double current_long,double final_lat,double final_long);
-
-        double **generate_path_points_helper(double array[]);
+        //Function to Generate Altitude path
+		double *generate_alt(double current_alt,double high);
 
         double *createPathVector(double la1,double lo1,double la2,double lo2,double startAltitude,double altDiff,double bearing,double pointStep);
 };    

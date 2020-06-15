@@ -43,14 +43,11 @@ void setup(){
     
     //SET LAUNCH
     //Listen to ground station for flight data (GPS Dest loc) through RF
+    double final_lat,final_long;
 
     //Compute Path to dest
-    double FINAL_LAT = sys.GET_LATITUDE(xF_FCoordinates);
-    double FINAL_LONG = sys.GET_LONGITUDE(xF_FCoordinates);
-    //double *pInitPoints = pInit.generate_path_points(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    //pInit.generate_path_points_helper(pInitPoints);
-    flightDistance = pInit.distance_lat_long(tel.GPS_LOC(1),tel.GPS_LOC(2),FINAL_LAT,FINAL_LONG);
-    xF_apPoints = pInit.generate_alt(tel.altimeter(),pInit.peak_altitude(flightDistance));
+    control.INITIALISE_DEST(final_lat,final_long);
+    control.altitudeController();
     //Test Microcontroller Bluetooth communication
 
     //Perform system check (Landing stage and Boost Stage)
