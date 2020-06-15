@@ -25,7 +25,7 @@ class StateMachine {
         boolean checkforApogeee();
 
         //Use of PID fin control to reorient vehicle
-        uint8_t reOrient_Program();
+        boolean reOrient_Program();
 
         //Detect Coast phase
         boolean checkforCoast();
@@ -35,6 +35,9 @@ class StateMachine {
 
         //Detect successful landing
         boolean checkforSuccessLand();
+
+        //Check if rocket orientation is within bounds and not spiraling out of control
+        boolean checkState();
 
 
 };

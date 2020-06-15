@@ -3,9 +3,11 @@
 
 #include<Arduino.h>
 #include"../Sensors/sensors.h"
+#include"../Flight Control/Stability System/Control Fins/AxisAdjustment.h"
 #include"../Flight Control/Stability System/AxisStability.h"
 #include"../Inertial Measurement/IMU.h"
 #include"../RF Comm/Transmit/DataHandling/Assign.h"
+#include"../utility/PID.h"
 
 #define SAMPLE_SIZE 5
 
@@ -34,14 +36,14 @@ class AreaAnalysis {
 		//Function to analyse velocity for a decceleration pattern
         boolean analyseAltDecceleration();
 
-		//Function to check if rocket orientation is within bounds
-		boolean checkState();
-
 		//Function to determine time to Apogee
 		double time_to_Apogee();
 
 		//Function to disable main loop and all processes - emergency routine
 		void BRICK_ALL_PROCESSES();
+
+		//Function to reorient vehicle
+		uint8_t reOrient();
 };   
 
 #endif

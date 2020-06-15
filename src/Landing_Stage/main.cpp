@@ -116,10 +116,16 @@ void loop(){
 
      #endif
 
-    #if FLIGHT_STATE == 4 //<-- Apogee/ReOrient 
+    #if FLIGHT_STATE == 4 //<-- Apogee/ReOrient
+    //Re-orient program
+
     //Continue fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
-
+    //Check for next flight state
+    if(sw.reOrient_Program()){
+        #undef FLIGHT_STATE 
+        #define FLIGHT_STATE 5
+    }
     #endif
 
     #if FLIGHT_STATE == 5 //<-- Controlled Coast
@@ -173,7 +179,7 @@ void loop(){
     sav.FOREIGN_LOG(YawID,stat.AccGyroVals(3));
     //Check flight State to see if orientation is in bounds else 
     //begin emergency routine
-    if(lD.checkState()){
+    if(sw.checkState()){
         lD.BRICK_ALL_PROCESSES();
     }
 }

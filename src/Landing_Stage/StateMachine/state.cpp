@@ -16,7 +16,6 @@ boolean StateMachine::checkforMECO(){
         MECO = true;
     }
     return MECO;    
-
 }
 
 //Detect Launch
@@ -37,6 +36,12 @@ boolean StateMachine::checkforLaunch(){
     boolean Apogee =  (trigger.time_to_Apogee() <= 0) ? true : false;
     return Apogee;
  }
+
+boolean StateMachine::reOrient_Program(){
+    //check for successful reorient 
+
+
+}
 
 //Detect Landing Program
 boolean StateMachine::checkforPropulsion_begin(){
@@ -66,4 +71,18 @@ boolean StateMachine::checkforSuccessLand(){
         successLand = false;
     }
     return successLand;
+}
+
+boolean StateMachine::checkState(){
+	//Check if rocket orientation is within bounds and not spiraling out 
+	//of control
+	//If out of control brick all control actions
+	Gyro state;
+	double pitch = state.AccGyroVals(2);
+	boolean inBounds = (pitch < -25.0) ? false : true;
+	if(inBounds){
+		return true;
+	}else{
+		return false;
+	}
 }

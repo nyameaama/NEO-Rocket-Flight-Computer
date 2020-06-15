@@ -145,24 +145,23 @@ boolean AreaAnalysis::analyseAltDecceleration(){
     }
 }
 
-boolean AreaAnalysis::checkState(){
-	//Check if rocket orientation is within bounds and not spiraling out 
-	//of control
-	//If out of control brick all control actions
-	Gyro state;
-	double pitch = state.AccGyroVals(2);
-	boolean inBounds = (pitch < -25.0) ? false : true;
-	if(inBounds){
-		return true;
-	}else{
-		return false;
-	}
-}
-
 void AreaAnalysis::BRICK_ALL_PROCESSES(){
 	String ID = "E-BRICK",data = "PROCESS BRICK";
 	RF_ASSIGN Eroutine;
 	while(true){
 		Eroutine.RF_SEND(ID,data);
 	}
+}
+
+uint8_t AreaAnalysis::reOrient(){
+	//Use of PID to reorient
+	Gyro IMU;
+	PROPORTIONAL_INTEGRAL_DERIVATIVE task;
+	FinAxisAdjustment adjust;
+	double kp,kd,ki;
+	double reorientSetpoint;
+	task.createPIDinstance("REORIENT",kp,ki,kd);
+	double rFin = task.PID_MAIN("REORIENT",IMU.AccGyroVals(2),reorientSetpoint);
+	//Move fins
+	
 }
