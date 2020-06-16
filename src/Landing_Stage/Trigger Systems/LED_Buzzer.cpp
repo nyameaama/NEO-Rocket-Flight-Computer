@@ -81,19 +81,6 @@ boolean LED_BUZZER::buttonPressed(){
   }
 }
 
-void LED_BUZZER::PIN_HOLD_DOWN(){
-  while(buttonPressed()){
-    delayMicroseconds(5000000);
-    if(!buttonPressed()){
-      //Do nothing
-    }else{
-      AreaAnalysis routine;
-      routine.BRICK_ALL_PROCESSES();
-    }
-  }
-  //While loop terminated which means button wasnt held for > 5 secs
- }
-
   void igniteMotor(){
     digitalWrite(IGNITE_PIN, HIGH);
   }

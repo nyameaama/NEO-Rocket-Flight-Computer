@@ -16,13 +16,18 @@ uint8_t AcurrentIndex;
 double flightDistance;
 double *xF_apPoints;
 
-void InterruptServiceRoutine();
+//Interrupt for button 
+void InterruptServiceRoutineA();
+//Interrupt for RF Coms
+void InterruptServiceRoutineB();
 
 
 void setup(){
     //If button is held for 5 seconds computer will brick all processes
     interrupts();
-    attachInterrupt(digitalPinToInterrupt(0),InterruptServiceRoutine,HIGH);
+    attachInterrupt(digitalPinToInterrupt(0),InterruptServiceRoutineA,HIGH);
+    attachInterrupt(digitalPinToInterrupt(0),InterruptServiceRoutineB,HIGH);
+
     #if FLIGHT_STATE == 0 //<-- Startup Idle
         sw.startupRoutine();
         #undef FLIGHT_STATE
@@ -182,6 +187,10 @@ void loop(){
 }
 
 //If button is held for 5 seconds computer will brick all processes
-void InterruptServiceRoutine(){
-    ring.PIN_HOLD_DOWN();
+void InterruptServiceRoutineA(){
+    IR.BUTTON_INTERRUPT();
+}
+
+void InterruptServiceRoutineB(){
+    IR.RF_COMS_INTERRUPT();
 }

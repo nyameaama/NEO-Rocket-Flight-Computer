@@ -20,6 +20,7 @@
 #include"Data Logging/EEPROM/EEPROMStorage.h"
 #include"Flight Control/ThrustRegulation/PropThrustControl.h"
 #include"StateMachine/state.h"
+#include"utility/Interrupts.h"
 #include<Servo.h>
 #include<stdlib.h>
 
@@ -56,7 +57,8 @@
     PathControl control;
     //Object for StateMachine class
     StateMachine sw;
-
+    //Object for INTERRUPT_ROUTINE class
+    INTERRUPT_ROUTINE IR;
 
 #define VECTOR_STATE 0
 #define FIN_STATE 1

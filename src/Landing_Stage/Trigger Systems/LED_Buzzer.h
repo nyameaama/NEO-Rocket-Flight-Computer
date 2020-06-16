@@ -37,9 +37,6 @@ class LED_BUZZER {
 
         void igniteMotor();
 
-        //If button is held for 5 seconds computer will brick all processes
-        void PIN_HOLD_DOWN();
-
 
 };
 
