@@ -18,7 +18,6 @@ class AutoLand {
         //Function to compensate motor ignition delay to calculation
         double compensateIgnitionDelay(double altitude);
 
-
     public:
         //Driver Function
         double propulsionAltitude();        

@@ -8,6 +8,7 @@ double PredictedThrustVectoring::Rate_Of_Change_Estimate(uint8_t DOF){
     }
     double endTime = millis();
     double ROC = (samples[2] - samples[0]) / (endTime - startTime);
+    free(samples);
     return ROC;
 }
 
