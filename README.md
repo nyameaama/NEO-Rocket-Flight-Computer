@@ -20,9 +20,9 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 
 ##### This stage is deployed where it uses fins to control roll, pitch and yaw during descent and thrust vectoring to control rocket direction when landing. A suicide burn is used to slow the stage down and land.
 
-* Support for vertical landing,
-* Active Flight Data Logging,
-* GPS based navigation.
+* Support for vertical landing
+* Active Flight Data Logging
+* GPS based navigation
 
 ## Avionics
 
@@ -32,14 +32,17 @@ of two stages: High Power Boost Stage and Propulsive Landing Stage. This program
 *  Altimeter (Adafruit_BMP085) -> pressure
 *  HC-05 Bluetooth Module (Slave)
 
-
 ### Landing Stage
 
 * ATmega2560 microcontroller [Custom PCB](https://github.com/nyameaama/NEO-PCB-Design---Flight-)
 * Altimeter (Adafruit_BMP085)
 * MPU6050 IMU 
 * MPXV7002DP - Airspeed
-* ArduCam/Receiver modules
+* OV7670,CMOS Camera Module
+* HC-06 Bluetooth Module (Master)
+* Micro SD card module
+
+##### The Landing stage microcontroller is the main controller with the boost controller being a sub controller. It uses Bluetooth(HC-05, HC-06) to communicate with boost stage microcontroller to control Boost Stage Thrust Vectoring. The boost stage controller only independently handles its parachute deployment.
 
 # Contribution
 
@@ -49,49 +52,4 @@ You can fork this repository to introduce new features, changes or bug fixes and
 
 The flight program for the project is written in C++. 
 
-
-## Program Structure
-
-### Landing Stage
-
-* The Landing stage microcontroller is the main controller with the boost controller being a sub controller. It uses Bluetooth(HC-05, HC-06 ) to communicate with boost stage microcontroller to control Boost Stage Thrust Vectoring. The boost stage controller only independently handles its parachute deployment.
-
-#### Data Logging Module
-* EEPROM storage
-* SD storage
-
-#### Flight Control Module
-* Axis Stability System
-* Thrust Vector Control
-
-#### Inertial Measurement
-* Axis Values(X,Y,Z)
-* Calculate pitch,yaw and roll from IMU
-
-#### Flight Navigation Module
-* Active Path Planning
-* Path Deviation Control
-
-#### RF Communication Module
-* [EXPERIMENTAL COMMUNICATION WITH GROUND STATION]
-
-#### Sensor Module
-* Interface GPS,altimeter,airspeed
-
-### Boost Stage 
-
-#### Communication Module
-* Recieve commands from landing Stgae
-* Log Data (Errors)
-* Send ejection trigger
-
-#### Trigger Module
-* Compute decceleration to send ejection trigger
-* Detect altitude for chute deployment
-
-#### Sensor Module
-* Interface altimeter
-
-
-
-
+### !!IN PROGRESS!! 

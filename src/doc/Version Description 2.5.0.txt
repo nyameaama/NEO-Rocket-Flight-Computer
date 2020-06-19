@@ -6,3 +6,49 @@ Description:
 
 - Complete codebase refactor
 - Improvements and bug fixes
+
+## Program Structure
+
+### Landing Stage
+
+* The Landing stage microcontroller is the main controller with the boost controller being a sub controller. It uses Bluetooth(HC-05, HC-06 ) to communicate with boost stage microcontroller to control Boost Stage Thrust Vectoring. The boost stage controller only independently handles its parachute deployment.
+
+#### Data Logging Module
+* EEPROM storage
+* SD storage
+
+#### Flight Control Module
+* Axis Stability System
+* Thrust Vector Control
+
+#### Inertial Measurement
+* Axis Values(X,Y,Z)
+* Calculate pitch,yaw and roll from IMU
+
+#### Flight Navigation Module
+* Active Path Planning
+* Path Deviation Control
+
+#### RF Communication Module
+* [EXPERIMENTAL COMMUNICATION WITH GROUND STATION]
+
+#### Sensor Module
+* Interface GPS,altimeter,airspeed
+
+### Boost Stage 
+
+#### Communication Module
+* Recieve commands from landing Stgae
+* Log Data (Errors)
+* Send ejection trigger
+
+#### Trigger Module
+* Compute decceleration to send ejection trigger
+* Detect altitude for chute deployment
+
+#### Sensor Module
+* Interface altimeter
+
+
+
+
