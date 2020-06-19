@@ -48,24 +48,43 @@ double PathControl::TVC(uint8_t M1pos, uint8_t M2pos){
 	double x;
 	PredictedThrustVectoring pvec;
 	uint8_t stage = (motor_state == LANDING_STAGE) ? 0 : BOOST_STAGE;
-	uint8_t tvc = (stage == LANDING_STAGE) ? vec.thrustVector(M1pos,M2pos) : pvec.computeMotorVector(x); // <-- Change pvec function
-	
+	double tvc = (stage == LANDING_STAGE) ? vec.thrustVector(M1pos,M2pos) : pvec.computeMotorVector(x); // <-- Change pvec function
+	return tvc;
 }
 
-//Accepts new pitch and yaw heading values and vectors appropriately
+//Function accepts new pitch value to adjust altittude, sends through PID
+//and sends determined value for control method assignment
 double PathControl::adjustAltitude(double pitch){
-	//Calculate Distance of values from the current axis pouint32_t to new axis pouint32_t
-	//double stable_axis_pouint32_t[2] = {}; //<— Come back and compensate for Dynamic board orientation
 	VectorCompute axis;
-	axis.transitionPitch(pitch);
-	
+	Gyro bet;
+	double currentY = bet.AccGyroVals(3);
+	//PID tuned pitch value
+	double PID_tunedP = axis.transitionPitch(pitch);
+	CONTROL_ASSIGNMENT(PID_tunedP,currentY);
 	return;
 }
 
+//Function to determine which control method to send by using current state
+double PathControl::CONTROL_ASSIGNMENT(double p, double y){
+	if(STATE == FIN_STATE){
+		FinAxisAdjustment cmAssign;
+		cmAssign.FIN_ADJUST(p,y);
+	}else if(STATE == VECTOR_STATE){
+		TVC(p,y);
+	}
+	return;
+}
+
+//Function accepts new yaw value to adjust path/heading, sends through PID
+//and sends determined value for control method assignment
 double PathControl::adjustPath(double yaw){
 	VectorCompute axis;
-	axis.transitionYaw(yaw);
-
+	Gyro bet;
+	double currentP = bet.AccGyroVals(2);
+	//PID tuned yaw value
+	double PID_tunedY = axis.transitionYaw(yaw);
+	CONTROL_ASSIGNMENT(currentP,PID_tunedY);
+	return;
 }
 
 

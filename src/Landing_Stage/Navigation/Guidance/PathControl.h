@@ -5,12 +5,17 @@
 #include<stdint.h>
 #include"../Nav/PathCompute.h"
 #include"../../Flight Control/Stability System/AxisStability.h"
+#include"../../Flight Control/Stability System/Control Fins/AxisAdjustment.h"
 #include"../../Flight Control/Thrust_Vector_Control/TVC.h"
 #include"../../Flight Control/Thrust_Vector_Control/PTV.h"
+#include"../../Inertial Measurement/IMU.h"
 #include"../../Sensors/sensors.h"
 
 #define BOOST_STAGE 0
 #define LANDING_STAGE 1
+
+#define VECTOR_STATE 0
+#define FIN_STATE 1
 
 class PathControl : public PathCompute {
 	private:
@@ -22,6 +27,9 @@ class PathControl : public PathCompute {
 
 		//Function to move thrust vectoring mount to pos
 		double TVC(uint8_t M1pos,uint8_t M2pos);
+
+		//Function to assign control to either fins or TVC
+		double CONTROL_ASSIGNMENT(double p, double y);
 		
 		double adjustPath(double yaw);
 		
