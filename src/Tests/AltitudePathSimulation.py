@@ -28,5 +28,6 @@ def AccelerationInSetTime(seconds):
     Acceleration = resultant_force / rocketMass
     return Acceleration * seconds
 
+
 PathSimulationMain()
 #print(AccelerationInSetTime(1))

@@ -2,6 +2,7 @@
 #define AXIS_ADJUSTMENT
 
 #include<Servo.h>
+#include<Arduino.h>
 
 #define MOTOR_PIN_1 0
 #define MOTOR_PIN_2 0
@@ -9,6 +10,8 @@
 #define MOTOR_PIN_4 0
 
 // Vehicle moves in direction of fin movement
+
+//Gyro Bounds
 //yaw = (-90 , 90)
 //pitch = ()
 
@@ -22,14 +25,18 @@ class FinAxisAdjustment {
         Servo sF1,sF2,sF3,sF4;
     private:
         //Function to scale reading between range (0,180)
-        double RANGE_TRANSLATE(double x);
+        double RANGE_TRANSLATE(double x,uint8_t LB, uint8_t UB);
+
+        uint8_t YAW_DIR_MOVEMENT(double x);
+
+        uint8_t PITCH_DIR_MOVEMENT(double x);
 
     public:
         //Constructor
         FinAxisAdjustment();
 
         //Driver function
-        uint8_t FIN_ADJUST(double x, double y);
+        uint8_t FIN_ADJUST(double p, double y);
 
 
 };
