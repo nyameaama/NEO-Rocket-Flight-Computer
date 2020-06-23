@@ -38,9 +38,15 @@ boolean StateMachine::checkforLaunch(){
  }
 
 boolean StateMachine::reOrient_Program(){
+    //If pitch axis is in bounds of reorient setpoint return success
+    Gyro get;
+    double reorientSet, threshArea = 5;
     //check for successful reorient 
-
-
+    boolean success = false;
+    if(get.AccGyroVals(2) >= (reorientSet - threshArea) || get.AccGyroVals(2) <= (reorientSet + threshArea)){
+        success = true;
+    } 
+    return success;
 }
 
 //Detect Landing Program

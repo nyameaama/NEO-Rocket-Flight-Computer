@@ -163,5 +163,6 @@ uint8_t AreaAnalysis::reOrient(){
 	task.createPIDinstance("REORIENT",kp,ki,kd);
 	double rFin = task.PID_MAIN("REORIENT",IMU.AccGyroVals(2),reorientSetpoint);
 	//Move fins
-	
+	adjust.FIN_ADJUST(rFin,IMU.AccGyroVals(3));
+	return;
 }

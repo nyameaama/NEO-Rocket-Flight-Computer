@@ -120,7 +120,7 @@ void loop(){
 
     #if FLIGHT_STATE == 4 //<-- Apogee/ReOrient
     //Re-orient program
-
+    lD.reOrient();
     //Continue fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
     //Check for next flight state
@@ -145,8 +145,8 @@ void loop(){
     #if FLIGHT_STATE == 6  //<-- Motor Burn/Propulsive Land
     // Continue fin based active roll stabilization
     stab.rollStabilize(stat.AccGyroVals(1));
-    //Ignite Motor
-
+    //Ignite Motor if suicide altitude is reached
+    
     //Begin navigation with active thrust Vectoring
     control.state(VECTOR_STATE);
     control.VECTOR_MOUNT_STATE(LANDING_STAGE);

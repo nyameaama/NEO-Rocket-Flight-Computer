@@ -59,6 +59,7 @@
     StateMachine sw;
     //Object for INTERRUPT_ROUTINE class
     INTERRUPT_ROUTINE IR;
+    //Object for Landing Program class
 
 #define VECTOR_STATE 0
 #define FIN_STATE 1
