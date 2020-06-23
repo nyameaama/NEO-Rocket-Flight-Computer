@@ -2,9 +2,9 @@
 #define LEDBUZZER
 
 #include"pitches.h"
-#include"../utility/utility.h"
+#include"../../utility/utility.h"
 #include<Arduino.h>
-#include"AreaAnalysis.h"
+#include"../AreaAnalysis.h"
 
 #define LED_PIN 0
 #define BUTTON_PIN 0

@@ -2,7 +2,7 @@
 #define INTERRUPT
 
 #include"../Trigger Systems/AreaAnalysis.h"
-#include"../Trigger Systems/LED_Buzzer.h"
+#include"../Trigger Systems/Misc/LED_Buzzer.h"
 #include"../RF Comm/Transmit/DataHandling/Assign.h"
 
 

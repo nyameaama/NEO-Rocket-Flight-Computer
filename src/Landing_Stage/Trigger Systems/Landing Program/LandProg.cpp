@@ -40,5 +40,4 @@ double AutoLand::propulsionAltitude(){
     //Compensate for ignition delay
     propulAlt = compensateIgnitionDelay(propulAlt);
     return propulAlt;
-
 }       

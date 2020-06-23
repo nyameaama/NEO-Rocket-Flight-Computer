@@ -4,7 +4,7 @@
 #include"../Trigger Systems/AreaAnalysis.h"
 #include"../Flight Control/Stability System/AxisStability.h"
 #include"../Sensors/sensors.h"
-#include"../Trigger Systems/LED_Buzzer.h"
+#include"../Trigger Systems/Misc/LED_Buzzer.h"
 #include"../Inertial Measurement/IMU.h"
 #include"../Trigger Systems/Landing Program/LandProg.h"
 
