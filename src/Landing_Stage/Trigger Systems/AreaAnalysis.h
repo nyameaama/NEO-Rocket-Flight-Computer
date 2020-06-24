@@ -8,6 +8,7 @@
 #include"../Inertial Measurement/IMU.h"
 #include"../RF Comm/Transmit/DataHandling/Assign.h"
 #include"../utility/PID.h"
+#include"Landing Program/LandProg.h"
 
 #define SAMPLE_SIZE 5
 
@@ -44,6 +45,7 @@ class AreaAnalysis {
 
 		//Function to reorient vehicle
 		uint8_t reOrient();
+
 };   
 
 #endif

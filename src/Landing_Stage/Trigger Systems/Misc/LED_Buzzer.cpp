@@ -80,7 +80,3 @@ boolean LED_BUZZER::buttonPressed(){
     return false;
   }
 }
-
-  void igniteMotor(){
-    digitalWrite(IGNITE_PIN, HIGH);
-  }

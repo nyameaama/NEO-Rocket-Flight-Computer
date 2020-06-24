@@ -35,9 +35,6 @@ class LED_BUZZER {
 
         boolean buttonPressed();
 
-        void igniteMotor();
-
-
 };
 
 #endif

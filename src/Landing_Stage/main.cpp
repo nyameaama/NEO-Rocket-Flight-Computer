@@ -142,11 +142,11 @@ void loop(){
     }
     #endif
     
-    #if FLIGHT_STATE == 6  //<-- Motor Burn/Propulsive Land
-    // Continue fin based active roll stabilization
-    stab.rollStabilize(stat.AccGyroVals(1));
+    #if FLIGHT_STATE == 6  //<-- Motor Burn/Propulsive Land 
     //Ignite Motor if suicide altitude is reached
-    
+
+    // Continue fin based active roll stabilization
+    stab.rollStabilize(stat.AccGyroVals(1)); 
     //Begin navigation with active thrust Vectoring
     control.state(VECTOR_STATE);
     control.VECTOR_MOUNT_STATE(LANDING_STAGE);
