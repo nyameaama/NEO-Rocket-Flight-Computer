@@ -33,35 +33,16 @@ SoftwareSerial BTSerial(2, 3); // RX | TX
 }
 
 String BT_Comm::compressStrings(String x, String y){
-    String compressed;
-    uint8_t combinedLength = x.length() + y.length();
-    //Separate string using "_" 
-    for(size_t i = 0; i < combinedLength + 1;i++){
-        if(i < (combinedLength + 1)/2){
-            compressed[i] = x[i];
-        }else if(i > (combinedLength + 1)/2){
-            compressed[i] = y[i];
-        }else{
-            String temp = " ";
-            //compressed[i] = temp;
-        }
-    }
-    return compressed;
+    //Separate strings with '_'
+    return (x + '_') + y;
 }
 
 String *BT_Comm::decompressString(String x){
     String *newStr = (String*)malloc(2);
-    uint8_t combLength = x.length();
-    String str1,str2;
-    uint8_t StrIndex = x.indexOf(" ");
-    for(size_t i = 0;i < StrIndex;i++){
-        str1 += x[i];
-    }
-    for (size_t j = (StrIndex + 1); j < combLength; j++){
-        str2 += x[j];
-    }
-    newStr[0] = str1;
-    newStr[1] = str2;
+    String delimiter = "_";
+    uint8_t pos = x.indexOf(delimiter);
+    newStr[0] =  x.substring(0, pos);
+    newStr[1] = x.substring(pos + 1,x.length());
     return newStr;
 }
 
