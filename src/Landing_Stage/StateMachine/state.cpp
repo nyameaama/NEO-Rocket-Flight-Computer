@@ -1,12 +1,13 @@
 #include"state.h"
 
  void StateMachine::startupRoutine(){
-     LED_BUZZER ring;
-      while(!ring.buttonPressed()){
-            ring.blink(3);
-            ring.playTone();
+     LED_BUZZER *ring = new LED_BUZZER;
+      while(!ring -> buttonPressed()){
+            ring -> blink(3);
+            ring -> playTone();
             delay(60000);
         }
+        delete ring;
  }
 
 //Detect MECO by acceleration differential

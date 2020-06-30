@@ -44,45 +44,47 @@ double PathControl::translate(double x, double y){
 
 //Function to move thrust vectoring mount to pos
 double PathControl::TVC(uint8_t M1pos, uint8_t M2pos){
-	Control vec;
+	Control *vec = new Control;
 	double x;
-	PredictedThrustVectoring pvec;
+	PredictedThrustVectoring *pvec = new PredictedThrustVectoring;
 	uint8_t stage = (motor_state == LANDING_STAGE) ? 0 : BOOST_STAGE;
-	double tvc = (stage == LANDING_STAGE) ? vec.thrustVector(M1pos,M2pos) : pvec.computeMotorVector(x); // <-- Change pvec function
+	double tvc = (stage == LANDING_STAGE) ? vec -> thrustVector(M1pos,M2pos) : pvec -> computeMotorVector(x); // <-- Change pvec function
 	return tvc;
 }
 
 //Function accepts new pitch value to adjust altittude, sends through PID
 //and sends determined value for control method assignment
 double PathControl::adjustAltitude(double pitch){
-	VectorCompute axis;
+	VectorCompute *axis = new VectorCompute;
 	Gyro bet;
 	double currentY = bet.AccGyroVals(3);
 	//PID tuned pitch value
-	double PID_tunedP = axis.transitionPitch(pitch);
+	double PID_tunedP = axis -> transitionPitch(pitch);
 	CONTROL_ASSIGNMENT(PID_tunedP,currentY);
+	delete axis;
 	return;
 }
 
 //Function to determine which control method to send by using current state
 double PathControl::CONTROL_ASSIGNMENT(double p, double y){
+	FinAxisAdjustment *cmAssign = new FinAxisAdjustment;
 	if(STATE == FIN_STATE){
-		FinAxisAdjustment cmAssign;
-		cmAssign.FIN_ADJUST(p,y);
+		cmAssign -> FIN_ADJUST(p,y);
 	}else if(STATE == VECTOR_STATE){
 		TVC(p,y);
 	}
+	delete cmAssign;
 	return;
 }
 
 //Function accepts new yaw value to adjust path/heading, sends through PID
 //and sends determined value for control method assignment
 double PathControl::adjustPath(double yaw){
-	VectorCompute axis;
-	Gyro bet;
-	double currentP = bet.AccGyroVals(2);
+	VectorCompute *axis = new VectorCompute;
+	Gyro *bet = new Gyro;
+	double currentP = bet -> AccGyroVals(2);
 	//PID tuned yaw value
-	double PID_tunedY = axis.transitionYaw(yaw);
+	double PID_tunedY = axis -> transitionYaw(yaw);
 	CONTROL_ASSIGNMENT(currentP,PID_tunedY);
 	return;
 }
