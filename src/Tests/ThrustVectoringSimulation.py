@@ -43,11 +43,11 @@ def PID(current,setpoint):
 
 
 def SimulationMain():
-    testValues = [48,64]
-    testSetpoints = [90,90]
+    testValues = [48,64,46]
+    testSetpoints = [90,90,100]
     M1_translate(testValues[0])
     print(M1_translate(PID(testValues[0],testSetpoints[0])))
-
+    print(PID(testValues[2],testSetpoints[2]))
 
 
 
