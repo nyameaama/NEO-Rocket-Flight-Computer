@@ -49,6 +49,7 @@ double PathControl::TVC(uint8_t M1pos, uint8_t M2pos){
 	PredictedThrustVectoring *pvec = new PredictedThrustVectoring;
 	uint8_t stage = (motor_state == LANDING_STAGE) ? 0 : BOOST_STAGE;
 	double tvc = (stage == LANDING_STAGE) ? vec -> thrustVector(M1pos,M2pos) : pvec -> computeMotorVector(x); // <-- Change pvec function
+	delete vec;
 	return tvc;
 }
 
@@ -86,6 +87,7 @@ double PathControl::adjustPath(double yaw){
 	//PID tuned yaw value
 	double PID_tunedY = axis -> transitionYaw(yaw);
 	CONTROL_ASSIGNMENT(currentP,PID_tunedY);
+	delete axis;
 	return;
 }
 

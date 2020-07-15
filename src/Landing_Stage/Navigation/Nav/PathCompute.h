@@ -39,6 +39,7 @@ class PathCompute {
         //Function to determine peak altitude
 		double peak_altitude(double distance);
 
+        //Function to find a lat lon point, when bearing, distance and another lat lon is given
         double *LatLongDist_gen(double latitude,double longitude,double bearing,double metres);
 
         //Function to determine Heading closest point

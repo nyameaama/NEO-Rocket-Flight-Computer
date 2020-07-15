@@ -31,9 +31,12 @@ class PathControl : public PathCompute {
 		//Function to assign control to either fins or TVC
 		double CONTROL_ASSIGNMENT(double p, double y);
 		
+		//Function accepts new yaw value to adjust path/heading, sends through PID
+		//and sends determined value for control method assignment
 		double adjustPath(double yaw);
 		
-		//Accepts new pitch and yaw heading values and vectors appropriately
+		//Function accepts new pitch value to adjust altittude, sends through PID
+		//and sends determined value for control method assignment
 		double adjustAltitude(double pitch);
 
     public:
