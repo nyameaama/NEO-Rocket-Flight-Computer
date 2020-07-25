@@ -1,0 +1,24 @@
+SYSTEM PID INSTANCES
+
+* AxisStability
+    - transitionPitch
+        -Gains: kp = N/A 
+                kd = N/A
+                ki = N/A
+
+    - transitionYaw
+        -Gains: kp = N/A 
+                kd = N/A
+                ki = N/A
+
+* ActiveRollStabilization
+    - rollStabilize
+        -Gains: kp = N/A 
+                kd = N/A
+                ki = N/A
+
+* AreaAnalysis
+    - reOrient
+        -Gains: kp = N/A 
+                kd = N/A
+                ki = N/A

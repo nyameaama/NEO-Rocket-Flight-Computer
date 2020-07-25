@@ -32,7 +32,7 @@ class PredictedThrustVectoring {
     public:
         PredictedThrustVectoring();
         
-        double computeMotorVector(double x);
+        double computeMotorVector(double TVC_MOUNT_VALUE);
 
 };
 

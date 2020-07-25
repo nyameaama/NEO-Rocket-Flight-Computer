@@ -148,6 +148,7 @@ boolean AreaAnalysis::analyseAltDecceleration(){
 void AreaAnalysis::BRICK_ALL_PROCESSES(){
 	String ID = "E-BRICK",data = "PROCESS BRICK";
 	RF_ASSIGN Eroutine;
+	//Infinite Loop
 	while(true){
 		Eroutine.RF_SEND(ID,data);
 	}

@@ -80,6 +80,20 @@ template <typename T>
 T PredictedThrustVectoring::forceToVel(T force){
 
 }
-double PredictedThrustVectoring::computeMotorVector(double x){
-    return x;
+double PredictedThrustVectoring::computeMotorVector(double TVC_MOUNT_VALUE){
+    //Save Current State (State = Pitch + Yaw)
+    double *state = getCurrentState();
+    //Estimate Guidance and Nav intended rocket direction from TVC mount values
+    
+    //Estimate vehicle current state after delay time
+
+    //Find resulting direction from TVC mount values for the estimated delay time state
+
+    //(Minus intended direction from estimated vehicle state after delay time)
+
+    //Calculate TVC mount motor values for the distance from Guidance and Nav intended rocket direction and estimated delay time state.
+
+    //Scale values from 0-90 to 0-180
+
+    return;
 }
